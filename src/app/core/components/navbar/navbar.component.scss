@@ -1,0 +1,39 @@
+$fuente-navbar: cursive;
+$color-texto-fuente-navbar: white;
+$color-hover-fuente-navbar: tomato;
+
+nav {
+    background-color: black;
+
+    #menu {
+        height: 50px;
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 100px);
+        justify-content: center;
+        align-items: center;
+
+        a {
+            font-family: $fuente-navbar;
+            color: $color-texto-fuente-navbar;
+            font-size: 18px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 150ms;
+            -webkit-transition: all 150ms;
+            -moz-transition: all 150ms;
+            -ms-transition: all 150ms;
+            -o-transition: all 150ms;
+}
+
+        a:hover {
+            color: $color-hover-fuente-navbar;
+            transform: scale(1.5, 1.5);
+            -webkit-transform: scale(1.5, 1.5);
+            -moz-transform: scale(1.5, 1.5);
+            -ms-transform: scale(1.5, 1.5);
+            -o-transform: scale(1.5, 1.5);
+        }
+    }
+
+}
