@@ -11,7 +11,7 @@ export class AppComponent {
   title = 'app-base';
   public menu_navigation: MenuItem[] = [
     { url: '/home', nombre: 'Home' },
-    { url: '/usuarios', nombre: 'Usuarios' }
+    { url: '/usuario', nombre: 'Usuarios' }
     
   ];
 
