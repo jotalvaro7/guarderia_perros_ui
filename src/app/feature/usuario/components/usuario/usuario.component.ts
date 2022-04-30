@@ -9,6 +9,9 @@ import { UsuarioService } from '@usuario/shared/service/usuario.service';
 })
 export class UsuarioComponent implements OnInit {
 
+  columnas: string[] = ['Id', 'Nombre', 'Apellido', 'Identificacion', 
+                        'Numero de celular', "Editar", "Borrar"
+                      ];
   public usuarios: Usuario[];
 
   constructor(
@@ -21,8 +24,16 @@ export class UsuarioComponent implements OnInit {
 
   obtenerUsuarios():void{
     this.usuarioService.consultar().subscribe(
-      usuarios => console.log(usuarios)
+      usuarios => this.usuarios = usuarios
     )
+  }
+
+  public editar(usuario: Usuario): void{
+    console.log(usuario);
+  }
+
+  public eliminar(usuario: Usuario): void{
+    console.log(usuario);
   }
 
 
