@@ -9,6 +9,8 @@ import {Usuario} from '../model/usuario';
 })
 export class UsuarioService {
 
+  modal: boolean = false;
+
   private notificarGestion = new EventEmitter<any>();
 
   constructor(protected http: HttpService) { }
@@ -19,5 +21,13 @@ export class UsuarioService {
 
   public consultar(){
     return this.http.doGet<Usuario[]>(`${environment.endpoint}/usuarios`, this.http.optsName('consultar usuarios'));
+  }
+
+  abrilModal(){
+    this.modal = true;
+  }
+
+  cerrarModal(){
+    this.modal = false;
   }
 }

@@ -1,8 +1,9 @@
+<app-crear-usuario *ngIf="usuarioSeleccionado" [usuario] = "usuarioSeleccionado"></app-crear-usuario>
 <mat-card class="card">
   <mat-card-header class="card__header">
         <mat-card-title class="card__titulo">Lista De Usuarios</mat-card-title>
         <section class="card__button">
-          <button mat-raised-button color="warn" class="card__add-button card__add-button--hover">Agregar Usuario</button>
+          <button mat-raised-button color="warn" class="card__add-button card__add-button--hover" (click)="crear()">Agregar Usuario</button>
         </section>
   </mat-card-header>
   <mat-card-content>

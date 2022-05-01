@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Usuario } from '@usuario/shared/model/usuario';
 
 @Component({
   selector: 'app-crear-usuario',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./crear-usuario.component.scss']
 })
 export class CrearUsuarioComponent implements OnInit {
+
+  @Input() usuario: Usuario;
 
   constructor() { }
 

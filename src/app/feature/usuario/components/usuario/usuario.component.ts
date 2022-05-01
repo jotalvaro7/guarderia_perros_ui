@@ -13,9 +13,10 @@ export class UsuarioComponent implements OnInit {
                         'Numero de celular', "Editar", "Borrar"
                       ];
   public usuarios: Usuario[];
+  public usuarioSeleccionado: Usuario;
 
   constructor(
-    protected usuarioService: UsuarioService
+    protected usuarioService: UsuarioService,
   ) { }
 
   ngOnInit(): void {
@@ -28,12 +29,22 @@ export class UsuarioComponent implements OnInit {
     )
   }
 
+  public crear(){
+    this.usuarioSeleccionado = new Usuario();
+    this.usuarioService.abrilModal();
+  }
+
   public editar(usuario: Usuario): void{
     console.log(usuario);
   }
 
   public eliminar(usuario: Usuario): void{
     console.log(usuario);
+  }
+
+
+  closeDialog(){
+    this.usuarioService.cerrarModal();
   }
 
 
