@@ -21,7 +21,13 @@
     </p>
     <div>
         <button mat-raised-button color="warn" (click)="limpiarForm()">Limpiar</button>
-        <button mat-raised-button color="primary" type="submit" [disabled]="usuarioForm.invalid">Aceptar</button>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="usuarioForm.invalid"
+            (click)="onCrearClick()" *ngIf="id=='crear' else buttonEdit">Guardar</button>
+
+        <ng-template #buttonEdit>
+            <button mat-raised-button color="primary" type="submit" [disabled]="usuarioForm.invalid"
+                (click)="onEditarClick()">Editar</button>
+        </ng-template>
     </div>
 </form>
-

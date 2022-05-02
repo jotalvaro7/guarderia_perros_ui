@@ -24,6 +24,10 @@ export class UsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerUsuarios();
+    this.usuarioService.notificar.subscribe(response =>{
+      console.log(`Desde el subscritor del emisor event ${response}`);
+      this.obtenerUsuarios();
+    })
   }
 
   obtenerUsuarios():void{

@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from '@usuario/shared/model/usuario';
 import { UsuarioService } from '@usuario/shared/service/usuario.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-crear-usuario',
@@ -16,15 +17,16 @@ export class CrearUsuarioComponent implements OnInit {
   public usuario: Usuario;
   public titulo: string;
   public id: any;
+  private crearClicked: boolean;
 
   constructor(
     public dialogRef: MatDialogRef<CrearUsuarioComponent>,
-    @Optional() @Inject(MAT_DIALOG_DATA) public data:any,
-   /*  private router: Router, */
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
     private usuarioService: UsuarioService,
-    
-  ) { 
+
+  ) {
     this.id = data.id;
+    this.crearClicked = false;
   }
 
   ngOnInit(): void {
@@ -33,7 +35,7 @@ export class CrearUsuarioComponent implements OnInit {
     this.cargarUsuario();
   }
 
-  private construirFormularioUsuario(){
+  private construirFormularioUsuario() {
     this.usuarioForm = new FormGroup({
       nombre: new FormControl('', [Validators.required]),
       apellido: new FormControl('', [Validators.required]),
@@ -42,19 +44,19 @@ export class CrearUsuarioComponent implements OnInit {
     })
   }
 
-  private cargarUsuario():void{
-    if(this.id == 'crear'){
+  private cargarUsuario(): void {
+    if (this.id == 'crear') {
       this.titulo = 'Crear Usuario';
-    }else{
+    } else {
       this.titulo = 'Actualizar Usuario';
-      this.usuarioService.consultarPorId(this.id).subscribe(usuario =>{
+      this.usuarioService.consultarPorId(this.id).subscribe(usuario => {
         this.usuario = usuario;
         this.setValue();
       })
     }
   }
 
-  private setValue():void{
+  private setValue(): void {
     this.usuarioForm.setValue({
       nombre: this.usuario.nombre,
       apellido: this.usuario.apellido,
@@ -63,20 +65,52 @@ export class CrearUsuarioComponent implements OnInit {
     })
   }
 
-  onSubmit(){
-    this.fabricarUsuario();
-    console.log(this.usuario)
+  onSubmit() {
+    if (this.crearClicked) {
+      this.crear();
+    } else {
+      this.actualizar();
+    }
   }
 
-  private fabricarUsuario(): void{
+  public crear(): void {
+    this.fabricarUsuario();
+    this.usuarioService.guardar(this.usuario).subscribe(response => {
+      if (response) {
+        this.dialogRef.close();
+        this.usuarioService.notificar.emit(response);
+        Swal.fire({
+          background: "#444444",
+          color: "#fff",
+          icon: "success",
+          title: 'Nuevo Usuario',
+          text:  `Usuario ${this.usuario.nombre} Creado Con Exito!`
+        })
+      }
+    })
+  }
+
+  public actualizar(): void {
+    console.log("actualizando...")
+  }
+
+  private fabricarUsuario(): void {
     this.usuario.nombre = this.usuarioForm.get('nombre').value;
     this.usuario.apellido = this.usuarioForm.get('apellido').value;
     this.usuario.identificacion = this.usuarioForm.get('identificacion').value;
     this.usuario.numeroCelular = this.usuarioForm.get('numeroCelular').value;
   }
 
-  limpiarForm(){
+  limpiarForm() {
     this.usuarioForm.reset();
+  }
+
+  onCrearClick() {
+    this.crearClicked = true;
+  }
+
+  onEditarClick() {
+    this.crearClicked = false;
   }
 
 }
