@@ -46,7 +46,7 @@ export class CrearUsuarioComponent implements OnInit {
 
   private cargarUsuario(): void {
     if (this.id == 'crear') {
-      this.titulo = 'Crear Usuario';
+      this.titulo = 'Registrar Usuario';
     } else {
       this.titulo = 'Actualizar Usuario';
       this.usuarioService.consultarPorId(this.id).subscribe(usuario => {

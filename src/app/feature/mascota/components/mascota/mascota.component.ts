@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Mascota } from '@mascota/shared/model/mascota';
 import { ActivatedRoute } from '@angular/router';
 import { MascotaService } from '@mascota/shared/service/mascota.service';
+import { MatDialog } from '@angular/material/dialog';
+import { CrearMascotaComponent } from '../crear-mascota/crear-mascota.component';
 
 @Component({
   selector: 'app-mascota',
@@ -21,6 +23,7 @@ export class MascotaComponent implements OnInit {
   constructor(
     private mascotaService: MascotaService,
     private activatedRoute: ActivatedRoute,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -39,6 +42,22 @@ export class MascotaComponent implements OnInit {
       )
     })
     
+  }
+
+  public crear(action:string){
+    this.dialog.open(CrearMascotaComponent, {
+      width: "20%",
+      autoFocus: true,
+      data:{id:action}
+    })
+  }
+
+  public editar(id:Number){
+    this.dialog.open(CrearMascotaComponent,{
+      width: "20%",
+      autoFocus: true,
+      data:{id:id, idUsuario:this.idUsuario}
+    })
   }
 
 }
