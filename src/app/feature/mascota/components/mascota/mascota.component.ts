@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MascotaService } from '@mascota/shared/service/mascota.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CrearMascotaComponent } from '../crear-mascota/crear-mascota.component';
+import { idResponse } from '@mascota/shared/model/idResponse';
 
 @Component({
   selector: 'app-mascota',
@@ -28,6 +29,11 @@ export class MascotaComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerMascotasUsuario();
+    this.mascotaService.notificar.subscribe(
+      (response:idResponse) => {
+        console.log(response);
+        this.obtenerMascotasUsuario();
+      })
   }
 
 
@@ -36,7 +42,6 @@ export class MascotaComponent implements OnInit {
       this.nombreUsuario = params.get("nombreUsuario");
       this.apellidoUsuario = params.get("apellidoUsuario")
       this.idUsuario = +params.get("idUsuario");
-      console.log(this.nombreUsuario, this.apellidoUsuario, this.idUsuario)
       this.mascotaService.consultarMascotasPorIdUsuario(this.idUsuario).subscribe(
         mascotas => this.mascotas = mascotas
       )
@@ -48,7 +53,7 @@ export class MascotaComponent implements OnInit {
     this.dialog.open(CrearMascotaComponent, {
       width: "20%",
       autoFocus: true,
-      data:{id:action}
+      data:{id:action, idUsuario:this.idUsuario}
     })
   }
 

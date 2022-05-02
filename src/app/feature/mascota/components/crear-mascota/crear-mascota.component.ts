@@ -1,8 +1,10 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { idResponse } from '@mascota/shared/model/idResponse';
 import { Mascota } from '@mascota/shared/model/mascota';
 import { MascotaService } from '@mascota/shared/service/mascota.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -60,6 +62,7 @@ export class CrearMascotaComponent implements OnInit {
       nombre: this.mascota.nombre,
       raza: this.mascota.raza,
       peso: this.mascota.peso,
+      idUsuario: this.mascota.idUsuario
     })
   }
 
@@ -73,7 +76,28 @@ export class CrearMascotaComponent implements OnInit {
 
   public crear():void{
     this.fabricarMascota();
-    console.log(this.mascota)
+    this.mascotaService.guardar(this.mascota).subscribe(
+      (response:idResponse) => {
+        this.dialogRef.close();
+        this.mascotaService.notificar.emit(response);
+        Swal.fire({
+          background: "#444444",
+          color: "#fff",
+          icon: "success",
+          title: 'Nueva Mascota',
+          text:  `Mascota ${this.mascota.nombre} registrada con Exito!`
+        })
+      },
+      err => {
+        Swal.fire({
+          background: "#444444",
+            color: "#fff",
+            icon: "error",
+            title: err.error.mensaje,
+            text:  'Nombre de la excepcion: ' + err.error.nombreExcepcion
+        })
+      }
+    )
   }
 
   public actualizar():void{
