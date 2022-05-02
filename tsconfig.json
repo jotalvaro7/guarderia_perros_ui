@@ -33,6 +33,9 @@
       "@usuario/*":[
         "src/app/feature/usuario/*"
       ],
+      "@mascota/*":[
+        "src/app/feature/mascota/*"
+      ],
       "@producto/*": [
         "src/app/feature/producto/*"
       ],

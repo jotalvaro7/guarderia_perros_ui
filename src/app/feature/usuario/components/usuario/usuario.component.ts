@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 export class UsuarioComponent implements OnInit {
 
   columnas: string[] = ['Id', 'Nombre', 'Apellido', 'Identificacion',
-    'Numero de celular', "Editar", "Borrar"
+    'Numero de celular', "Mascotas", "Editar", "Borrar"
   ];
   public usuarios: Usuario[];
   public usuario: Usuario;

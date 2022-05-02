@@ -34,23 +34,34 @@
         <td mat-cell *matCellDef="let usuario"> {{usuario.numeroCelular}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="Editar">
-        <th mat-header-cell *matHeaderCellDef></th>
+      <ng-container matColumnDef="Mascotas">
+        <th mat-header-cell *matHeaderCellDef>Mascotas</th>
         <td mat-cell *matCellDef="let usuario">
-          <button mat-mini-fab color="primary" (click)="editar(usuario.id)">
-            <mat-icon>edit</mat-icon>
+          <button mat-icon-button  [routerLink]="['/mascota/', usuario.nombre, usuario.apellido , usuario.id]">
+            <mat-icon>pets</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Editar">
+        <th mat-header-cell *matHeaderCellDef>Editar</th>
+        <td mat-cell *matCellDef="let usuario">
+          <button mat-icon-button color="primary" (click)="editar(usuario.id)">
+            <mat-icon>open_in_new</mat-icon>
           </button>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="Borrar">
-        <th mat-header-cell *matHeaderCellDef></th>
+        <th mat-header-cell *matHeaderCellDef>Eliminar</th>
         <td mat-cell *matCellDef="let usuario">
-          <button mat-mini-fab color="accent" (click)="delete(usuario)">
+          <button mat-icon-button color="accent" (click)="delete(usuario)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>
       </ng-container>
+
+
 
       <tr mat-header-row *matHeaderRowDef="columnas"></tr>
       <tr mat-row *matRowDef="let row; columns: columnas;"></tr>

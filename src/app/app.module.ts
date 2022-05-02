@@ -9,6 +9,7 @@ import { ProductoModule } from '@producto/producto.module';
 import { UsuarioModule } from '@usuario/usuario.module';
 import { CoreModule } from '@core/core.module';
 import { CookieService } from 'ngx-cookie-service';
+import { MascotaModule } from '@mascota/mascota.module';
 
 
 
@@ -24,6 +25,7 @@ import { CookieService } from 'ngx-cookie-service';
     AppRoutingModule,
     ProductoModule,
     UsuarioModule,
+    MascotaModule,
     CoreModule
   ],
   providers: [CookieService],
