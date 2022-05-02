@@ -18,7 +18,7 @@ export class MascotaService {
     return this.notificarMascota;
   }
 
-  public consultarPorIdUsuario(idUsuario: number){
-    return this.http.doGet<Mascota[]>(`${environment.endpoint}/mascotas/${idUsuario}`, this.http.optsName("consultar mascotas del usuario"));
+  public consultarMascotasPorIdUsuario(idUsuario: number){
+    return this.http.doGet<Mascota[]>(`${environment.endpoint}/mascotas/usuario/${idUsuario}`, this.http.optsName("consultar mascotas del usuario"));
   }
 }

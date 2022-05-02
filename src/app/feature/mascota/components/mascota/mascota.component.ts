@@ -10,6 +10,7 @@ import { MascotaService } from '@mascota/shared/service/mascota.service';
 })
 export class MascotaComponent implements OnInit {
 
+  columnas: string[] = ['Id', 'Nombre', 'Raza', 'Peso', 'Editar', 'Borrar'];
 
   public mascotas: Mascota[];
 
@@ -33,8 +34,8 @@ export class MascotaComponent implements OnInit {
       this.apellidoUsuario = params.get("apellidoUsuario")
       this.idUsuario = +params.get("idUsuario");
       console.log(this.nombreUsuario, this.apellidoUsuario, this.idUsuario)
-      this.mascotaService.consultarPorIdUsuario(this.idUsuario).subscribe(
-        mascotas => console.log(mascotas)
+      this.mascotaService.consultarMascotasPorIdUsuario(this.idUsuario).subscribe(
+        mascotas => this.mascotas = mascotas
       )
     })
     
