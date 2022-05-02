@@ -83,7 +83,7 @@ export class UsuarioComponent implements OnInit {
                 color: "#fff",
                 icon: 'success',
                 title: 'Usuario Eliminado!',
-                text: `El usuario se ha eliminado con éxito de la base de datos`,
+                text: `El Usuario se ha eliminado con éxito de la base de datos`,
               });
             }
           },

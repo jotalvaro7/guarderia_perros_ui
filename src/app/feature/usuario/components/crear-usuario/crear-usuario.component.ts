@@ -84,7 +84,7 @@ export class CrearUsuarioComponent implements OnInit {
           color: "#fff",
           icon: "success",
           title: 'Nuevo Usuario',
-          text:  `Usuario ${this.usuario.nombre} Creado Con Exito!`
+          text:  `Usuario ${this.usuario.nombre} creado con Exito!`
         })
       },
       err => {
@@ -100,7 +100,30 @@ export class CrearUsuarioComponent implements OnInit {
   }
 
   public actualizar(): void {
-    console.log("actualizando...")
+    this.fabricarUsuario();
+    this.usuarioService.editar(this.usuario).subscribe(
+      response => {
+        this.dialogRef.close();
+        this.usuarioService.notificar.emit(response);
+        Swal.fire({
+          background: "#444444",
+          color: "#fff",
+          icon: "success",
+          title: 'Se ha actualizado el Usuario',
+          text:  `Usuario ${this.usuario.nombre} actualizado con Exito!`
+        })
+      },
+      err => {
+        Swal.fire({
+          background: "#444444",
+            color: "#fff",
+            icon: "error",
+            title: err.error.mensaje,
+            text:  'Nombre de la excepcion: ' + err.error.nombreExcepcion
+        })
+      }
+    )
+
   }
 
   private fabricarUsuario(): void {
