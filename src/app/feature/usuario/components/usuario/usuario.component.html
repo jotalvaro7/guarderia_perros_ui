@@ -46,7 +46,7 @@
       <ng-container matColumnDef="Borrar">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let usuario">
-          <button mat-mini-fab color="accent" >
+          <button mat-mini-fab color="accent" (click)="delete(usuario)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>

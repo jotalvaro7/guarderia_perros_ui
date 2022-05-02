@@ -75,8 +75,8 @@ export class CrearUsuarioComponent implements OnInit {
 
   public crear(): void {
     this.fabricarUsuario();
-    this.usuarioService.guardar(this.usuario).subscribe(response => {
-      if (response) {
+    this.usuarioService.guardar(this.usuario).subscribe(
+      response => {
         this.dialogRef.close();
         this.usuarioService.notificar.emit(response);
         Swal.fire({
@@ -86,8 +86,17 @@ export class CrearUsuarioComponent implements OnInit {
           title: 'Nuevo Usuario',
           text:  `Usuario ${this.usuario.nombre} Creado Con Exito!`
         })
+      },
+      err => {
+        Swal.fire({
+          background: "#444444",
+            color: "#fff",
+            icon: "error",
+            title: err.error.mensaje,
+            text:  'Nombre de la excepcion: ' + err.error.nombreExcepcion
+        })
       }
-    })
+    )
   }
 
   public actualizar(): void {

@@ -30,5 +30,9 @@ export class UsuarioService {
     return this.http.doPost(`${environment.endpoint}/usuarios`, usuario, this.http.optsName('crear usuario'));
   }
 
+  public eliminar(id:Number){
+    return this.http.doDelete(`${environment.endpoint}/usuarios/${id}`, this.http.optsName('eliminar usuario'));
+  }
+
 
 }
