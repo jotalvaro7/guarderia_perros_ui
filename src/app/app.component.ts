@@ -8,7 +8,7 @@ import { MenuItem } from '@core/modelo/menu-item';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app-base';
+  title = 'Guarderia Mascotas';
   public menu_navigation: MenuItem[] = [
     { url: '/home', nombre: 'Home' },
     { url: '/usuario', nombre: 'Usuarios' }

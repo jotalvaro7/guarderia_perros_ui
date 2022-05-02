@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from '@usuario/shared/model/usuario';
 import { UsuarioService } from '@usuario/shared/service/usuario.service';
+import { MatDialog } from '@angular/material/dialog';
+import { CrearUsuarioComponent } from '../crear-usuario/crear-usuario.component';
 
 @Component({
   selector: 'app-usuario',
@@ -13,10 +15,11 @@ export class UsuarioComponent implements OnInit {
                         'Numero de celular', "Editar", "Borrar"
                       ];
   public usuarios: Usuario[];
-  public usuarioSeleccionado: Usuario;
+  public usuario:Usuario;
 
   constructor(
     protected usuarioService: UsuarioService,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -29,22 +32,24 @@ export class UsuarioComponent implements OnInit {
     )
   }
 
-  public crear(){
-    this.usuarioSeleccionado = new Usuario();
-    this.usuarioService.abrilModal();
+  public crear(action: string){
+    this.dialog.open(CrearUsuarioComponent, {
+      width: "20%",
+      autoFocus: true,
+      data: {id:action}
+    })
   }
 
-  public editar(usuario: Usuario): void{
-    console.log(usuario);
+  public editar(id:Number): void{
+    this.dialog.open(CrearUsuarioComponent, {
+      width: "20%",
+      autoFocus: true,
+      data: {id:id}
+    })
   }
 
   public eliminar(usuario: Usuario): void{
     console.log(usuario);
-  }
-
-
-  closeDialog(){
-    this.usuarioService.cerrarModal();
   }
 
 

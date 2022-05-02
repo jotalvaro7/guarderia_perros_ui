@@ -9,7 +9,6 @@ import {Usuario} from '../model/usuario';
 })
 export class UsuarioService {
 
-  modal: boolean = false;
 
   private notificarGestion = new EventEmitter<any>();
 
@@ -23,11 +22,13 @@ export class UsuarioService {
     return this.http.doGet<Usuario[]>(`${environment.endpoint}/usuarios`, this.http.optsName('consultar usuarios'));
   }
 
-  abrilModal(){
-    this.modal = true;
+  public consultarPorId(id:number){
+    return this.http.doGet<Usuario>(`${environment.endpoint}/usuarios/${id}`, this.http.optsName('consultar usuario por id'));
   }
 
-  cerrarModal(){
-    this.modal = false;
+  public guardar(usuario: Usuario){
+    return this.http.doPost(`${environment.endpoint}/usuarios`, usuario, this.http.optsName('crear usuario'));
   }
+
+
 }
