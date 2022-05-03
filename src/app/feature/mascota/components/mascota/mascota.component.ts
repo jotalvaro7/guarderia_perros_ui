@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Mascota } from '@mascota/shared/model/mascota';
 import { ActivatedRoute } from '@angular/router';
-import { MascotaService } from '@mascota/shared/service/mascota.service';
+import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CrearMascotaComponent } from '../crear-mascota/crear-mascota.component';
 import { idResponse } from '@mascota/shared/model/idResponse';
