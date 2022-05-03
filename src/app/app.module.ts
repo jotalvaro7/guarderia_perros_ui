@@ -10,6 +10,7 @@ import { UsuarioModule } from '@usuario/usuario.module';
 import { CoreModule } from '@core/core.module';
 import { CookieService } from 'ngx-cookie-service';
 import { MascotaModule } from '@mascota/mascota.module';
+import { FacturaModule } from './feature/factura/factura.module';
 
 
 
@@ -26,6 +27,7 @@ import { MascotaModule } from '@mascota/mascota.module';
     ProductoModule,
     UsuarioModule,
     MascotaModule,
+    FacturaModule,
     CoreModule
   ],
   providers: [CookieService],

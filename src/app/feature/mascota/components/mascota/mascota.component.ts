@@ -9,6 +9,7 @@ import { RegistroIngreso } from '@mascota/shared/model/registro-ingreso/registro
 import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso/registro-ingreso.service';
 
 import Swal from 'sweetalert2';
+import { FacturaComponent } from '@factura/components/factura/factura.component';
 
 @Component({
   selector: 'app-mascota',
@@ -17,7 +18,7 @@ import Swal from 'sweetalert2';
 })
 export class MascotaComponent implements OnInit {
 
-  columnas: string[] = ['Id', 'Nombre', 'Raza', 'Peso', 'Editar', 'Borrar'];
+  columnas: string[] = ['Id', 'Nombre', 'Raza', 'Peso', 'Editar', 'Factura'];
 
   public mascotas: Mascota[];
 
@@ -115,6 +116,14 @@ export class MascotaComponent implements OnInit {
           });
       }
     });
+  }
+
+  factura(idMascota:Number){
+    this.dialog.open(FacturaComponent,{
+      width: "20%",
+      autoFocus: true,
+      data:{idMascota:idMascota}
+    })
   }
 
   registrarIngresoMascota(idResponse: idMascotaResponse){

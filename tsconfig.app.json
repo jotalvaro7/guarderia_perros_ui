@@ -20,6 +20,9 @@
       "@mascota/*":[
         "src/app/feature/mascota/*"
       ],
+      "@factura/*":[
+        "src/app/feature/factura/*"
+      ],
       "@producto/*": [
         "src/app/feature/producto/*"
       ],
