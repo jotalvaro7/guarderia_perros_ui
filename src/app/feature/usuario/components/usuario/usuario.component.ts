@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { Usuario } from '@usuario/shared/model/usuario';
 import { UsuarioService } from '@usuario/shared/service/usuario.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CrearUsuarioComponent } from '../crear-usuario/crear-usuario.component';
+
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,16 +15,19 @@ import Swal from 'sweetalert2';
 })
 export class UsuarioComponent implements OnInit {
 
-  columnas: string[] = ['Id', 'Nombre', 'Apellido', 'Identificacion',
+  columnas: string[] = ['#','Nombre', 'Apellido', 'Identificacion',
     'Numero de celular', "Mascotas", "Editar", "Borrar"
   ];
   public usuarios: Usuario[];
   public usuario: Usuario;
+  public dataSource: any;
 
   constructor(
     protected usuarioService: UsuarioService,
     private dialog: MatDialog,
   ) { }
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit(): void {
     this.obtenerUsuarios();
@@ -33,7 +39,11 @@ export class UsuarioComponent implements OnInit {
 
   obtenerUsuarios(): void {
     this.usuarioService.consultar().subscribe(
-      usuarios => this.usuarios = usuarios
+      usuarios => {
+        this.usuarios = usuarios;
+        this.dataSource = new MatTableDataSource(this.usuarios);
+        this.dataSource.paginator = this.paginator;
+      }
     )
   }
 
