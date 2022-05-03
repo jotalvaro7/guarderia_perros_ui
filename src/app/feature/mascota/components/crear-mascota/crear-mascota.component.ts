@@ -81,8 +81,6 @@ export class CrearMascotaComponent implements OnInit {
         this.dialogRef.close();
         this.mascotaService.notificar.emit(response);
         Swal.fire({
-          background: "#444444",
-          color: "#fff",
           icon: "success",
           title: 'Nueva Mascota',
           text:  `Mascota ${this.mascota.nombre} registrada con Exito!`
@@ -90,8 +88,6 @@ export class CrearMascotaComponent implements OnInit {
       },
       err => {
         Swal.fire({
-          background: "#444444",
-            color: "#fff",
             icon: "error",
             title: err.error.mensaje,
             text:  'Nombre de la excepcion: ' + err.error.nombreExcepcion
@@ -102,7 +98,24 @@ export class CrearMascotaComponent implements OnInit {
 
   public actualizar():void{
     this.fabricarMascota();
-    console.log(this.mascota)
+    this.mascotaService.actualizar(this.mascota).subscribe(
+      response => {
+        this.dialogRef.close();
+        this.mascotaService.notificar.emit(response);
+        Swal.fire({
+          icon: "success",
+          title: 'Se ha actualizado la Mascota',
+          text:  `Mascota ${this.mascota.nombre} actualizada con Exito!`
+        })
+      },
+      err => {
+        Swal.fire({
+          icon: "error",
+            title: err.error.mensaje,
+            text:  'Nombre de la excepcion: ' + err.error.nombreExcepcion
+        })
+      }
+    )
   }
 
   private fabricarMascota():void{

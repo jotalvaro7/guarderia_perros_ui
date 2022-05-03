@@ -1,1 +1,22 @@
 
+    <div class="contenedor" *ngIf="factura">
+        <mat-card class="factura">
+            <mat-card-header>
+                <mat-card-title class="factura__titulo">
+                    Factura De Cobro
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p class="factura__nombre">{{factura.nombreMascota}}</p>
+                <p class="factura__ingreso"> <b>Ingreso:</b> {{factura.fechaIngreso}}</p>
+                <p class="factura__salida"> <b>Salida:</b> {{factura.fechaSalida}}</p>
+                <p class="factura__tiempo"><b>Total Tiempo:</b> {{factura.totalTiempoEnGuarderia}}</p>
+                <p class="factura__pagar"> <b>Total a pagar:</b> ${{factura.precioAPagar}}</p>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-flat-button color="warn" (click)="cancelar()">Cancelar</button>
+                <button mat-flat-button color="primary" (click)="cobrar()">Cobrar</button>
+              </mat-card-actions>
+        </mat-card>
+    </div>
+    

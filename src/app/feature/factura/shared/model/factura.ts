@@ -3,5 +3,5 @@ export class Factura{
     fechaIngreso: string;
     fechaSalida: string;
     totalTiempoEnGuarderia: string;
-    precioaPagar:number
+    precioAPagar:number
 }

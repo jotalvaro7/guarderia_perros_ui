@@ -63,8 +63,6 @@ export class UsuarioComponent implements OnInit {
     });
 
     swalWithBootstrapButtons.fire({
-      background: "#444",
-      color: "#fff",
       title: 'Cuidado!',
       text: `Está seguro de eliminar el usuario ${usuario.nombre} ${usuario.apellido} ?`,
       icon: 'warning',
@@ -79,8 +77,6 @@ export class UsuarioComponent implements OnInit {
             if (!response) {
               this.usuarios = this.usuarios.filter(cli => cli !== usuario);
               swalWithBootstrapButtons.fire({
-                background: "#444",
-                color: "#fff",
                 icon: 'success',
                 title: 'Usuario Eliminado!',
                 text: `El Usuario se ha eliminado con éxito de la base de datos`,
@@ -89,8 +85,6 @@ export class UsuarioComponent implements OnInit {
           },
           err => {
             Swal.fire({
-              background: "#444444",
-                color: "#fff",
                 icon: "error",
                 title: err.error.mensaje,
                 text:  'Nombre de la excepcion: ' + err.error.nombreExcepcion

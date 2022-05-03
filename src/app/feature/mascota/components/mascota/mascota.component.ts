@@ -81,8 +81,6 @@ export class MascotaComponent implements OnInit {
     });
 
     swalWithBootstrapButtons.fire({
-      background: "#444",
-      color: "#fff",
       title: 'Cuidado!',
       text: `Está seguro de eliminar la mascota ${mascota.nombre} ?`,
       icon: 'warning',
@@ -97,8 +95,6 @@ export class MascotaComponent implements OnInit {
             if (!response) {
               this.mascotas = this.mascotas.filter(cli => cli !== mascota);
               swalWithBootstrapButtons.fire({
-                background: "#444",
-                color: "#fff",
                 icon: 'success',
                 title: 'Mascota Eliminada!',
                 text: `La mascota se ha eliminado con éxito de la base de datos`,
@@ -107,8 +103,6 @@ export class MascotaComponent implements OnInit {
           },
           err => {
             Swal.fire({
-              background: "#444444",
-                color: "#fff",
                 icon: "error",
                 title: err.error.mensaje,
                 text:  'Nombre de la excepcion: ' + err.error.nombreExcepcion
@@ -120,7 +114,6 @@ export class MascotaComponent implements OnInit {
 
   factura(idMascota:Number){
     this.dialog.open(FacturaComponent,{
-      width: "20%",
       autoFocus: true,
       data:{idMascota:idMascota}
     })

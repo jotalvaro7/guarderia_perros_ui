@@ -80,8 +80,6 @@ export class CrearUsuarioComponent implements OnInit {
         this.dialogRef.close();
         this.usuarioService.notificar.emit(response);
         Swal.fire({
-          background: "#444444",
-          color: "#fff",
           icon: "success",
           title: 'Nuevo Usuario',
           text:  `Usuario ${this.usuario.nombre} creado con Exito!`
@@ -89,8 +87,6 @@ export class CrearUsuarioComponent implements OnInit {
       },
       err => {
         Swal.fire({
-          background: "#444444",
-            color: "#fff",
             icon: "error",
             title: err.error.mensaje,
             text:  'Nombre de la excepcion: ' + err.error.nombreExcepcion
@@ -106,8 +102,6 @@ export class CrearUsuarioComponent implements OnInit {
         this.dialogRef.close();
         this.usuarioService.notificar.emit(response);
         Swal.fire({
-          background: "#444444",
-          color: "#fff",
           icon: "success",
           title: 'Se ha actualizado el Usuario',
           text:  `Usuario ${this.usuario.nombre} actualizado con Exito!`
@@ -115,8 +109,6 @@ export class CrearUsuarioComponent implements OnInit {
       },
       err => {
         Swal.fire({
-          background: "#444444",
-            color: "#fff",
             icon: "error",
             title: err.error.mensaje,
             text:  'Nombre de la excepcion: ' + err.error.nombreExcepcion

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { SharedModule } from '@shared/shared.module';
 
 import { FacturaRoutingModule } from './factura-routing.module';
 import { FacturaComponent } from './components/factura/factura.component';
@@ -10,7 +10,7 @@ import { FacturaComponent } from './components/factura/factura.component';
     FacturaComponent
   ],
   imports: [
-    CommonModule,
+    SharedModule,
     FacturaRoutingModule
   ]
 })
