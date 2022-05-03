@@ -5,6 +5,7 @@ import { MascotaService } from '@mascota/shared/service/mascota.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CrearMascotaComponent } from '../crear-mascota/crear-mascota.component';
 import { idResponse } from '@mascota/shared/model/idResponse';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-mascota',
@@ -63,6 +64,53 @@ export class MascotaComponent implements OnInit {
       autoFocus: true,
       data:{id:id, idUsuario:this.idUsuario}
     })
+  }
+
+  public delete(mascota: Mascota): void {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    });
+
+    swalWithBootstrapButtons.fire({
+      background: "#444",
+      color: "#fff",
+      title: 'Cuidado!',
+      text: `Está seguro de eliminar la mascota ${mascota.nombre} ?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si eliminar',
+      cancelButtonText: 'No, cancelar',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.mascotaService.eliminar(mascota.id).subscribe(
+          response => {
+            if (!response) {
+              this.mascotas = this.mascotas.filter(cli => cli !== mascota);
+              swalWithBootstrapButtons.fire({
+                background: "#444",
+                color: "#fff",
+                icon: 'success',
+                title: 'Mascota Eliminada!',
+                text: `La mascota se ha eliminado con éxito de la base de datos`,
+              });
+            }
+          },
+          err => {
+            Swal.fire({
+              background: "#444444",
+                color: "#fff",
+                icon: "error",
+                title: err.error.mensaje,
+                text:  'Nombre de la excepcion: ' + err.error.nombreExcepcion
+            })
+          });
+      }
+    });
   }
 
 }

@@ -88,7 +88,13 @@ export class UsuarioComponent implements OnInit {
             }
           },
           err => {
-            Swal.fire(err.error.mensaje, 'Nombre de la excepción: ' + err.error.nombreExcepcion, 'error');
+            Swal.fire({
+              background: "#444444",
+                color: "#fff",
+                icon: "error",
+                title: err.error.mensaje,
+                text:  'Nombre de la excepcion: ' + err.error.nombreExcepcion
+            })
           });
       }
     });
