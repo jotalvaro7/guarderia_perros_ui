@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Mascota } from '@mascota/shared/model/mascota';
+import { Mascota } from '@mascota/shared/model/mascota/mascota';
 import { ActivatedRoute } from '@angular/router';
 import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CrearMascotaComponent } from '../crear-mascota/crear-mascota.component';
-import { idResponse } from '@mascota/shared/model/idResponse';
+import { idMascotaResponse } from '@mascota/shared/model/mascota/idMascotaResponse';
+import { RegistroIngreso } from '@mascota/shared/model/registro-ingreso/registro-ingreso';
+import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso/registro-ingreso.service';
+
 import Swal from 'sweetalert2';
 
 @Component({
@@ -24,6 +27,7 @@ export class MascotaComponent implements OnInit {
 
   constructor(
     private mascotaService: MascotaService,
+    private registroIngresoService: RegistroIngresoService,
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
   ) { }
@@ -31,9 +35,9 @@ export class MascotaComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerMascotasUsuario();
     this.mascotaService.notificar.subscribe(
-      (response:idResponse) => {
-        console.log(response);
+      (response:idMascotaResponse) => {
         this.obtenerMascotasUsuario();
+        this.registrarIngresoMascota(response);
       })
   }
 
@@ -111,6 +115,12 @@ export class MascotaComponent implements OnInit {
           });
       }
     });
+  }
+
+  registrarIngresoMascota(idResponse: idMascotaResponse){
+    let registroIngreso = new RegistroIngreso();
+    registroIngreso.idMascota =  idResponse.valor
+    this.registroIngresoService.guardar(registroIngreso).subscribe();
   }
 
 }

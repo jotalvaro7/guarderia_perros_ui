@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { HttpService } from '@core/services/http.service';
 import { environment } from 'src/environments/environment';
-import { Mascota } from '@mascota/shared/model/mascota';
+import { Mascota } from '@mascota/shared/model/mascota/mascota';
 
 @Injectable({
   providedIn: 'root'

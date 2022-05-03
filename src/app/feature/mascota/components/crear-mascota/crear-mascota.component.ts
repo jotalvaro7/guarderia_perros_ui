@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { idResponse } from '@mascota/shared/model/idResponse';
-import { Mascota } from '@mascota/shared/model/mascota';
+import { idMascotaResponse } from '@mascota/shared/model/mascota/idMascotaResponse';
+import { Mascota } from '@mascota/shared/model/mascota/mascota';
 import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
 import Swal from 'sweetalert2';
 
@@ -77,7 +77,7 @@ export class CrearMascotaComponent implements OnInit {
   public crear():void{
     this.fabricarMascota();
     this.mascotaService.guardar(this.mascota).subscribe(
-      (response:idResponse) => {
+      (response:idMascotaResponse) => {
         this.dialogRef.close();
         this.mascotaService.notificar.emit(response);
         Swal.fire({
