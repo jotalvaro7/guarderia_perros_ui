@@ -1,5 +1,10 @@
-<nav>
-  <div id="menu">
+<nav class="navbar">
+  <div class="menu">
     <a *ngFor="let item of items" [routerLink]="item.url" routerLinkActive="active">{{item.nombre}}</a>
+  </div>
+  <div class="iconos">
+    <img class="icono icono-facebook" src="../../../../assets/svg/icons8-facebook.svg" alt="icono facebook" >
+    <img class="icono icono-instagram" src="../../../../assets/svg/icons8-instagram.svg" alt="icono instagram" >
+    <img class="icono icono-twitter" src="../../../../assets/svg/icons8-twitter.svg" alt="icono twitter" >
   </div>
 </nav>

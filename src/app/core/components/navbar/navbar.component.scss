@@ -2,38 +2,64 @@ $fuente-navbar: serif;
 $color-texto-fuente-navbar: white;
 $color-hover-fuente-navbar: tomato;
 
-nav {
+
+.navbar {
+    display: grid;
+    grid-template-columns: 90% 10%;
     background-color: black;
-
-    #menu {
-        height: 50px;
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(2, 100px);
-        justify-content: center;
-        align-items: center;
-
-        a {
-            font-family: $fuente-navbar;
-            color: $color-texto-fuente-navbar;
-            font-size: 18px;
-            text-align: center;
-            text-decoration: none;
-            transition: all 150ms;
-            -webkit-transition: all 150ms;
-            -moz-transition: all 150ms;
-            -ms-transition: all 150ms;
-            -o-transition: all 150ms;
 }
 
-        a:hover {
-            color: $color-hover-fuente-navbar;
-            transform: scale(1.5, 1.5);
-            -webkit-transform: scale(1.5, 1.5);
-            -moz-transform: scale(1.5, 1.5);
-            -ms-transform: scale(1.5, 1.5);
-            -o-transform: scale(1.5, 1.5);
-        }
+.menu {
+    height: 50px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 100px);
+    justify-content: center;
+    align-items: center;
+
+    a {
+        font-family: $fuente-navbar;
+        color: $color-texto-fuente-navbar;
+        font-size: 18px;
+        text-align: center;
+        text-decoration: none;
+        transition: all 150ms;
+        -webkit-transition: all 150ms;
+        -moz-transition: all 150ms;
+        -ms-transition: all 150ms;
+        -o-transition: all 150ms;
     }
 
+    a:hover {
+        color: $color-hover-fuente-navbar;
+        transform: scale(1.5, 1.5);
+        -webkit-transform: scale(1.5, 1.5);
+        -moz-transform: scale(1.5, 1.5);
+        -ms-transform: scale(1.5, 1.5);
+        -o-transform: scale(1.5, 1.5);
+    }
+}
+
+
+.iconos {
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+
+    .icono {
+        width: 40px;
+        transition: all 300ms;
+        -webkit-transition: all 300ms;
+        -moz-transition: all 300ms;
+        -ms-transition: all 300ms;
+        -o-transition: all 300ms;
+    }
+
+    .icono:hover {
+        transform: scale(1.5);
+        -webkit-transform: scale(1.5);
+        -moz-transform: scale(1.5);
+        -ms-transform: scale(1.5);
+        -o-transform: scale(1.5);
+    }
 }
