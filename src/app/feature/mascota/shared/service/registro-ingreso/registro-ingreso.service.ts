@@ -15,7 +15,7 @@ export class RegistroIngresoService {
     return this.http.doPost(`${environment.endpoint}/registro/ingreso`, registroIngreso, this.http.optsName("creando registro de ingreso de mascota"))
   }
 
-  public eliminar(idMascota: number){
+  public eliminar(idMascota: Number){
     return this.http.doDelete(`${environment.endpoint}/registro/ingreso/${idMascota}` , this.http.optsName("eliminar mascota"));
   }
 }

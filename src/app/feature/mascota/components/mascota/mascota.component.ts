@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Mascota } from '@mascota/shared/model/mascota/mascota';
-import { ActivatedRoute } from '@angular/router';
-import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
+import { Mascota } from '@mascota/shared/model/mascota/mascota';
+import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
 import { CrearMascotaComponent } from '../crear-mascota/crear-mascota.component';
 import { idMascotaResponse } from '@mascota/shared/model/mascota/idMascotaResponse';
 import { RegistroIngreso } from '@mascota/shared/model/registro-ingreso/registro-ingreso';
 import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso/registro-ingreso.service';
+import { FacturaComponent } from '@factura/components/factura/factura.component';
+import { FacturaService } from '@factura/shared/service/factura.service';
 
 import Swal from 'sweetalert2';
-import { FacturaComponent } from '@factura/components/factura/factura.component';
 
 @Component({
   selector: 'app-mascota',
@@ -21,6 +22,7 @@ export class MascotaComponent implements OnInit {
   columnas: string[] = ['Id', 'Nombre', 'Raza', 'Peso', 'Editar', 'Factura'];
 
   public mascotas: Mascota[];
+  public mascota: Mascota;
 
   public idUsuario: number;
   public nombreUsuario: string;
@@ -29,22 +31,19 @@ export class MascotaComponent implements OnInit {
   constructor(
     private mascotaService: MascotaService,
     private registroIngresoService: RegistroIngresoService,
+    private facturaService: FacturaService,
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
     this.obtenerMascotasUsuario();
-    this.mascotaService.notificar.subscribe(
-      (response:idMascotaResponse) => {
-        this.obtenerMascotasUsuario();
-        this.registrarIngresoMascota(response);
-      })
+    this.subcripcionMascotaServiceEmitter();
+    this.subcripcionFacturaServiceEmitter();
   }
 
-
-  obtenerMascotasUsuario():void{
-    this.activatedRoute.paramMap.subscribe((params) =>{
+  obtenerMascotasUsuario(): void {
+    this.activatedRoute.paramMap.subscribe((params) => {
       this.nombreUsuario = params.get("nombreUsuario");
       this.apellidoUsuario = params.get("apellidoUsuario")
       this.idUsuario = +params.get("idUsuario");
@@ -52,76 +51,69 @@ export class MascotaComponent implements OnInit {
         mascotas => this.mascotas = mascotas
       )
     })
-    
   }
 
-  public crear(action:string){
+  subcripcionMascotaServiceEmitter() {
+    this.mascotaService.notificar.subscribe(
+      (response: idMascotaResponse) => {
+        this.obtenerMascotasUsuario();
+        this.registrarIngresoMascota(response);
+      })
+  }
+
+  subcripcionFacturaServiceEmitter() {
+    this.facturaService.notificar.subscribe(idMascota => {
+      this.registroIngresoService.eliminar(idMascota).subscribe();
+      this.obtenerMascotaDeUsuarioYEliminar(idMascota);
+    })
+  }
+
+  public crear(action: string) {
     this.dialog.open(CrearMascotaComponent, {
       width: "20%",
       autoFocus: true,
-      data:{id:action, idUsuario:this.idUsuario}
+      data: { id: action, idUsuario: this.idUsuario }
     })
   }
 
-  public editar(id:Number){
-    this.dialog.open(CrearMascotaComponent,{
+  public editar(id: Number) {
+    this.dialog.open(CrearMascotaComponent, {
       width: "20%",
       autoFocus: true,
-      data:{id:id, idUsuario:this.idUsuario}
+      data: { id: id, idUsuario: this.idUsuario }
     })
   }
 
-  public delete(mascota: Mascota): void {
-    const swalWithBootstrapButtons = Swal.mixin({
-      customClass: {
-        confirmButton: 'btn btn-success',
-        cancelButton: 'btn btn-danger'
-      },
-      buttonsStyling: false
-    });
-
-    swalWithBootstrapButtons.fire({
-      title: 'Cuidado!',
-      text: `Está seguro de eliminar la mascota ${mascota.nombre} ?`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Si eliminar',
-      cancelButtonText: 'No, cancelar',
-      reverseButtons: true
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.mascotaService.eliminar(mascota.id).subscribe(
-          response => {
-            if (!response) {
-              this.mascotas = this.mascotas.filter(cli => cli !== mascota);
-              swalWithBootstrapButtons.fire({
-                icon: 'success',
-                title: 'Mascota Eliminada!',
-                text: `La mascota se ha eliminado con éxito de la base de datos`,
-              });
-            }
-          },
-          err => {
-            Swal.fire({
-                icon: "error",
-                title: err.error.mensaje,
-                text:  'Nombre de la excepcion: ' + err.error.nombreExcepcion
-            })
-          });
-      }
-    });
+  obtenerMascotaDeUsuarioYEliminar(idMascota: Number) {
+    this.mascotaService.consultarMascotaPorId(idMascota).subscribe(mascota => {
+      this.mascota = mascota;
+      this.mascotaService.eliminar(this.mascota.id).subscribe(
+        response => {
+          if (!response) {
+            this.mascotas = this.mascotas.filter(cli => cli !== this.mascota);
+            this.mascotaService.notificar.emit();
+          }
+        },
+        err => {
+          Swal.fire({
+            icon: "error",
+            title: err.error.mensaje,
+            text: 'Nombre de la excepcion: ' + err.error.nombreExcepcion
+          })
+        });
+    })
   }
 
-  factura(idMascota:Number){
-    this.dialog.open(FacturaComponent,{
+  factura(idMascota: Number) {
+    this.dialog.open(FacturaComponent, {
       autoFocus: true,
-      data:{idMascota:idMascota}
+      data: { idMascota: idMascota }
     })
   }
 
-  registrarIngresoMascota(idResponse: idMascotaResponse){
+  registrarIngresoMascota(idResponse: idMascotaResponse) {
     let registroIngreso = new RegistroIngreso();
-    registroIngreso.idMascota =  idResponse.valor
+    registroIngreso.idMascota = idResponse.valor
     this.registroIngresoService.guardar(registroIngreso).subscribe();
   }
 
