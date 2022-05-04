@@ -39,9 +39,6 @@
       "@factura/*":[
         "src/app/feature/factura/*"
       ],
-      "@producto/*": [
-        "src/app/feature/producto/*"
-      ],
       "@shared/*": [
         "src/app/shared/*"
       ]
