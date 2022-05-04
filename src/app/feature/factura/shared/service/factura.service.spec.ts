@@ -28,7 +28,6 @@ describe('FacturaService', () => {
 
   it('deberia obtener la factura de cobro', () => {
     const dummyFactura = new Factura();
-    
     service.consultar(1).subscribe(response => {
       expect(response).toEqual(dummyFactura);
     });

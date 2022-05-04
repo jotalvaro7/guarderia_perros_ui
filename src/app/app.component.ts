@@ -9,7 +9,7 @@ import { MenuItem } from '@core/modelo/menu-item';
 })
 export class AppComponent {
   title = 'Guarderia Mascotas';
-  public menu_navigation: MenuItem[] = [
+  public menuNavigation: MenuItem[] = [
     { url: '/home', nombre: 'Home' },
     { url: '/usuario', nombre: 'Usuarios' }
     

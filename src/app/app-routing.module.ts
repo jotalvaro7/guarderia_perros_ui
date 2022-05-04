@@ -8,7 +8,10 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, canActivate: [SecurityGuard] },
   { path: 'usuario', loadChildren: () => import('@usuario/usuario.module').then(mod => mod.UsuarioModule) },
-  { path: 'mascota/:nombreUsuario/:apellidoUsuario/:idUsuario', loadChildren: () => import('@mascota/mascota.module').then(mod => mod.MascotaModule) },
+  {
+    path: 'mascota/:nombreUsuario/:apellidoUsuario/:idUsuario',
+    loadChildren: () => import('@mascota/mascota.module').then(mod => mod.MascotaModule)
+  },
   { path: 'factura', loadChildren: () => import('@factura/factura.module').then(mod => mod.FacturaModule) }
 ];
 

@@ -1,7 +1,7 @@
-export class Factura{
+export class Factura {
     nombreMascota: string;
     fechaIngreso: string;
     fechaSalida: string;
     totalTiempoEnGuarderia: string;
-    precioAPagar:number
-}
+    precioAPagar: number;
+};

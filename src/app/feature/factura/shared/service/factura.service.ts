@@ -12,12 +12,12 @@ export class FacturaService {
 
   constructor(protected http: HttpService) { }
 
-  get notificar(): EventEmitter<any>{
+  get notificar(): EventEmitter<any> {
     return this.notificarCobro;
   }
 
-  public consultar(idMascota:Number){
-    return this.http.doGet<Factura>(`${environment.endpoint}/cobrar/${idMascota}`, this.http.optsName("consultando la factura de cobro de la mascota"));
+  public consultar(idMascota: number) {
+    return this.http.doGet<Factura>(`${environment.endpoint}/cobrar/${idMascota}`, this.http.optsName('consultando la factura de cobro de la mascota'));
   }
 
 }

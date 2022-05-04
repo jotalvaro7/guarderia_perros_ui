@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, Optional} from '@angular/core';
+import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { Factura } from '@factura/shared/model/factura';
@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 export class FacturaComponent implements OnInit {
 
   public factura: Factura;
-  private idMascota: Number;
+  private idMascota: number;
 
   constructor(
     private facturaService: FacturaService,
@@ -21,26 +21,26 @@ export class FacturaComponent implements OnInit {
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     this.idMascota = data.idMascota;
-   }
-
-  ngOnInit(): void {
-    this.facturaService.consultar(this.idMascota).subscribe(factura => {
-      this.factura = factura;
-    })
   }
 
-  cobrar(){
+  ngOnInit(): void {
+    this.facturaService.consultar(this.idMascota).subscribe(
+      factura => this.factura = factura
+    );
+  }
+
+  cobrar() {
     this.dialogRef.close();
     Swal.fire({
-      icon: "success",
-      title: 'Cobro Realizado'
-    })
+      icon: 'success',
+      title: 'Cobro Realizado',
+    });
     this.facturaService.notificar.emit(this.idMascota);
   }
 
 
 
-  cancelar(){
+  cancelar() {
     this.dialogRef.close();
   }
 }
