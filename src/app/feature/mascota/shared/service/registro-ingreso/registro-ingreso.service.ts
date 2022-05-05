@@ -3,9 +3,7 @@ import { HttpService } from '@core/services/http.service';
 import { RegistroIngreso } from '@mascota/shared/model/registro-ingreso/registro-ingreso';
 import { environment } from 'src/environments/environment';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class RegistroIngresoService {
 
   constructor(protected http: HttpService) { }

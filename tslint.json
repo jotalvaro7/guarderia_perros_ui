@@ -24,7 +24,7 @@
       "app",
       "camelCase"
     ],
-    "eofline": true,
+    "eofline": false,
     "component-selector": [
       true,
       "element",
