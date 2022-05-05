@@ -27,5 +27,19 @@ $color-fuente-header: rgb(9, 8, 8);
         letter-spacing: 15px;
         text-shadow: 0px 10px 5px black;
         margin-top: 40px;
+        animation-name: movein;
+        animation-duration: 3s;
     }
+}
+
+
+@keyframes movein {
+    from {
+        transform: scale(2);
+        -webkit-transform: scale(2);
+        -moz-transform: scale(2);
+        -ms-transform: scale(2);
+        -o-transform: scale(2);
+}
+    
 }
