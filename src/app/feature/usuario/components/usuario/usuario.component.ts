@@ -86,6 +86,7 @@ export class UsuarioComponent implements OnInit {
           response => {
             if (!response) {
               this.usuarios = this.usuarios.filter(cli => cli !== usuario);
+              this.usuarioService.notificar.emit();
               swalWithBootstrapButtons.fire({
                 icon: 'success',
                 title: 'Usuario Eliminado!',
