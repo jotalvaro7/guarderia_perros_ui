@@ -3,7 +3,9 @@ import { HttpService } from '@core/services/http.service';
 import { environment } from 'src/environments/environment';
 import { Mascota } from '@mascota/shared/model/mascota/mascota';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class MascotaService {
 
   private notificarMascota = new EventEmitter<any>();

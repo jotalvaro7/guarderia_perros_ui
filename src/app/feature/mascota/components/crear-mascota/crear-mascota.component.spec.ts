@@ -4,8 +4,8 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from '@core/services/http.service';
-import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
 
+import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
 import { CrearMascotaComponent } from './crear-mascota.component';
 
 describe('CrearMascotaComponent', () => {

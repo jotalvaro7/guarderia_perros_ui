@@ -3,7 +3,9 @@ import { HttpService } from '@core/services/http.service';
 import { environment } from 'src/environments/environment';
 import { Factura } from '../model/factura';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class FacturaService {
 
   private notificarCobro = new EventEmitter<any>();

@@ -4,7 +4,9 @@ import { environment } from 'src/environments/environment';
 import { Usuario } from '../model/usuario';
 
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class UsuarioService {
 
 
