@@ -1,8 +1,8 @@
-import { browser } from "protractor";
+import { browser } from 'protractor';
 import { AppPage } from '../app.po';
-import { UsuarioPage } from "../page/usuario/usuario.po";
-import { NavbarPage } from "../page/navbar/navbar.po";
-import { MascotaPage } from "../page/mascota/mascota.po";
+import { UsuarioPage } from '../page/usuario/usuario.po';
+import { NavbarPage } from '../page/navbar/navbar.po';
+import { MascotaPage } from '../page/mascota/mascota.po';
 
 describe('workspace-project Producto', () => {
     let page: UsuarioPage;
@@ -132,7 +132,4 @@ describe('workspace-project Producto', () => {
         browser.sleep(1000);
         page.botonLimpiarFormulario();
     });
-
-
-
-})
+});

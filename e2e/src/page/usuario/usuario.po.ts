@@ -16,7 +16,7 @@ export class UsuarioPage {
     }
 
     async numeroCelularUsuarioInput(numeroCelular: string) {
-        await element(by.id('numeroCelular')).sendKeys(numeroCelular);;
+        await element(by.id('numeroCelular')).sendKeys(numeroCelular);
     }
 
     async botonAgregar() {
