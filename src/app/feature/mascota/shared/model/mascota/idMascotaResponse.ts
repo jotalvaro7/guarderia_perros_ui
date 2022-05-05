@@ -1,3 +1,3 @@
-export class idMascotaResponse{
-    valor: number
+export class IdMascotaResponse {
+    valor: number;
 }

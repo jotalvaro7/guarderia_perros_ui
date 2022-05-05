@@ -1,17 +1,17 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HttpResponse } from '@angular/common/http';
-import {environment} from 'src/environments/environment';
-import {HttpService} from 'src/app/core/services/http.service';
+import { environment } from 'src/environments/environment';
+import { HttpService } from 'src/app/core/services/http.service';
 
 import { UsuarioService } from './usuario.service';
-import {Usuario} from '../model/usuario';
+import { Usuario } from '../model/usuario';
 
 describe('UsuarioService', () => {
   let httpMock: HttpTestingController;
   let service: UsuarioService;
 
-  const apiEndpointUsuario = `${environment.endpoint}/usuarios`
+  const apiEndpointUsuario = `${environment.endpoint}/usuarios`;
 
   beforeEach(() => {
     const injector = TestBed.configureTestingModule({
@@ -23,18 +23,18 @@ describe('UsuarioService', () => {
   });
 
   it('should be created', () => {
-    const productService : UsuarioService = TestBed.inject(UsuarioService);
+    const productService: UsuarioService = TestBed.inject(UsuarioService);
     expect(productService).toBeTruthy();
   });
 
-  it('deberia crear un usuario', ()=>{
-    const dummyUsuario  = new Usuario();
+  it('deberia crear un usuario', () => {
+    const dummyUsuario = new Usuario();
     service.guardar(dummyUsuario).subscribe((respuesta) => {
       expect(respuesta).toEqual(true);
     });
     const req = httpMock.expectOne(apiEndpointUsuario);
     expect(req.request.method).toBe('POST');
-    req.event(new HttpResponse<boolean>({body:true}));
+    req.event(new HttpResponse<boolean>({ body: true }));
   });
 
   it('deberia actualizar un usuario', () => {
@@ -53,10 +53,10 @@ describe('UsuarioService', () => {
     dummyUsuario.id = 1;
     service.eliminar(dummyUsuario.id).subscribe(response => {
       expect(response).toEqual(true);
-    })
+    });
     const req = httpMock.expectOne(`${apiEndpointUsuario}/1`);
     expect(req.request.method).toBe('DELETE');
-    req.event(new HttpResponse<boolean>({body:true}));
+    req.event(new HttpResponse<boolean>({ body: true }));
   });
 
   it('deberia listar usuarios', () => {
@@ -69,7 +69,7 @@ describe('UsuarioService', () => {
     });
     const req = httpMock.expectOne(apiEndpointUsuario);
     expect(req.request.method).toBe('GET');
-    req.flush(dummyUsuarios)
+    req.flush(dummyUsuarios);
   });
 
   it('deberia obtener un usuario por id', () => {
@@ -81,5 +81,5 @@ describe('UsuarioService', () => {
     const req = httpMock.expectOne(`${apiEndpointUsuario}/1`);
     expect(req.request.method).toBe('GET');
     req.flush(dummyUsuarios);
-  })
+  });
 });

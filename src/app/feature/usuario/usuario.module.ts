@@ -16,7 +16,7 @@ import { CrearUsuarioComponent } from './components/crear-usuario/crear-usuario.
     UsuarioRoutingModule,
     SharedModule
   ],
-  providers:[
+  providers: [
     UsuarioService
   ]
 })

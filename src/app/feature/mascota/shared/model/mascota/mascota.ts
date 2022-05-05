@@ -1,5 +1,5 @@
-export class Mascota{
-    id:number;
+export class Mascota {
+    id: number;
     nombre: string;
     raza: string;
     peso: string;

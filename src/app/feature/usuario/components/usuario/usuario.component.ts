@@ -15,8 +15,8 @@ import Swal from 'sweetalert2';
 })
 export class UsuarioComponent implements OnInit {
 
-  columnas: string[] = ['#','Nombre', 'Apellido', 'Identificacion',
-    'Numero de celular', "Mascotas", "Editar", "Borrar"
+  columnas: string[] = ['#', 'Nombre', 'Apellido', 'Identificacion',
+    'Numero de celular', 'Mascotas', 'Editar', 'Borrar'
   ];
   public usuarios: Usuario[];
   public usuario: Usuario;
@@ -34,7 +34,7 @@ export class UsuarioComponent implements OnInit {
     this.usuarioService.notificar.subscribe(response => {
       console.log(`Desde el subscritor del emisor event ${response}`);
       this.obtenerUsuarios();
-    })
+    });
   }
 
   obtenerUsuarios(): void {
@@ -44,23 +44,23 @@ export class UsuarioComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.usuarios);
         this.dataSource.paginator = this.paginator;
       }
-    )
+    );
   }
 
   public crear(action: string) {
     this.dialog.open(CrearUsuarioComponent, {
-      width: "20%",
+      width: '20%',
       autoFocus: true,
       data: { id: action }
-    })
+    });
   }
 
-  public editar(id: Number): void {
+  public editar(id: number): void {
     this.dialog.open(CrearUsuarioComponent, {
-      width: "20%",
+      width: '20%',
       autoFocus: true,
-      data: { id: id }
-    })
+      data: { id }
+    });
   }
 
   public delete(usuario: Usuario): void {
@@ -95,10 +95,10 @@ export class UsuarioComponent implements OnInit {
           },
           err => {
             Swal.fire({
-                icon: "error",
-                title: err.error.mensaje,
-                text:  'Nombre de la excepcion: ' + err.error.nombreExcepcion
-            })
+              icon: 'error',
+              title: err.error.mensaje,
+              text: 'Nombre de la excepcion: ' + err.error.nombreExcepcion
+            });
           });
       }
     });

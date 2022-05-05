@@ -16,7 +16,7 @@ import { MascotaService } from './shared/service/mascota/mascota.service';
     MascotaRoutingModule,
     SharedModule
   ],
-  providers:[
+  providers: [
     MascotaService
   ]
 })

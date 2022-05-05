@@ -12,9 +12,9 @@ describe('UsuarioComponent', () => {
   let fixture: ComponentFixture<UsuarioComponent>;
 
   beforeEach(waitForAsync(() => {
-      TestBed.configureTestingModule({
-      declarations: [ UsuarioComponent ],
-      imports:[
+    TestBed.configureTestingModule({
+      declarations: [UsuarioComponent],
+      imports: [
         CommonModule,
         HttpClientModule,
         RouterTestingModule,
@@ -22,7 +22,7 @@ describe('UsuarioComponent', () => {
       ],
       providers: [UsuarioService, HttpService]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

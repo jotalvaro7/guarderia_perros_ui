@@ -41,18 +41,18 @@ export class CrearUsuarioComponent implements OnInit {
       apellido: new FormControl('', [Validators.required]),
       identificacion: new FormControl('', [Validators.required]),
       numeroCelular: new FormControl('', [Validators.required]),
-    })
+    });
   }
 
   private cargarUsuario(): void {
-    if (this.id == 'crear') {
+    if (this.id === 'crear') {
       this.titulo = 'Registrar Usuario';
     } else {
       this.titulo = 'Actualizar Usuario';
       this.usuarioService.consultarPorId(this.id).subscribe(usuario => {
         this.usuario = usuario;
         this.setValue();
-      })
+      });
     }
   }
 
@@ -62,7 +62,7 @@ export class CrearUsuarioComponent implements OnInit {
       apellido: this.usuario.apellido,
       identificacion: this.usuario.identificacion,
       numeroCelular: this.usuario.numeroCelular
-    })
+    });
   }
 
   onSubmit() {
@@ -80,19 +80,19 @@ export class CrearUsuarioComponent implements OnInit {
         this.dialogRef.close();
         this.usuarioService.notificar.emit(response);
         Swal.fire({
-          icon: "success",
+          icon: 'success',
           title: 'Nuevo Usuario',
-          text:  `Usuario ${this.usuario.nombre} creado con Exito!`
-        })
+          text: `Usuario ${this.usuario.nombre} creado con Exito!`
+        });
       },
       err => {
         Swal.fire({
-            icon: "error",
-            title: err.error.mensaje,
-            text:  'Nombre de la excepcion: ' + err.error.nombreExcepcion
-        })
+          icon: 'error',
+          title: err.error.mensaje,
+          text: 'Nombre de la excepcion: ' + err.error.nombreExcepcion
+        });
       }
-    )
+    );
   }
 
   public actualizar(): void {
@@ -102,20 +102,19 @@ export class CrearUsuarioComponent implements OnInit {
         this.dialogRef.close();
         this.usuarioService.notificar.emit(response);
         Swal.fire({
-          icon: "success",
+          icon: 'success',
           title: 'Se ha actualizado el Usuario',
-          text:  `Usuario ${this.usuario.nombre} actualizado con Exito!`
-        })
+          text: `Usuario ${this.usuario.nombre} actualizado con Exito!`
+        });
       },
       err => {
         Swal.fire({
-            icon: "error",
-            title: err.error.mensaje,
-            text:  'Nombre de la excepcion: ' + err.error.nombreExcepcion
-        })
+          icon: 'error',
+          title: err.error.mensaje,
+          text: 'Nombre de la excepcion: ' + err.error.nombreExcepcion
+        });
       }
-    )
-
+    );
   }
 
   private fabricarUsuario(): void {

@@ -1,17 +1,17 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HttpResponse } from '@angular/common/http';
-import {environment} from 'src/environments/environment';
-import {HttpService} from 'src/app/core/services/http.service';
+import { environment } from 'src/environments/environment';
+import { HttpService } from 'src/app/core/services/http.service';
 
 import { MascotaService } from './mascota.service';
-import {Mascota} from '../../model/mascota/mascota';
+import { Mascota } from '../../model/mascota/mascota';
 
 describe('MascotaService', () => {
   let httpMock: HttpTestingController;
   let service: MascotaService;
 
-  const apiEndpointMascota = `${environment.endpoint}/mascotas`
+  const apiEndpointMascota = `${environment.endpoint}/mascotas`;
 
   beforeEach(() => {
     const injector = TestBed.configureTestingModule({
@@ -23,7 +23,7 @@ describe('MascotaService', () => {
   });
 
   it('should be created', () => {
-    const productService: MascotaService = TestBed.inject(MascotaService)
+    const productService: MascotaService = TestBed.inject(MascotaService);
     expect(productService).toBeTruthy();
   });
 
@@ -34,7 +34,7 @@ describe('MascotaService', () => {
     });
     const req = httpMock.expectOne(apiEndpointMascota);
     expect(req.request.method).toBe('POST');
-    req.event(new HttpResponse<boolean>({body:true}));
+    req.event(new HttpResponse<boolean>({ body: true }));
   });
 
   it('deberia actualizar una mascota', () => {
@@ -56,7 +56,7 @@ describe('MascotaService', () => {
     });
     const req = httpMock.expectOne(`${apiEndpointMascota}/1`);
     expect(req.request.method).toBe('DELETE');
-    req.event(new HttpResponse<boolean>({body:true}));
+    req.event(new HttpResponse<boolean>({ body: true }));
   });
 
   it('deberia obtener una mascota por id', () => {
@@ -72,8 +72,8 @@ describe('MascotaService', () => {
 
   it('deberia listar mascotas de un usuario', () => {
     const dummyMascotas = [
-      new Mascota(), new Mascota(), new Mascota() 
-    ]
+      new Mascota(), new Mascota(), new Mascota()
+    ];
     const dummyMascota = new Mascota();
     dummyMascota.idUsuario = 1;
     service.consultarMascotasPorIdUsuario(dummyMascota.idUsuario).subscribe(mascotas => {
@@ -83,6 +83,6 @@ describe('MascotaService', () => {
     const req = httpMock.expectOne(`${apiEndpointMascota}/usuario/1`);
     expect(req.request.method).toBe('GET');
     req.flush(dummyMascotas);
-  })
+  });
 
 });

@@ -4,4 +4,4 @@ export class Factura {
     fechaSalida: string;
     totalTiempoEnGuarderia: string;
     precioAPagar: number;
-};
+}
