@@ -12,7 +12,7 @@ const routes: Routes = [
     path: 'mascota/:nombreUsuario/:apellidoUsuario/:idUsuario',
     loadChildren: () => import('@mascota/mascota.module').then(mod => mod.MascotaModule)
   },
-  { path: 'factura', loadChildren: () => import('@factura/factura.module').then(mod => mod.FacturaModule) }
+  /* { path: 'factura', loadChildren: () => import('@factura/factura.module').then(mod => mod.FacturaModule) } */
 ];
 
 @NgModule({
