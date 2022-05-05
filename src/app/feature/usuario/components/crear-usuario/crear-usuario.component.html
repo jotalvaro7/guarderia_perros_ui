@@ -1,35 +1,35 @@
-
 <mat-card-title>{{titulo}}</mat-card-title>
 <form [formGroup]="usuarioForm" (submit)="onSubmit()">
     <p>
         <mat-form-field appearance="legacy">
-            <input formControlName="nombre" matInput placeholder="Nombre*">
+            <input id="nombres" formControlName="nombre" matInput placeholder="Nombre*">
         </mat-form-field>
     </p>
     <p>
         <mat-form-field appearance="legacy">
-            <input formControlName="apellido" matInput placeholder="Apellido*">
+            <input id="apellido" formControlName="apellido" matInput placeholder="Apellido*">
         </mat-form-field>
     </p>
     <p>
         <mat-form-field appearance="legacy">
-            <input formControlName="identificacion" matInput placeholder="Identificación*">
+            <input id="identificacion" formControlName="identificacion" matInput placeholder="Identificación*">
         </mat-form-field>
     </p>
     <p>
         <mat-form-field appearance="legacy">
-            <input formControlName="numeroCelular" matInput placeholder="Número Celular*">
+            <input id="numeroCelular" formControlName="numeroCelular" matInput placeholder="Número Celular*">
         </mat-form-field>
     </p>
     <div>
-        <button mat-raised-button color="warn" (click)="limpiarForm()">Limpiar</button>
+        <button id="botonLimpiarFormulario" mat-raised-button color="warn" (click)="limpiarForm()">Limpiar</button>
 
-        <button mat-raised-button color="primary" type="submit" [disabled]="usuarioForm.invalid"
-            (click)="onCrearClick()" *ngIf="id=='crear' else buttonEdit">Guardar</button>
+        <button id="botonConfirmarGuardar" mat-raised-button color="primary" type="submit"
+            [disabled]="usuarioForm.invalid" (click)="onCrearClick()"
+            *ngIf="id=='crear' else buttonEdit">Guardar</button>
 
         <ng-template #buttonEdit>
-            <button mat-raised-button color="primary" type="submit" [disabled]="usuarioForm.invalid"
-                (click)="onEditarClick()">Editar</button>
+            <button id="botonConfirmarEditar" mat-raised-button color="primary" type="submit"
+                [disabled]="usuarioForm.invalid" (click)="onEditarClick()">Editar</button>
         </ng-template>
     </div>
 </form>
