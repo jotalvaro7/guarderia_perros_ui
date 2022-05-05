@@ -5,7 +5,10 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from '@core/services/http.service';
 import { UsuarioService } from '@usuario/shared/service/usuario.service';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MaterialModule} from '@shared/material/material-module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UsuarioComponent } from './usuario.component';
+
 
 describe('UsuarioComponent', () => {
   let component: UsuarioComponent;
@@ -18,7 +21,9 @@ describe('UsuarioComponent', () => {
         CommonModule,
         HttpClientModule,
         RouterTestingModule,
-        MatDialogModule
+        MatDialogModule,
+        MaterialModule,
+        BrowserAnimationsModule
       ],
       providers: [UsuarioService, HttpService]
     })

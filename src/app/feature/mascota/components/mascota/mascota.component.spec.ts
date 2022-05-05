@@ -3,6 +3,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from '@core/services/http.service';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MaterialModule } from '@shared/material/material-module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 
 import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
@@ -21,7 +23,9 @@ describe('MascotaComponent', () => {
         CommonModule,
         HttpClientModule,
         RouterTestingModule,
-        MatDialogModule
+        MatDialogModule,
+        MaterialModule,
+        BrowserAnimationsModule
       ],
       providers: [MascotaService, HttpService, RegistroIngresoService, FacturaService]
     })

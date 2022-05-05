@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MaterialModule } from '@shared/material/material-module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from '@core/services/http.service';
@@ -19,6 +21,8 @@ describe('FacturaComponent', () => {
         MatDialogModule,
         HttpClientModule,
         RouterTestingModule,
+        MaterialModule,
+        BrowserAnimationsModule
       ],
       providers: [
         {

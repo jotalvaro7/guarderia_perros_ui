@@ -4,6 +4,9 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from '@core/services/http.service';
+import { MaterialModule } from '@shared/material/material-module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { UsuarioService } from '@usuario/shared/service/usuario.service';
 
 import { CrearUsuarioComponent } from './crear-usuario.component';
@@ -19,6 +22,10 @@ describe('CrearUsuarioComponent', () => {
         MatDialogModule,
         HttpClientModule,
         RouterTestingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MaterialModule,
+        BrowserAnimationsModule
       ],
       providers: [
         {
