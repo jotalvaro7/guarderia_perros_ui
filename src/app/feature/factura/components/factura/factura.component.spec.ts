@@ -6,13 +6,28 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from '@core/services/http.service';
-import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
+
+/* import { Factura } from '@factura/shared/model/factura'; */
 import { FacturaService } from '@factura/shared/service/factura.service';
 import { FacturaComponent } from './factura.component';
 
 describe('FacturaComponent', () => {
   let component: FacturaComponent;
   let fixture: ComponentFixture<FacturaComponent>;
+
+
+  const dialogMock = {
+    close: () => { }
+   };
+
+  /* let facturaService: FacturaService;
+
+  let factura= new Factura(
+    'Cristal', 
+    '2022-05-06 09:27:35', 
+    '2022-05-06 18:31:36', 
+    'Su mascota ha estado en nuestra guarderia por: 0 semana(s), 0 dia(s), 9 hora(s), 4 minuto(s)',
+    135000); */
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -31,10 +46,9 @@ describe('FacturaComponent', () => {
         },
         {
           provide: MatDialogRef,
-          useValue: {}
+          useValue: dialogMock
         },
         FacturaService,
-        MascotaService,
         HttpService
       ],
     })
@@ -50,4 +64,10 @@ describe('FacturaComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('deberia cobrar la Factura de una mascota', () => {
+    let spy = spyOn(component.dialogRef, 'close').and.callThrough();
+    component.cobrar();
+    expect(spy).toHaveBeenCalled();
+  })
 });
