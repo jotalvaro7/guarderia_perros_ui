@@ -7,10 +7,8 @@ import { HttpService } from '@core/services/http.service';
 import { MaterialModule } from '@shared/material/material-module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UsuarioService } from '@usuario/shared/service/usuario.service';
 import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
-import { TrmService } from '@home/shared/service/trm.service';
-import { FacturaService } from '@factura/shared/service/factura.service';
+import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso/registro-ingreso.service';
 import { CrearMascotaComponent } from './crear-mascota.component';
 
 describe('CrearMascotaComponent', () => {
@@ -18,7 +16,7 @@ describe('CrearMascotaComponent', () => {
   let fixture: ComponentFixture<CrearMascotaComponent>;
 
   beforeEach(waitForAsync(() => {
-      TestBed.configureTestingModule({
+    TestBed.configureTestingModule({
       declarations: [CrearMascotaComponent],
       imports: [
         MatDialogModule,
@@ -40,9 +38,7 @@ describe('CrearMascotaComponent', () => {
           useValue: {}
         },
         MascotaService,
-        UsuarioService,
-        FacturaService,
-        TrmService,
+        RegistroIngresoService,
         HttpService
       ]
     })

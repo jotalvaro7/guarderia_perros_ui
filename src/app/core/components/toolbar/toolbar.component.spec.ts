@@ -1,4 +1,4 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+/* import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UsuarioService } from '@usuario/shared/service/usuario.service';
 import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
@@ -30,3 +30,4 @@ describe('ToolbarComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+ */

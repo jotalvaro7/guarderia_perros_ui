@@ -6,10 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from '@core/services/http.service';
-import { UsuarioService } from '@usuario/shared/service/usuario.service';
 import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
-import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso/registro-ingreso.service';
-import { TrmService } from '@home/shared/service/trm.service';
 import { FacturaService } from '@factura/shared/service/factura.service';
 import { FacturaComponent } from './factura.component';
 
@@ -37,10 +34,7 @@ describe('FacturaComponent', () => {
           useValue: {}
         },
         FacturaService,
-        UsuarioService,
         MascotaService,
-        RegistroIngresoService,
-        TrmService,
         HttpService
       ],
     })

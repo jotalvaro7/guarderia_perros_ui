@@ -3,12 +3,8 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { environment } from 'src/environments/environment';
 import { HttpService } from '@core/services/http.service';
 
-import { UsuarioService } from '@usuario/shared/service/usuario.service';
-import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
-import { FacturaService } from '@factura/shared/service/factura.service';
 import { TrmService } from './trm.service';
 import { Trm } from '../model/trm';
-import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso/registro-ingreso.service';
 
 describe('TrmService', () => {
   let httpMock: HttpTestingController;
@@ -17,9 +13,9 @@ describe('TrmService', () => {
   const apiEndpointTrm = `${environment.endpoint}/trm`;
 
   beforeEach(() => {
-     const injector = TestBed.configureTestingModule({
+      const injector = TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [TrmService, HttpService, UsuarioService, MascotaService, RegistroIngresoService, FacturaService]
+      providers: [TrmService, HttpService]
     });
     service = TestBed.inject(TrmService);
     httpMock = injector.inject(HttpTestingController);

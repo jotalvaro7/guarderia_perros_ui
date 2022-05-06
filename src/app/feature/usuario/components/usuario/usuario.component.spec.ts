@@ -3,10 +3,10 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from '@core/services/http.service';
-import { UsuarioService } from '@usuario/shared/service/usuario.service';
 import { MatDialogModule } from '@angular/material/dialog';
-import {MaterialModule} from '@shared/material/material-module';
+import { MaterialModule } from '@shared/material/material-module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UsuarioService } from '@usuario/shared/service/usuario.service';
 import { UsuarioComponent } from './usuario.component';
 
 

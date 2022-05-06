@@ -1,5 +1,5 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MaterialModule } from '@shared/material/material-module';
 import { HttpService } from '@core/services/http.service';
@@ -15,7 +15,7 @@ describe('HomeComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ HomeComponent ],
       imports: [
-        HttpClientModule,
+        HttpClientTestingModule,
         RouterTestingModule,
         MaterialModule,
         BrowserAnimationsModule,

@@ -3,11 +3,6 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { HttpService } from 'src/app/core/services/http.service';
-
-import { UsuarioService } from '@usuario/shared/service/usuario.service';
-import { RegistroIngresoService } from '../registro-ingreso/registro-ingreso.service';
-import { FacturaService } from '@factura/shared/service/factura.service';
-import { TrmService } from '@home/shared/service/trm.service';
 import { MascotaService } from './mascota.service';
 import { Mascota } from '../../model/mascota/mascota';
 
@@ -20,7 +15,7 @@ describe('MascotaService', () => {
   beforeEach(() => {
     const injector = TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [MascotaService, UsuarioService, RegistroIngresoService, FacturaService, TrmService, HttpService]
+      providers: [MascotaService, HttpService]
     });
     httpMock = injector.inject(HttpTestingController);
     service = TestBed.inject(MascotaService);

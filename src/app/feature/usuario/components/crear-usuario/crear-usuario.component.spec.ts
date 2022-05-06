@@ -7,12 +7,7 @@ import { HttpService } from '@core/services/http.service';
 import { MaterialModule } from '@shared/material/material-module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
-import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
-import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso/registro-ingreso.service';
-import { FacturaService } from '@factura/shared/service/factura.service';
 import { UsuarioService } from '@usuario/shared/service/usuario.service';
-import { TrmService } from '@home/shared/service/trm.service';
-
 import { CrearUsuarioComponent } from './crear-usuario.component';
 
 describe('CrearUsuarioComponent', () => {
@@ -41,10 +36,6 @@ describe('CrearUsuarioComponent', () => {
           useValue: {}
         },
         UsuarioService,
-        MascotaService,
-        RegistroIngresoService,
-        FacturaService,
-        TrmService,
         HttpService
       ],
     })

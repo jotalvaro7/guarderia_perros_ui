@@ -1,12 +1,11 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from '@core/services/http.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MaterialModule } from '@shared/material/material-module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
-
 import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
 import { FacturaService } from '@factura/shared/service/factura.service';
 import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso/registro-ingreso.service';
@@ -21,7 +20,7 @@ describe('MascotaComponent', () => {
       declarations: [ MascotaComponent ],
       imports: [
         CommonModule,
-        HttpClientModule,
+        HttpClientTestingModule,
         RouterTestingModule,
         MatDialogModule,
         MaterialModule,
