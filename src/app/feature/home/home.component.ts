@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Trm } from './shared/model/trm';
+import { TrmService } from './shared/service/trm.service';
 
 @Component({
   selector: 'app-home',
@@ -7,10 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  public trm: Trm;
 
-  constructor() { }
+  constructor(
+    private trmService: TrmService,
+  ) { }
 
   ngOnInit() {
+    this.trmService.consultar().subscribe(
+      trm => this.trm = trm
+    );
   }
 
 }

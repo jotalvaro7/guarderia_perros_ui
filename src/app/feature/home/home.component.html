@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row text-md-center">
             <div class="col-12 col-md-6 col-lg-6 mb-3">
-                <img src="assets/img/home/anime-dogs.webp" class="card-img-top" height="500">
+                <img src="assets/img/home/pets-group.webp" class="card-img-top" height="500">
                 <div class="card-body">
                     <h5 id="labelItemsCompra" class="card-title"> <b>¿Quienes Somos?</b></h5>
                     <p class="card-text">
@@ -10,16 +10,18 @@
                         personales,
                         negocios etc. Sin la necesidad de preocupate por el estado de tu mascota.
                     </p>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-6 mb-3">
-                <img src="assets/img/home/pets-group.webp" class="card-img-top" height="500">
-                <div class="card-body">
-                    <h5 id="labelAdministracion" class="card-title"> <b>Contacto </b></h5>
                     <p class="card-text">Cel: xxx.xxx.xx.xx</p>
                     <p class="card-text">Correo: xxx@gmail.com</p>
                 </div>
             </div>
+            <mat-card class="card" *ngIf="trm">
+                <mat-card-header>
+                    <mat-card-title class="header__titulo">Tcrm hoy</mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="header__body">
+                    <p>El dolar se encuentra a {{trm.value}} {{trm.unit}} </p>
+                </mat-card-content>
+            </mat-card>
         </div>
     </div>
 </section>
