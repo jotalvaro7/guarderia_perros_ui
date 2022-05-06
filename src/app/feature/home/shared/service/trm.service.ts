@@ -11,6 +11,6 @@ export class TrmService {
   constructor(protected http: HttpService) { }
 
   public consultar(){
-    return this.http.doGet<Trm>(`${environment.endpoint}/trm`, this.http.optsName('consultando el trm'))
+    return this.http.doGet<Trm>(`${environment.endpoint}/trm`, this.http.optsName('consultando el trm'));
   }
 }

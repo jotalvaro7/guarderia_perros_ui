@@ -1,16 +1,38 @@
 import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { environment } from 'src/environments/environment';
+import { HttpService } from '@core/services/http.service';
 
 import { TrmService } from './trm.service';
+import { Trm } from '../model/trm';
 
 describe('TrmService', () => {
+  let httpMock: HttpTestingController;
   let service: TrmService;
 
+  const apiEndpointTrm = `${environment.endpoint}/trm`;
+
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    const injector = TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [TrmService, HttpService]
+    });
     service = TestBed.inject(TrmService);
+    httpMock = injector.inject(HttpTestingController);
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    const productService: TrmService = TestBed.inject(TrmService);
+    expect(productService).toBeTruthy();
+  });
+
+  it('deberia obtener el Trm del dia actual', () => {
+    const dummyTrm = new Trm();
+    service.consultar().subscribe(response => {
+      expect(response).toEqual(dummyTrm);
+    });
+    const req = httpMock.expectOne(`${apiEndpointTrm}`);
+    expect(req.request.method).toBe('GET');
+    req.flush(dummyTrm);
   });
 });

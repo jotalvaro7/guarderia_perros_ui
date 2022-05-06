@@ -8,7 +8,6 @@ import { Mascota } from '@mascota/shared/model/mascota/mascota';
 import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
 import { CrearMascotaComponent } from '../crear-mascota/crear-mascota.component';
 import { IdMascotaResponse } from '@mascota/shared/model/mascota/idMascotaResponse';
-import { RegistroIngreso } from '@mascota/shared/model/registro-ingreso/registro-ingreso';
 import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso/registro-ingreso.service';
 import { FacturaComponent } from '@factura/components/factura/factura.component';
 import { FacturaService } from '@factura/shared/service/factura.service';
@@ -67,8 +66,8 @@ export class MascotaComponent implements OnInit {
   subcripcionMascotaServiceEmitter() {
     this.mascotaService.notificar.subscribe(
       (response: IdMascotaResponse) => {
+        console.log(response);
         this.obtenerMascotasUsuario();
-        this.registrarIngresoMascota(response);
       });
   }
 
@@ -120,12 +119,6 @@ export class MascotaComponent implements OnInit {
       autoFocus: true,
       data: { idMascota }
     });
-  }
-
-  registrarIngresoMascota(idResponse: IdMascotaResponse) {
-    const registroIngreso = new RegistroIngreso();
-    registroIngreso.idMascota = idResponse.valor;
-    this.registroIngresoService.guardar(registroIngreso).subscribe();
   }
 
 }
