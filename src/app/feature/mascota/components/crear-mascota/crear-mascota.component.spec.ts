@@ -1,13 +1,16 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from '@core/services/http.service';
 import { MaterialModule } from '@shared/material/material-module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UsuarioService } from '@usuario/shared/service/usuario.service';
 import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
+import { TrmService } from '@home/shared/service/trm.service';
+import { FacturaService } from '@factura/shared/service/factura.service';
 import { CrearMascotaComponent } from './crear-mascota.component';
 
 describe('CrearMascotaComponent', () => {
@@ -19,7 +22,7 @@ describe('CrearMascotaComponent', () => {
       declarations: [CrearMascotaComponent],
       imports: [
         MatDialogModule,
-        HttpClientModule,
+        HttpClientTestingModule,
         RouterTestingModule,
         FormsModule,
         ReactiveFormsModule,
@@ -37,6 +40,9 @@ describe('CrearMascotaComponent', () => {
           useValue: {}
         },
         MascotaService,
+        UsuarioService,
+        FacturaService,
+        TrmService,
         HttpService
       ]
     })

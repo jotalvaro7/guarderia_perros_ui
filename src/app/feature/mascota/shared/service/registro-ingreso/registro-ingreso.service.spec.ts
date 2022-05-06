@@ -4,6 +4,10 @@ import { HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { HttpService } from 'src/app/core/services/http.service';
 
+import { UsuarioService } from '@usuario/shared/service/usuario.service';
+import { MascotaService } from '../mascota/mascota.service';
+import { FacturaService } from '@factura/shared/service/factura.service';
+import { TrmService } from '@home/shared/service/trm.service';
 import { RegistroIngresoService } from './registro-ingreso.service';
 import { RegistroIngreso } from '../../model/registro-ingreso/registro-ingreso';
 
@@ -16,7 +20,7 @@ describe('RegistroIngresoService', () => {
   beforeEach(() => {
     const injector = TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [RegistroIngresoService, HttpService]
+      providers: [RegistroIngresoService, UsuarioService, MascotaService, FacturaService, TrmService, HttpService]
     });
     httpMock = injector.inject(HttpTestingController);
     service = TestBed.inject(RegistroIngresoService);

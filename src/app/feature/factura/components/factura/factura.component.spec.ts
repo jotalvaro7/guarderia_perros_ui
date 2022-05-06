@@ -3,11 +3,15 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MaterialModule } from '@shared/material/material-module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from '@core/services/http.service';
-import { FacturaService } from '@factura/shared/service/factura.service';
+import { UsuarioService } from '@usuario/shared/service/usuario.service';
+import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
+import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso/registro-ingreso.service';
+import { TrmService } from '@home/shared/service/trm.service'; 
 
+import { FacturaService } from '@factura/shared/service/factura.service';
 import { FacturaComponent } from './factura.component';
 
 describe('FacturaComponent', () => {
@@ -19,7 +23,7 @@ describe('FacturaComponent', () => {
       declarations: [ FacturaComponent ],
       imports: [
         MatDialogModule,
-        HttpClientModule,
+        HttpClientTestingModule,
         RouterTestingModule,
         MaterialModule,
         BrowserAnimationsModule
@@ -34,6 +38,10 @@ describe('FacturaComponent', () => {
           useValue: {}
         },
         FacturaService,
+        UsuarioService, 
+        MascotaService, 
+        RegistroIngresoService,
+        TrmService,
         HttpService
       ],
     })
