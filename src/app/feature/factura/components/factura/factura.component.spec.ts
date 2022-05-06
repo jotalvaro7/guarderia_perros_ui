@@ -9,8 +9,7 @@ import { HttpService } from '@core/services/http.service';
 import { UsuarioService } from '@usuario/shared/service/usuario.service';
 import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
 import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso/registro-ingreso.service';
-import { TrmService } from '@home/shared/service/trm.service'; 
-
+import { TrmService } from '@home/shared/service/trm.service';
 import { FacturaService } from '@factura/shared/service/factura.service';
 import { FacturaComponent } from './factura.component';
 
@@ -18,9 +17,9 @@ describe('FacturaComponent', () => {
   let component: FacturaComponent;
   let fixture: ComponentFixture<FacturaComponent>;
 
-  beforeEach(waitForAsync (() => {
-      TestBed.configureTestingModule({
-      declarations: [ FacturaComponent ],
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [FacturaComponent],
       imports: [
         MatDialogModule,
         HttpClientTestingModule,
@@ -38,14 +37,14 @@ describe('FacturaComponent', () => {
           useValue: {}
         },
         FacturaService,
-        UsuarioService, 
-        MascotaService, 
+        UsuarioService,
+        MascotaService,
         RegistroIngresoService,
         TrmService,
         HttpService
       ],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

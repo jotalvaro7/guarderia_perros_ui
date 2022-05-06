@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import {environment} from 'src/environments/environment';
-import {HttpService} from 'src/app/core/services/http.service';
+import { environment } from 'src/environments/environment';
+import { HttpService } from 'src/app/core/services/http.service';
 
 import { FacturaService } from './factura.service';
-import {Factura} from '../model/factura';
-import {Mascota} from '@mascota/shared/model/mascota/mascota'
+import { Factura } from '../model/factura';
+import { Mascota } from '@mascota/shared/model/mascota/mascota';
 
 describe('FacturaService', () => {
   let httpMock: HttpTestingController;
