@@ -70,7 +70,7 @@ describe('CrearUsuarioComponent', () => {
 
   it('deberia cargar usuario crear', () => {
     component.id = 'crear';
-    component.ngOnInit();
+    component['cargarUsuario']();
     expect('Registrar Usuario').toEqual(component.titulo);
 
   });
