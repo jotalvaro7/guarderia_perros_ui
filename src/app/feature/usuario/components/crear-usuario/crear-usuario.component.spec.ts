@@ -92,8 +92,9 @@ describe('CrearUsuarioComponent', () => {
   });
 
   it('deberia guardar usuario', async() => {
-    let usuario = new Usuario('Julio' , 'Osorio', '103694987', '34725812');
+    component.crear();
     component['fabricarUsuario']();
+    let usuario = new Usuario('Julio' , 'Osorio', '103694987', '34725812');
     usuarioService.guardar(usuario);
     usuarioService.notificar.emit();
   })
