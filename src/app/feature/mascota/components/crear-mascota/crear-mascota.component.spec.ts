@@ -13,7 +13,7 @@ import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso
 import Swal from 'sweetalert2';
 import { CrearMascotaComponent } from './crear-mascota.component';
 
-/* import { Mascota } from '@mascota/shared/model/mascota/mascota'; */
+import { Mascota } from '@mascota/shared/model/mascota/mascota';
 
 describe('CrearMascotaComponent', () => {
   let component: CrearMascotaComponent;
@@ -21,7 +21,7 @@ describe('CrearMascotaComponent', () => {
   let mascotaService: MascotaService;
   let registroIngresoService: RegistroIngresoService;
   let idMascotaResponse = new IdMascotaResponse();
-  /* let mascota = new Mascota(); */
+  
 
   const dialogMock = {
     close: () => { }
@@ -140,9 +140,19 @@ describe('CrearMascotaComponent', () => {
   });
 
   it('deberia registrar Ingreso de mascota cuando se ejecute el servicio de guardar', () => {
-    const spy = spyOn(component, 'registrarIngresoMascota').and.callThrough;
-    component.crear();
-    expect(spy).toHaveBeenCalled
+    const mascota = new Mascota();
+    mascota.nombre = "Zeus";
+    mascota.raza = "Doberman";
+    mascota.peso = "7Kg";
+    mascota.idUsuario = 1;
+    
+    const spy = spyOn(component, 'registrarIngresoMascota').and.callThrough();
+
+    mascotaService.guardar(mascota).subscribe(
+      () => {
+        expect(spy).toHaveBeenCalled();
+      }
+    )
   })
 
 });
