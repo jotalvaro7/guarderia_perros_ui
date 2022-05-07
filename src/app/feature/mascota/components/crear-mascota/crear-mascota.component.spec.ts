@@ -8,15 +8,18 @@ import { MaterialModule } from '@shared/material/material-module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
+import { IdMascotaResponse } from '@mascota/shared/model/mascota/idMascotaResponse';
 import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso/registro-ingreso.service';
 import { CrearMascotaComponent } from './crear-mascota.component';
+
 /* import { Mascota } from '@mascota/shared/model/mascota/mascota'; */
 
 describe('CrearMascotaComponent', () => {
   let component: CrearMascotaComponent;
   let fixture: ComponentFixture<CrearMascotaComponent>;
   let mascotaService: MascotaService;
-
+  let registroIngresoService: RegistroIngresoService;
+  let idMascotaResponse = new IdMascotaResponse();
   /* let mascota = new Mascota(); */
 
   const dialogMock = {
@@ -57,6 +60,7 @@ describe('CrearMascotaComponent', () => {
     fixture = TestBed.createComponent(CrearMascotaComponent);
     component = fixture.componentInstance;
     mascotaService = TestBed.inject(MascotaService);
+    registroIngresoService = TestBed.inject(RegistroIngresoService);
     fixture.detectChanges();
   });
 
@@ -83,6 +87,49 @@ describe('CrearMascotaComponent', () => {
     const spy = spyOn(mascotaService, 'guardar').and.callThrough();
     component.crear();
     expect(spy).toHaveBeenCalled();
+  });
+
+  it('deberia actualizar mascota', async() => {
+    const spy = spyOn(mascotaService, 'actualizar').and.callThrough();
+    component.actualizar();
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('deberia tomar decision de crear mascota', () => {
+    const spy = spyOn(component, 'crear').and.callThrough();
+    component['crearClicked'] = true;
+    component.onSubmit();
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('deberia tomar decision de actualizar mascota', () => {
+    const spy = spyOn(component, 'actualizar').and.callThrough();
+    component['crearClicked'] = false;
+    component.onSubmit();
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('deberia registar Ingreso de mascota', () => {
+    const spy = spyOn(registroIngresoService, 'guardar').and.callThrough();
+    idMascotaResponse.valor = 1;
+    component.registrarIngresoMascota(idMascotaResponse);
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('deberia limpiar el formulario', ()=> {
+    const spy = spyOn(component.mascotaForm, 'reset');
+    component.limpiarForm();
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('deberia setear variable crearClicked en true', () => {
+    component.onCrearClick();
+    expect(true).toEqual(component['crearClicked']);
+  });
+
+  it('deberia setear variable crearClicked en false', () => {
+    component.onEditarClick();
+    expect(false).toEqual(component['crearClicked']);
   })
 
 });
