@@ -110,7 +110,7 @@ describe('CrearUsuarioComponent', () => {
 
   it('deberia limpiar formulario', () => {
     const spy = spyOn(component.usuarioForm, 'reset');
-    component.usuarioForm.reset();
+    component.limpiarForm();
     expect(spy).toHaveBeenCalled();
   });
 
