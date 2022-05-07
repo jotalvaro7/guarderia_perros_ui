@@ -4,7 +4,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from '@core/services/http.service';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MaterialModule } from '@shared/material/material-module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UsuarioService } from '@usuario/shared/service/usuario.service';
@@ -15,7 +15,6 @@ import { Usuario } from '@usuario/shared/model/usuario';
 describe('UsuarioComponent', () => {
   let component: UsuarioComponent;
   let fixture: ComponentFixture<UsuarioComponent>;
-
   let usuarioService: UsuarioService;
 
   let usuarios: Usuario[] = [
@@ -28,6 +27,10 @@ describe('UsuarioComponent', () => {
     }
   ];
 
+  const dialogMock = {
+    open: () => { }
+   };
+
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [UsuarioComponent],
@@ -39,7 +42,11 @@ describe('UsuarioComponent', () => {
         MaterialModule,
         BrowserAnimationsModule
       ],
-      providers: [UsuarioService, HttpService]
+      providers: [UsuarioService, HttpService,
+        {
+          provide: MatDialog,
+          useValue: dialogMock
+        },]
     })
       .compileComponents();
   }));
@@ -55,4 +62,14 @@ describe('UsuarioComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+
+  it('deberia llamar metodo openDialog para crear', () => {
+    component.crear('crear');
+  });
+
+  it('deberia llamar metodo openDialog para editar ', () => {
+    component.editar(2);
+  });
+
 });
