@@ -101,9 +101,23 @@ describe('CrearUsuarioComponent', () => {
     usuarioService.guardar(usuario);
   });
 
+  it('deberia actualizar usuario', async() => {
+    component.actualizar();
+    component['fabricarUsuario']();
+    let usuario = new Usuario('Julio' , 'Osorio', '103694987', '34725812');
+    usuarioService.editar(usuario);
+  });
+
   it('deberia tomar decision de crear usuario', () => {
     const spy = spyOn(component, 'crear').and.callThrough();
     component.crearClicked = true;
+    component.onSubmit();
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('deberia tomar decision de actualizar usuario', () => {
+    const spy = spyOn(component, 'actualizar').and.callThrough();
+    component.crearClicked = false;
     component.onSubmit();
     expect(spy).toHaveBeenCalled();
   });
