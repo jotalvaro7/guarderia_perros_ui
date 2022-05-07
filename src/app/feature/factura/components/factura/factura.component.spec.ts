@@ -7,7 +7,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from '@core/services/http.service';
 
-/* import { Factura } from '@factura/shared/model/factura'; */
+import { Factura } from '@factura/shared/model/factura';
 import { FacturaService } from '@factura/shared/service/factura.service';
 import { FacturaComponent } from './factura.component';
 
@@ -20,7 +20,7 @@ describe('FacturaComponent', () => {
     close: () => { }
    };
 
-  /* let facturaService: FacturaService;
+/*   let facturaService: FacturaService;
 
   let factura= new Factura(
     'Cristal', 
@@ -69,5 +69,11 @@ describe('FacturaComponent', () => {
     let spy = spyOn(component.dialogRef, 'close').and.callThrough();
     component.cobrar();
     expect(spy).toHaveBeenCalled();
-  })
+  });
+
+  it('deberia cerrar el dialogRef cuando da click en cancelar', () => {
+    let spy = spyOn(component.dialogRef, 'close').and.callThrough();
+    component.cancelar();
+    expect(spy).toHaveBeenCalled();
+  });
 });
