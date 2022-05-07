@@ -75,5 +75,16 @@ describe('CrearUsuarioComponent', () => {
     component['cargarUsuario']();
     expect('Registrar Usuario').toEqual(component.titulo);
   });
+  
+
+  it('deberia fabricar usuario', () => {
+  
+    component.usuarioForm.controls.nombre.setValue('Julio');
+    component.usuarioForm.controls.apellido.setValue('Osorio');
+    component.usuarioForm.controls.identificacion.setValue('103694987');
+    component.usuarioForm.controls.numeroCelular.setValue('34725812');
+    component['fabricarUsuario']();
+
+  })
 
 });
