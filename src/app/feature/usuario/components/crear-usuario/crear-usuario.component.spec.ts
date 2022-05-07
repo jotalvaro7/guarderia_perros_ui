@@ -12,6 +12,7 @@ import { UsuarioService } from '@usuario/shared/service/usuario.service';
 import { CrearUsuarioComponent } from './crear-usuario.component';
 import { Usuario } from '@usuario/shared/model/usuario';
 
+
 describe('CrearUsuarioComponent', () => {
   let component: CrearUsuarioComponent;
   let fixture: ComponentFixture<CrearUsuarioComponent>;
@@ -82,12 +83,14 @@ describe('CrearUsuarioComponent', () => {
   
 
   it('deberia fabricar usuario', () => {
-  
+
     component.usuarioForm.controls.nombre.setValue('Julio');
     component.usuarioForm.controls.apellido.setValue('Osorio');
     component.usuarioForm.controls.identificacion.setValue('103694987');
     component.usuarioForm.controls.numeroCelular.setValue('34725812');
     component['fabricarUsuario']();
+
+    expect(component.usuarioForm.valid).toBeTruthy;
 
   });
 
@@ -96,7 +99,31 @@ describe('CrearUsuarioComponent', () => {
     component['fabricarUsuario']();
     let usuario = new Usuario('Julio' , 'Osorio', '103694987', '34725812');
     usuarioService.guardar(usuario);
-    usuarioService.notificar.emit();
-  })
+  });
+
+  it('deberia tomar decision de crear usuario', () => {
+    const spy = spyOn(component, 'crear').and.callThrough();
+    component.crearClicked = true;
+    component.onSubmit();
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('deberia limpiar formulario', () => {
+    const spy = spyOn(component.usuarioForm, 'reset');
+    component.usuarioForm.reset();
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('deberia setear variable true en el boton crear', () => {
+    component.onCrearClick();
+    expect(true).toBe(component.crearClicked)
+  });
+
+  it('deberia setear variable false en el boton editar', () => {
+    component.onEditarClick();
+    expect(false).toBe(component.crearClicked)
+  });
 
 });
+
+

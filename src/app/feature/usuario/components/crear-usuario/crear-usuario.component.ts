@@ -17,7 +17,7 @@ export class CrearUsuarioComponent implements OnInit {
   public usuario: Usuario;
   public titulo: string;
   public id: any;
-  private crearClicked: boolean;
+  public crearClicked: boolean;
 
   constructor(
     public dialogRef: MatDialogRef<CrearUsuarioComponent>,
