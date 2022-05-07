@@ -30,6 +30,10 @@ describe('CrearUsuarioComponent', () => {
     }
   ]; */
 
+  const dialogMock = {
+    close: () => { }
+   };
+
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ CrearUsuarioComponent ],
@@ -49,7 +53,7 @@ describe('CrearUsuarioComponent', () => {
         },
         {
           provide: MatDialogRef,
-          useValue: {}
+          useValue: dialogMock
         },
         UsuarioService,
         HttpService
@@ -85,6 +89,13 @@ describe('CrearUsuarioComponent', () => {
     component.usuarioForm.controls.numeroCelular.setValue('34725812');
     component['fabricarUsuario']();
 
+  });
+
+  it('deberia guardar usuario', async() => {
+    let usuario = new Usuario('Julio' , 'Osorio', '103694987', '34725812');
+    component['fabricarUsuario']();
+    usuarioService.guardar(usuario);
+    usuarioService.notificar.emit();
   })
 
 });
