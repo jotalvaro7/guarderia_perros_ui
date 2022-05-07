@@ -30,7 +30,7 @@ export class CrearUsuarioComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.usuario = new Usuario();
+    this.usuario = new Usuario('', '', '', '');
     this.construirFormularioUsuario();
     this.cargarUsuario();
   }

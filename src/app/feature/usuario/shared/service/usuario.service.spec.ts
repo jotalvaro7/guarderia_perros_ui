@@ -27,7 +27,7 @@ describe('UsuarioService', () => {
   });
 
   it('deberia crear un usuario', () => {
-    const dummyUsuario = new Usuario();
+    const dummyUsuario = new Usuario('Julio' , 'Osorio', '103694987', '34725812');
     service.guardar(dummyUsuario).subscribe((respuesta) => {
       expect(respuesta).toEqual(true);
     });
@@ -37,7 +37,7 @@ describe('UsuarioService', () => {
   });
 
   it('deberia actualizar un usuario', () => {
-    const dummyUsuario = new Usuario();
+    const dummyUsuario = new Usuario('Julio' , 'Osorio', '103694987', '34725812');
     dummyUsuario.id = 1;
     service.editar(dummyUsuario).subscribe(response => {
       expect(response).toEqual(dummyUsuario);
@@ -48,7 +48,7 @@ describe('UsuarioService', () => {
   });
 
   it('deberia eliminar un usuario', () => {
-    const dummyUsuario = new Usuario();
+    const dummyUsuario = new Usuario('Julio' , 'Osorio', '103694987', '34725812');
     dummyUsuario.id = 1;
     service.eliminar(dummyUsuario.id).subscribe(response => {
       expect(response).toEqual(true);
@@ -60,7 +60,8 @@ describe('UsuarioService', () => {
 
   it('deberia listar usuarios', () => {
     const dummyUsuarios = [
-      new Usuario(), new Usuario()
+      new Usuario('Julio' , 'Osorio', '103694987', '34725812'),
+      new Usuario('Luisa' , 'Severino', '10369768', '55544421')
     ];
     service.consultar().subscribe(usuarios => {
       expect(usuarios.length).toBe(2);
@@ -72,7 +73,7 @@ describe('UsuarioService', () => {
   });
 
   it('deberia obtener un usuario por id', () => {
-    const dummyUsuarios = new Usuario();
+    const dummyUsuarios = new Usuario('Julio' , 'Osorio', '103694987', '34725812');
     dummyUsuarios.id = 1;
     service.consultarPorId(dummyUsuarios.id).subscribe(response => {
       expect(response).toEqual(dummyUsuarios);
