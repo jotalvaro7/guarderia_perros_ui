@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
 import { IdMascotaResponse } from '@mascota/shared/model/mascota/idMascotaResponse';
 import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso/registro-ingreso.service';
+import Swal from 'sweetalert2';
 import { CrearMascotaComponent } from './crear-mascota.component';
 
 /* import { Mascota } from '@mascota/shared/model/mascota/mascota'; */
@@ -130,6 +131,18 @@ describe('CrearMascotaComponent', () => {
   it('deberia setear variable crearClicked en false', () => {
     component.onEditarClick();
     expect(false).toEqual(component['crearClicked']);
+  });
+
+  it('deberia activar el Swal Alert', async() => {
+    component.crear();
+    expect(Swal.isVisible()).toBeTruthy();
+    /* expect(Swal.getTitle().textContent).toEqual('Nueva Mascota'); */
+  });
+
+  it('deberia registrar Ingreso de mascota cuando se ejecute el servicio de guardar', () => {
+    const spy = spyOn(component, 'registrarIngresoMascota').and.callThrough;
+    component.crear();
+    expect(spy).toHaveBeenCalled
   })
 
 });
