@@ -1,3 +1,4 @@
+import { of } from 'rxjs';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -9,15 +10,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { UsuarioService } from '@usuario/shared/service/usuario.service';
 import { CrearUsuarioComponent } from './crear-usuario.component';
-/* import { Usuario } from '@usuario/shared/model/usuario'; */
+import { Usuario } from '@usuario/shared/model/usuario';
 
 describe('CrearUsuarioComponent', () => {
   let component: CrearUsuarioComponent;
   let fixture: ComponentFixture<CrearUsuarioComponent>;
-  /* let usuarioService: UsuarioService; */
+  let usuarioService: UsuarioService;
 
-  /* let spyUsuariosServiceConsultar: jasmine.Spy; */
-  /* let usuario = new Usuario('Julio' , 'Osorio', '103694987', '34725812'); */
+ /*  let spyUsuariosServiceConsultar: jasmine.Spy; */
+  let usuario = new Usuario('Julio' , 'Osorio', '103694987', '34725812');
 
   /* let usuarios: Usuario[] = [
     {
@@ -60,7 +61,8 @@ describe('CrearUsuarioComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CrearUsuarioComponent);
     component = fixture.componentInstance;
-    /* usuarioService = TestBed.inject(UsuarioService); */
+    usuarioService = TestBed.inject(UsuarioService);
+    spyOn(usuarioService, 'consultarPorId').and.returnValue(of(usuario))
     fixture.detectChanges();
   });
 
@@ -68,11 +70,10 @@ describe('CrearUsuarioComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('deberia cargar usuario crear', () => {
+  it('deberia cargar titulo Registrar Usuario', () => {
     component.id = 'crear';
     component['cargarUsuario']();
     expect('Registrar Usuario').toEqual(component.titulo);
-
   });
 
 });
