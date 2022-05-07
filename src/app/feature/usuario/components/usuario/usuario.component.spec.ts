@@ -72,4 +72,9 @@ describe('UsuarioComponent', () => {
     component.editar(2);
   });
 
+  it('deberia obtener los usuarios', async() =>{
+    component.obtenerUsuarios();
+    expect(usuarioService.consultar).toHaveBeenCalled;
+  });
+
 });
