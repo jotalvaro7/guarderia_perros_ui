@@ -1,3 +1,4 @@
+import { of } from 'rxjs';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -7,7 +8,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from '@core/services/http.service';
 
-/* import { Factura } from '@factura/shared/model/factura'; */
+import { Factura } from '@factura/shared/model/factura';
 import { FacturaService } from '@factura/shared/service/factura.service';
 import { FacturaComponent } from './factura.component';
 
@@ -20,14 +21,14 @@ describe('FacturaComponent', () => {
     close: () => { }
    };
 
-/*   let facturaService: FacturaService;
+  let facturaService: FacturaService;
 
   let factura= new Factura(
     'Cristal', 
     '2022-05-06 09:27:35', 
     '2022-05-06 18:31:36', 
     'Su mascota ha estado en nuestra guarderia por: 0 semana(s), 0 dia(s), 9 hora(s), 4 minuto(s)',
-    135000); */
+    135000);
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -58,6 +59,8 @@ describe('FacturaComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(FacturaComponent);
     component = fixture.componentInstance;
+    facturaService = TestBed.inject(FacturaService);
+    spyOn(facturaService, 'consultar').and.returnValue(of(factura))
     fixture.detectChanges();
   });
 

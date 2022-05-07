@@ -27,7 +27,7 @@ describe('TrmService', () => {
   });
 
   it('deberia obtener el Trm del dia actual', () => {
-    const dummyTrm = new Trm();
+    const dummyTrm = new Trm('1234','COP','2022-05-04T00:00:00-05:00', '2022-05-04T00:00:00-05:00', '4016.34', 'true');
     service.consultar().subscribe(response => {
       expect(response).toEqual(dummyTrm);
     });
