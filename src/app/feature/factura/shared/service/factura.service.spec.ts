@@ -5,7 +5,6 @@ import { HttpService } from 'src/app/core/services/http.service';
 
 import { FacturaService } from './factura.service';
 import { Factura } from '../model/factura';
-import { Mascota } from '@mascota/shared/model/mascota/mascota';
 
 describe('FacturaService', () => {
   let httpMock: HttpTestingController;
@@ -35,9 +34,8 @@ describe('FacturaService', () => {
       'Su mascota ha estado en nuestra guarderia por: 0 semana(s), 0 dia(s), 9 hora(s), 4 minuto(s)',
       135000
     );
-    const dummyMascota = new Mascota();
-    dummyMascota.id = 1;
-    service.consultar(dummyMascota.id).subscribe(response => {
+    const mascotaId = 1;
+    service.consultar(mascotaId).subscribe(response => {
       expect(response).toEqual(dummyFactura);
     });
     const req = httpMock.expectOne(`${apiEndpointFactura}/1`);
