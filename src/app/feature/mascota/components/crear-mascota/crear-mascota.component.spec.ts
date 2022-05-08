@@ -99,7 +99,8 @@ describe('CrearMascotaComponent', () => {
   });
 
   it('deberia actualizar mascota', async () => {
-    component.actualizar();
+/*     const spy = spyOn(component, 'actualizar').and.callThrough();
+ */    component.actualizar();
     expect(spyMascotaServiceActualizar).toHaveBeenCalled();
   });
 
