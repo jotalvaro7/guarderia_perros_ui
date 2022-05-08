@@ -13,6 +13,7 @@ import { MascotaComponent } from './mascota.component';
 import { of } from 'rxjs';
 import { Mascota } from '@mascota/shared/model/mascota/mascota';
 import { FacturaComponent } from '@factura/components/factura/factura.component';
+import { CrearMascotaComponent } from '../crear-mascota/crear-mascota.component';
 
 
 describe('MascotaComponent', () => {
@@ -65,6 +66,40 @@ describe('MascotaComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('open dialog cuando se ejecuta el metodo crear', () => {
+    const action = 'crear';
+    const idUsuario = 1;
+    component.crear(action);
+    component['dialog'].open(CrearMascotaComponent, {
+      width: '20%',
+      autoFocus: true,
+      data: {id: action, idUsuario: idUsuario}
+    });
+    expect(dialogSpy).toHaveBeenCalled();
+    expect(dialogSpy).toHaveBeenCalledWith(CrearMascotaComponent, {
+      width: '20%',
+      autoFocus: true,
+      data: { id: 'crear', idUsuario: 1}
+    });
+  });
+
+  it('open dialog cuando se ejecuta el metodo editar', () => {
+    const id = 1;
+    const idUsuario = 1;
+    component.editar(id);
+    component['dialog'].open(CrearMascotaComponent, {
+      width: '20%',
+      autoFocus: true,
+      data: {id, idUsuario}
+    });
+    expect(dialogSpy).toHaveBeenCalled();
+    expect(dialogSpy).toHaveBeenCalledWith(CrearMascotaComponent, {
+      width: '20%',
+      autoFocus: true,
+      data: { id: 1, idUsuario: 1}
+    });
+  });
+
   it('open dialog cuando se ejecuta el metodo factura', ()=>{
     const idMascota = 1;
     component.factura(idMascota);
@@ -73,7 +108,7 @@ describe('MascotaComponent', () => {
       data: {idMascota}
     });
     expect(dialogSpy).toHaveBeenCalled();
-
-  })
+    
+  });
   
 });
