@@ -145,10 +145,9 @@ describe('CrearMascotaComponent', () => {
 
     mascotaService.guardar(mascota).subscribe(
       () => {
-       
+        expect(spy).toHaveBeenCalled();
       }
     )
-    expect(spy).toHaveBeenCalled();
   
     component.crear();
   })
