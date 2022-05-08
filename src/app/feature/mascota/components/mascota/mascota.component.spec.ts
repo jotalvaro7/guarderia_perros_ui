@@ -14,7 +14,8 @@ import { of } from 'rxjs';
 import { Mascota } from '@mascota/shared/model/mascota/mascota';
 import { FacturaComponent } from '@factura/components/factura/factura.component';
 import { CrearMascotaComponent } from '../crear-mascota/crear-mascota.component';
-/* import * as jasmine from 'jasmine'; */
+/* import { IdMascotaResponse } from '@mascota/shared/model/mascota/idMascotaResponse'; */
+
 
 
 describe('MascotaComponent', () => {
@@ -39,7 +40,11 @@ describe('MascotaComponent', () => {
   ]
 
   let mascota= new Mascota();
+  /* let idMascotaResponse = new IdMascotaResponse(); */
+
   let spyMascotaServiceConsultarMascotasPorId: jasmine.Spy;
+  let spyMascotaServiceEliminarMascotaPorId: jasmine.Spy;
+  /* let spyMascotaServiceNotificar: jasmine.Spy; */
 
   beforeEach(waitForAsync (() => {
       TestBed.configureTestingModule({
@@ -63,7 +68,8 @@ describe('MascotaComponent', () => {
     mascotaService = TestBed.inject(MascotaService);
     spyOn(mascotaService, 'consultarMascotasPorIdUsuario').and.returnValue(of(mascotas));
     spyMascotaServiceConsultarMascotasPorId = spyOn(mascotaService, 'consultarMascotaPorId').and.returnValue(of(mascota));
-    spyOn(mascotaService, 'eliminar').and.returnValue(of(mascota));
+    spyMascotaServiceEliminarMascotaPorId = spyOn(mascotaService, 'eliminar');
+    /* spyMascotaServiceNotificar = spyOn(mascotaService, 'notificar'); */
     dialogSpy = spyOn(TestBed.get(MatDialog), 'open').and.returnValue(dialogRefSpyObj);
     fixture.detectChanges();
   });
@@ -121,6 +127,9 @@ describe('MascotaComponent', () => {
     const idMascota = 1;
     component.obtenerMascotaDeUsuarioYEliminar(idMascota);
     expect(spyMascotaServiceConsultarMascotasPorId).toHaveBeenCalled();
-  })
+    expect(spyMascotaServiceEliminarMascotaPorId).toHaveBeenCalled();
+  });
+
+
   
 });
