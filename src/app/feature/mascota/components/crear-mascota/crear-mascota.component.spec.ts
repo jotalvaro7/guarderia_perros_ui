@@ -11,7 +11,7 @@ import { MascotaService } from '@mascota/shared/service/mascota/mascota.service'
 import { IdMascotaResponse } from '@mascota/shared/model/mascota/idMascotaResponse';
 import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso/registro-ingreso.service';
 import { CrearMascotaComponent } from './crear-mascota.component';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 
 import { Mascota } from '@mascota/shared/model/mascota/mascota';
 
@@ -140,5 +140,15 @@ describe('CrearMascotaComponent', () => {
     expect(false).toEqual(component['crearClicked']);
   });
 
+  it('deberia sacar error cuando se envia null en el actualizar mascota', () => {
+    const error = 'error'
+    spyMascotaServiceActualizar.and.returnValue(throwError(error));
+
+    mascotaService.actualizar(null).subscribe(
+      () => {},
+      (error) => expect(error).toEqual(error)
+    );
+    component.actualizar();
+  })
 
 });
