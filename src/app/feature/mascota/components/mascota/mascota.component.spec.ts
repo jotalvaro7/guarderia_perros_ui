@@ -39,7 +39,7 @@ describe('MascotaComponent', () => {
   ]
 
   let mascota= new Mascota();
-  /* let spyMascotaServiceConsultarMascotasPorId: jasmine.Spy; */
+  let spyMascotaServiceConsultarMascotasPorId: jasmine.Spy;
 
   beforeEach(waitForAsync (() => {
       TestBed.configureTestingModule({
@@ -62,7 +62,7 @@ describe('MascotaComponent', () => {
     component = fixture.componentInstance;
     mascotaService = TestBed.inject(MascotaService);
     spyOn(mascotaService, 'consultarMascotasPorIdUsuario').and.returnValue(of(mascotas));
-    spyOn(mascotaService, 'consultarMascotaPorId').and.returnValue(of(mascota));
+    spyMascotaServiceConsultarMascotasPorId = spyOn(mascotaService, 'consultarMascotaPorId').and.returnValue(of(mascota));
     dialogSpy = spyOn(TestBed.get(MatDialog), 'open').and.returnValue(dialogRefSpyObj);
     fixture.detectChanges();
   });
@@ -116,9 +116,10 @@ describe('MascotaComponent', () => {
     
   });
 
- /*  it('deberia obtener mascota de usuario y eliminar', () => {
+  it('deberia obtener mascota de usuario y eliminar', () => {
     const idMascota = 1;
     component.obtenerMascotaDeUsuarioYEliminar(idMascota);
-  }) */
+    expect(spyMascotaServiceConsultarMascotasPorId).toHaveBeenCalled();
+  })
   
 });
