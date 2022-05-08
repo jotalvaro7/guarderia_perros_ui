@@ -1,4 +1,4 @@
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
@@ -17,6 +17,8 @@ describe('UsuarioComponent', () => {
   let component: UsuarioComponent;
   let fixture: ComponentFixture<UsuarioComponent>;
   let usuarioService: UsuarioService;
+  /* let spyUsuarioServiceNotificar: jasmine.Spy; */
+  let spyUsuarioServiceEliminar: jasmine.Spy;
 
   let dialogSpy: jasmine.Spy;
   let dialogRefSpyObj = jasmine.createSpyObj({ afterClosed : of({}), close: null });
@@ -63,6 +65,8 @@ describe('UsuarioComponent', () => {
     usuarioService = TestBed.inject(UsuarioService);
     spyOn(usuarioService, 'consultar').and.returnValue(of(usuarios));
     dialogSpy = spyOn(TestBed.get(MatDialog), 'open').and.returnValue(dialogRefSpyObj);
+    spyOn(usuarioService, 'notificar');
+    spyUsuarioServiceEliminar = spyOn(usuarioService, 'eliminar');
     fixture.detectChanges();
   });
 
@@ -91,6 +95,23 @@ describe('UsuarioComponent', () => {
       data: { id: id }
     });
     expect(dialogSpy).toHaveBeenCalled();
+  });
+
+  it('deberia eliminar un usuario', () => {
+    const usuario = new Usuario('Julio', 'Osorio', '1034', '555');
+    component.delete(usuario);
+  });
+
+  it('deberia sacar error cuando se envia null el id del usuario', () => {
+    const usuario = new Usuario('Julio', 'Osorio', '1034', '555');
+    const error = 'error'
+    spyUsuarioServiceEliminar.and.returnValue(throwError(error));
+
+    usuarioService.eliminar(null).subscribe(
+      () => {},
+      (error) => expect(error).toEqual(error)
+    );
+    component.delete(usuario);
   });
 
 });
