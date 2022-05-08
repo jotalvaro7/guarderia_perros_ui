@@ -11,7 +11,6 @@ import { MascotaService } from '@mascota/shared/service/mascota/mascota.service'
 import { IdMascotaResponse } from '@mascota/shared/model/mascota/idMascotaResponse';
 import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso/registro-ingreso.service';
 import { CrearMascotaComponent } from './crear-mascota.component';
-import { Mascota } from '@mascota/shared/model/mascota/mascota';
 
 /* import { Mascota } from '@mascota/shared/model/mascota/mascota'; */
 
@@ -21,11 +20,11 @@ describe('CrearMascotaComponent', () => {
   let mascotaService: MascotaService;
   let registroIngresoService: RegistroIngresoService;
   let idMascotaResponse = new IdMascotaResponse();
-  
+
 
   const dialogMock = {
     close: jasmine.createSpy('close')
-   };
+  };
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -84,13 +83,13 @@ describe('CrearMascotaComponent', () => {
 
   });
 
-  it('deberia guardar mascota', async() => {
+  it('deberia guardar mascota', async () => {
     const spy = spyOn(mascotaService, 'guardar').and.callThrough();
     component.crear();
     expect(spy).toHaveBeenCalled();
   });
 
-  it('deberia actualizar mascota', async() => {
+  it('deberia actualizar mascota', async () => {
     const spy = spyOn(mascotaService, 'actualizar').and.callThrough();
     component.actualizar();
     expect(spy).toHaveBeenCalled();
@@ -117,7 +116,7 @@ describe('CrearMascotaComponent', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('deberia limpiar el formulario', ()=> {
+  it('deberia limpiar el formulario', () => {
     const spy = spyOn(component.mascotaForm, 'reset');
     component.limpiarForm();
     expect(spy).toHaveBeenCalled();
@@ -134,24 +133,22 @@ describe('CrearMascotaComponent', () => {
   });
 
 
-  it('deberia registrar Ingreso de mascota cuando se ejecute el servicio de guardar', () => {
+  /* it('deberia registrar Ingreso de mascota cuando se ejecute el servicio de guardar', () => {
     const mascota = new Mascota();
     mascota.nombre = "Zeus";
     mascota.raza = "Doberman";
     mascota.peso = "7Kg";
     mascota.idUsuario = 1;
 
-  
-    /* const error = 'error'; */
-    
+
     mascotaService.guardar(mascota).subscribe(
-      () => { 
+      () => {
         expect(dialogMock.close).toHaveBeenCalled();
       },
-      );
-      
-      component.crear();
-    
-  })
+    );
+
+    component.crear();
+
+  }) */
 
 });
