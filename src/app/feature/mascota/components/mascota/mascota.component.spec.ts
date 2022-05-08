@@ -18,8 +18,8 @@ describe('MascotaComponent', () => {
   let fixture: ComponentFixture<MascotaComponent>;
   let mascotaService: MascotaService;
 
-  let spyMascotaServiceConsultarMascotasDeUsuario: jasmine.Spy;
-
+  /* let spyMascotaServiceConsultarMascotasDeUsuario: jasmine.Spy;
+ */
   let mascotas: Mascota[] = [
     {
       id: 1,
@@ -50,7 +50,7 @@ describe('MascotaComponent', () => {
     fixture = TestBed.createComponent(MascotaComponent);
     component = fixture.componentInstance;
     mascotaService = TestBed.inject(MascotaService);
-    spyMascotaServiceConsultarMascotasDeUsuario = spyOn(mascotaService, 'consultarMascotasPorIdUsuario').and.returnValue(of(mascotas))
+    spyOn(mascotaService, 'consultarMascotasPorIdUsuario').and.returnValue(of(mascotas))
     fixture.detectChanges();
   });
 
