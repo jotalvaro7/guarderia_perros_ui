@@ -63,6 +63,7 @@ describe('MascotaComponent', () => {
     mascotaService = TestBed.inject(MascotaService);
     spyOn(mascotaService, 'consultarMascotasPorIdUsuario').and.returnValue(of(mascotas));
     spyMascotaServiceConsultarMascotasPorId = spyOn(mascotaService, 'consultarMascotaPorId').and.returnValue(of(mascota));
+    spyOn(mascotaService, 'eliminar').and.returnValue(of(mascota));
     dialogSpy = spyOn(TestBed.get(MatDialog), 'open').and.returnValue(dialogRefSpyObj);
     fixture.detectChanges();
   });
