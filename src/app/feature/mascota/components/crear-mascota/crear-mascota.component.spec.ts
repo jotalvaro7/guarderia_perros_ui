@@ -11,9 +11,9 @@ import { MascotaService } from '@mascota/shared/service/mascota/mascota.service'
 import { IdMascotaResponse } from '@mascota/shared/model/mascota/idMascotaResponse';
 import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso/registro-ingreso.service';
 import { CrearMascotaComponent } from './crear-mascota.component';
-/* import { of } from 'rxjs'; */
+import { of } from 'rxjs';
 
-/* import { Mascota } from '@mascota/shared/model/mascota/mascota'; */
+import { Mascota } from '@mascota/shared/model/mascota/mascota';
 
 describe('CrearMascotaComponent', () => {
   let component: CrearMascotaComponent;
@@ -21,13 +21,14 @@ describe('CrearMascotaComponent', () => {
   let mascotaService: MascotaService;
   let registroIngresoService: RegistroIngresoService;
   let idMascotaResponse = new IdMascotaResponse();
+  let spyMascotaServiceActualizar: jasmine.Spy;
 
-/*   let mascota = new Mascota();
+  let mascota = new Mascota();
   mascota.id = 1;
   mascota.nombre= "Zeus";
   mascota.raza = "Doberman";
   mascota.peso = "8Kg";
-  mascota.idUsuario = 1; */
+  mascota.idUsuario = 1;
 
   const dialogMock = {
     close: jasmine.createSpy('close')
@@ -68,6 +69,7 @@ describe('CrearMascotaComponent', () => {
     component = fixture.componentInstance;
     mascotaService = TestBed.inject(MascotaService);
     registroIngresoService = TestBed.inject(RegistroIngresoService);
+    spyMascotaServiceActualizar = spyOn(mascotaService, 'actualizar').and.returnValue(of(mascota));
     fixture.detectChanges();
   });
 
@@ -97,9 +99,8 @@ describe('CrearMascotaComponent', () => {
   });
 
   it('deberia actualizar mascota', async () => {
-    const spy = spyOn(mascotaService, 'actualizar').and.callThrough();
     component.actualizar();
-    expect(spy).toHaveBeenCalled();
+    expect(spyMascotaServiceActualizar).toHaveBeenCalled();
   });
 
   it('deberia tomar decision de crear mascota', () => {
