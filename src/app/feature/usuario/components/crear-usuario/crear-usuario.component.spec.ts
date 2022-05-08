@@ -147,7 +147,7 @@ describe('CrearUsuarioComponent', () => {
       () => {},
       (error) => expect(error).toEqual(error)
     );
-    component.actualizar();
+    component.crear();
   });
 
   it('deberia sacar error cuando se envia null en el editar mascota', () => {

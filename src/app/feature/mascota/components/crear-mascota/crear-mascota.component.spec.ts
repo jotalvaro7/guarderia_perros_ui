@@ -166,7 +166,7 @@ describe('CrearMascotaComponent', () => {
       () => {},
       (error) => expect(error).toEqual(error)
     );
-    component.actualizar();
+    component.crear();
   });
 
 
