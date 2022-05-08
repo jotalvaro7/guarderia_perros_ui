@@ -1,4 +1,4 @@
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -11,16 +11,19 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { UsuarioService } from '@usuario/shared/service/usuario.service';
 import { CrearUsuarioComponent } from './crear-usuario.component';
 import { Usuario } from '@usuario/shared/model/usuario';
+import { IdUsuarioResponse } from '@usuario/shared/model/idResponseUsuario';
 
 
 describe('CrearUsuarioComponent', () => {
   let component: CrearUsuarioComponent;
   let fixture: ComponentFixture<CrearUsuarioComponent>;
   let usuarioService: UsuarioService;
-
- /*  let spyUsuariosServiceConsultar: jasmine.Spy; */
+  let spyUsuariosServiceGuardar: jasmine.Spy;
+  let spyUsuariosServiceEditar: jasmine.Spy;
+  
   let usuario = new Usuario('Julio' , 'Osorio', '103694987', '34725812');
-
+  let idUsuario= new IdUsuarioResponse();
+  idUsuario.valor = 1;
   /* let usuarios: Usuario[] = [
     {
     id: 1,
@@ -67,7 +70,9 @@ describe('CrearUsuarioComponent', () => {
     fixture = TestBed.createComponent(CrearUsuarioComponent);
     component = fixture.componentInstance;
     usuarioService = TestBed.inject(UsuarioService);
-    spyOn(usuarioService, 'consultarPorId').and.returnValue(of(usuario))
+    spyOn(usuarioService, 'consultarPorId').and.returnValue(of(usuario));
+    spyUsuariosServiceGuardar = spyOn(usuarioService, 'guardar').and.returnValue(of(idUsuario));
+    spyUsuariosServiceEditar = spyOn(usuarioService, 'editar').and.returnValue(of(idUsuario));
     fixture.detectChanges();
   });
 
@@ -95,15 +100,13 @@ describe('CrearUsuarioComponent', () => {
   });
 
   it('deberia guardar usuario', async() => {
-    const spy = spyOn(usuarioService, 'guardar').and.callThrough();
     component.crear();
-    expect(spy).toHaveBeenCalled();
+    expect(spyUsuariosServiceGuardar).toHaveBeenCalled();
   });
 
   it('deberia actualizar usuario', async() => {
-    const spy = spyOn(usuarioService, 'editar').and.callThrough();
     component.actualizar();
-    expect(spy).toHaveBeenCalled();
+    expect(spyUsuariosServiceEditar).toHaveBeenCalled();
   });
 
   it('deberia tomar decision de crear usuario', () => {
@@ -134,6 +137,28 @@ describe('CrearUsuarioComponent', () => {
   it('deberia setear variable false en el boton editar', () => {
     component.onEditarClick();
     expect(false).toBe(component.crearClicked)
+  });
+
+  it('deberia sacar error cuando se envia null en el guardar mascota', () => {
+    const error = 'error'
+    spyUsuariosServiceGuardar.and.returnValue(throwError(error));
+
+    usuarioService.guardar(null).subscribe(
+      () => {},
+      (error) => expect(error).toEqual(error)
+    );
+    component.actualizar();
+  });
+
+  it('deberia sacar error cuando se envia null en el editar mascota', () => {
+    const error = 'error'
+    spyUsuariosServiceEditar.and.returnValue(throwError(error));
+
+    usuarioService.editar(null).subscribe(
+      () => {},
+      (error) => expect(error).toEqual(error)
+    );
+    component.actualizar();
   });
 
 });
