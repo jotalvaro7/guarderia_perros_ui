@@ -22,9 +22,16 @@ describe('CrearMascotaComponent', () => {
   let registroIngresoService: RegistroIngresoService;
   let idMascotaResponse = new IdMascotaResponse();
   let spyMascotaServiceActualizar: jasmine.Spy;
+  let spyMascotaServiceGuardar: jasmine.Spy;
 
   let mascota = new Mascota();
   mascota.id = 1;
+  mascota.nombre= "Zeus";
+  mascota.raza = "Doberman";
+  mascota.peso = "8Kg";
+  mascota.idUsuario = 1;
+
+  let mascotaGuardar = new Mascota();
   mascota.nombre= "Zeus";
   mascota.raza = "Doberman";
   mascota.peso = "8Kg";
@@ -70,6 +77,7 @@ describe('CrearMascotaComponent', () => {
     mascotaService = TestBed.inject(MascotaService);
     registroIngresoService = TestBed.inject(RegistroIngresoService);
     spyMascotaServiceActualizar = spyOn(mascotaService, 'actualizar').and.returnValue(of(mascota));
+    spyMascotaServiceGuardar = spyOn(mascotaService, 'guardar').and.returnValue(of(mascotaGuardar));
     fixture.detectChanges();
   });
 
@@ -93,14 +101,12 @@ describe('CrearMascotaComponent', () => {
   });
 
   it('deberia guardar mascota', async () => {
-    const spy = spyOn(mascotaService, 'guardar').and.callThrough();
     component.crear();
-    expect(spy).toHaveBeenCalled();
+    expect(spyMascotaServiceGuardar).toHaveBeenCalled();
   });
 
   it('deberia actualizar mascota', async () => {
-/*     const spy = spyOn(component, 'actualizar').and.callThrough();
- */    component.actualizar();
+    component.actualizar();
     expect(spyMascotaServiceActualizar).toHaveBeenCalled();
   });
 
@@ -150,6 +156,19 @@ describe('CrearMascotaComponent', () => {
       (error) => expect(error).toEqual(error)
     );
     component.actualizar();
-  })
+  });
+
+  it('deberia sacar error cuando se envia null en el guardar mascota', () => {
+    const error = 'error'
+    spyMascotaServiceGuardar.and.returnValue(throwError(error));
+
+    mascotaService.guardar(null).subscribe(
+      () => {},
+      (error) => expect(error).toEqual(error)
+    );
+    component.actualizar();
+  });
+
+
 
 });
