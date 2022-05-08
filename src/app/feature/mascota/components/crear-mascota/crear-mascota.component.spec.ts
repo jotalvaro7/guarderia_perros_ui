@@ -11,6 +11,7 @@ import { MascotaService } from '@mascota/shared/service/mascota/mascota.service'
 import { IdMascotaResponse } from '@mascota/shared/model/mascota/idMascotaResponse';
 import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso/registro-ingreso.service';
 import { CrearMascotaComponent } from './crear-mascota.component';
+/* import { of } from 'rxjs'; */
 
 /* import { Mascota } from '@mascota/shared/model/mascota/mascota'; */
 
@@ -21,6 +22,12 @@ describe('CrearMascotaComponent', () => {
   let registroIngresoService: RegistroIngresoService;
   let idMascotaResponse = new IdMascotaResponse();
 
+/*   let mascota = new Mascota();
+  mascota.id = 1;
+  mascota.nombre= "Zeus";
+  mascota.raza = "Doberman";
+  mascota.peso = "8Kg";
+  mascota.idUsuario = 1; */
 
   const dialogMock = {
     close: jasmine.createSpy('close')
@@ -132,23 +139,5 @@ describe('CrearMascotaComponent', () => {
     expect(false).toEqual(component['crearClicked']);
   });
 
-
-  /* it('deberia registrar Ingreso de mascota cuando se ejecute el servicio de guardar', () => {
-    const mascota = new Mascota();
-    mascota.nombre = "Zeus";
-    mascota.raza = "Doberman";
-    mascota.peso = "7Kg";
-    mascota.idUsuario = 1;
-
-
-    mascotaService.guardar(mascota).subscribe(
-      () => {
-        expect(dialogMock.close).toHaveBeenCalled();
-      },
-    );
-
-    component.crear();
-
-  }) */
 
 });

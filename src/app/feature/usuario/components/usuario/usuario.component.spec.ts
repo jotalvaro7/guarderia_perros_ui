@@ -10,12 +10,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UsuarioService } from '@usuario/shared/service/usuario.service';
 import { UsuarioComponent } from './usuario.component';
 import { Usuario } from '@usuario/shared/model/usuario';
+import { CrearUsuarioComponent } from '../crear-usuario/crear-usuario.component';
 
 
 describe('UsuarioComponent', () => {
   let component: UsuarioComponent;
   let fixture: ComponentFixture<UsuarioComponent>;
   let usuarioService: UsuarioService;
+
+  let dialogSpy: jasmine.Spy;
+  let dialogRefSpyObj = jasmine.createSpyObj({ afterClosed : of({}), close: null });
+  dialogRefSpyObj.componentInstance = { body: '' };
+
 
   let usuarios: Usuario[] = [
     {
@@ -56,6 +62,7 @@ describe('UsuarioComponent', () => {
     component = fixture.componentInstance;
     usuarioService = TestBed.inject(UsuarioService);
     spyOn(usuarioService, 'consultar').and.returnValue(of(usuarios));
+    dialogSpy = spyOn(TestBed.get(MatDialog), 'open').and.returnValue(dialogRefSpyObj);
     fixture.detectChanges();
   });
 
@@ -65,11 +72,25 @@ describe('UsuarioComponent', () => {
 
 
   it('deberia llamar metodo openDialog para crear', () => {
+    const action = 'crear';
     component.crear('crear');
+    component['dialog'].open(CrearUsuarioComponent, {
+      width: '20%',
+      autoFocus: true,
+      data: { id: action }
+    });
+    expect(dialogSpy).toHaveBeenCalled();
   });
 
   it('deberia llamar metodo openDialog para editar ', () => {
-    component.editar(2);
+    const id = 2;
+    component.editar(id);
+    component['dialog'].open(CrearUsuarioComponent, {
+      width: '20%',
+      autoFocus: true,
+      data: { id: id }
+    });
+    expect(dialogSpy).toHaveBeenCalled();
   });
 
 });
