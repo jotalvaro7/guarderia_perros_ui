@@ -14,6 +14,7 @@ import { of } from 'rxjs';
 import { Mascota } from '@mascota/shared/model/mascota/mascota';
 import { FacturaComponent } from '@factura/components/factura/factura.component';
 import { CrearMascotaComponent } from '../crear-mascota/crear-mascota.component';
+/* import * as jasmine from 'jasmine'; */
 
 
 describe('MascotaComponent', () => {
@@ -37,6 +38,9 @@ describe('MascotaComponent', () => {
     }
   ]
 
+  let mascota= new Mascota();
+  /* let spyMascotaServiceConsultarMascotasPorId: jasmine.Spy; */
+
   beforeEach(waitForAsync (() => {
       TestBed.configureTestingModule({
       declarations: [ MascotaComponent ],
@@ -58,6 +62,7 @@ describe('MascotaComponent', () => {
     component = fixture.componentInstance;
     mascotaService = TestBed.inject(MascotaService);
     spyOn(mascotaService, 'consultarMascotasPorIdUsuario').and.returnValue(of(mascotas));
+    spyOn(mascotaService, 'consultarMascotaPorId').and.returnValue(of(mascota));
     dialogSpy = spyOn(TestBed.get(MatDialog), 'open').and.returnValue(dialogRefSpyObj);
     fixture.detectChanges();
   });
@@ -110,5 +115,10 @@ describe('MascotaComponent', () => {
     expect(dialogSpy).toHaveBeenCalled();
     
   });
+
+ /*  it('deberia obtener mascota de usuario y eliminar', () => {
+    const idMascota = 1;
+    component.obtenerMascotaDeUsuarioYEliminar(idMascota);
+  }) */
   
 });
