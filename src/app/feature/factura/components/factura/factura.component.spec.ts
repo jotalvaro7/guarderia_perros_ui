@@ -19,14 +19,14 @@ describe('FacturaComponent', () => {
 
   const dialogMock = {
     close: () => { }
-   };
+  };
 
   let facturaService: FacturaService;
 
-  let factura= new Factura(
-    'Cristal', 
-    '2022-05-06 09:27:35', 
-    '2022-05-06 18:31:36', 
+  const factura = new Factura(
+    'Cristal',
+    '2022-05-06 09:27:35',
+    '2022-05-06 18:31:36',
     'Su mascota ha estado en nuestra guarderia por: 0 semana(s), 0 dia(s), 9 hora(s), 4 minuto(s)',
     135000);
 
@@ -60,7 +60,7 @@ describe('FacturaComponent', () => {
     fixture = TestBed.createComponent(FacturaComponent);
     component = fixture.componentInstance;
     facturaService = TestBed.inject(FacturaService);
-    spyOn(facturaService, 'consultar').and.returnValue(of(factura))
+    spyOn(facturaService, 'consultar').and.returnValue(of(factura));
     fixture.detectChanges();
   });
 
@@ -69,13 +69,13 @@ describe('FacturaComponent', () => {
   });
 
   it('deberia cobrar la Factura de una mascota', () => {
-    let spy = spyOn(component.dialogRef, 'close').and.callThrough();
+    const spy = spyOn(component.dialogRef, 'close').and.callThrough();
     component.cobrar();
     expect(spy).toHaveBeenCalled();
   });
 
   it('deberia cerrar el dialogRef cuando da click en cancelar', () => {
-    let spy = spyOn(component.dialogRef, 'close').and.callThrough();
+    const spy = spyOn(component.dialogRef, 'close').and.callThrough();
     component.cancelar();
     expect(spy).toHaveBeenCalled();
   });

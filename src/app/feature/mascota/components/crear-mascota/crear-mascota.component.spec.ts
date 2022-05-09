@@ -20,28 +20,28 @@ describe('CrearMascotaComponent', () => {
   let fixture: ComponentFixture<CrearMascotaComponent>;
   let mascotaService: MascotaService;
   let registroIngresoService: RegistroIngresoService;
-  let idMascotaResponse = new IdMascotaResponse();
+  const idMascotaResponse = new IdMascotaResponse();
   let spyMascotaServiceActualizar: jasmine.Spy;
   let spyMascotaServiceGuardar: jasmine.Spy;
 
-  let mascota = new Mascota();
+  const mascota = new Mascota();
   mascota.id = 1;
-  mascota.nombre= "Zeus";
-  mascota.raza = "Doberman";
-  mascota.peso = "8Kg";
+  mascota.nombre = 'Zeus';
+  mascota.raza = 'Doberman';
+  mascota.peso = '8Kg';
   mascota.idUsuario = 1;
 
-  let mascotaConsulta = new Mascota();
-  mascota.nombre= "Zeus";
-  mascota.raza = "Doberman";
-  mascota.peso = "8Kg";
+  const mascotaConsulta = new Mascota();
+  mascota.nombre = 'Zeus';
+  mascota.raza = 'Doberman';
+  mascota.peso = '8Kg';
   mascota.idUsuario = 1;
 
 
-  let mascotaGuardar = new Mascota();
-  mascota.nombre= "Zeus";
-  mascota.raza = "Doberman";
-  mascota.peso = "8Kg";
+  const mascotaGuardar = new Mascota();
+  mascota.nombre = 'Zeus';
+  mascota.raza = 'Doberman';
+  mascota.peso = '8Kg';
   mascota.idUsuario = 1;
 
   const dialogMock = {
@@ -90,7 +90,7 @@ describe('CrearMascotaComponent', () => {
   });
   afterEach(() => {
     fixture.destroy();
-  })
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -98,16 +98,18 @@ describe('CrearMascotaComponent', () => {
 
   it('deberia cargar el titulo Registrar Mascota', () => {
     component.id = 'crear';
-    component['cargarMascota']();
+    const key = 'cargarMascota';
+    component[key]();
     expect('Registrar Mascota').toEqual(component.titulo);
   });
 
   it('deberia fabricar mascota', () => {
+    const key = 'fabricarMascota';
     component.mascotaForm.controls.nombre.setValue('Max');
     component.mascotaForm.controls.raza.setValue('Golden');
     component.mascotaForm.controls.peso.setValue('10Kg');
-    component['fabricarMascota']();
-    expect(component.mascotaForm.valid).toBeTruthy;
+    component[key]();
+    expect(component.mascotaForm.valid).toBeTruthy();
 
   });
 
@@ -122,15 +124,17 @@ describe('CrearMascotaComponent', () => {
   });
 
   it('deberia tomar decision de crear mascota', () => {
+    const key = 'crearClicked';
     const spy = spyOn(component, 'crear').and.callThrough();
-    component['crearClicked'] = true;
+    component[key] = true;
     component.onSubmit();
     expect(spy).toHaveBeenCalled();
   });
 
   it('deberia tomar decision de actualizar mascota', () => {
+    const key = 'crearClicked';
     const spy = spyOn(component, 'actualizar').and.callThrough();
-    component['crearClicked'] = false;
+    component[key] = false;
     component.onSubmit();
     expect(spy).toHaveBeenCalled();
   });
@@ -149,33 +153,35 @@ describe('CrearMascotaComponent', () => {
   });
 
   it('deberia setear variable crearClicked en true', () => {
+    const key = 'crearClicked';
     component.onCrearClick();
-    expect(true).toEqual(component['crearClicked']);
+    expect(true).toEqual(component[key]);
   });
 
   it('deberia setear variable crearClicked en false', () => {
+    const key = 'crearClicked';
     component.onEditarClick();
-    expect(false).toEqual(component['crearClicked']);
+    expect(false).toEqual(component[key]);
   });
 
   it('deberia sacar error cuando se envia null en el actualizar mascota', () => {
-    const error = 'error'
+    const error = 'error';
     spyMascotaServiceActualizar.and.returnValue(throwError(error));
 
     mascotaService.actualizar(null).subscribe(
-      () => {},
-      (error) => expect(error).toEqual(error)
+      () => { },
+      (err) => expect(error).toEqual(err)
     );
     component.actualizar();
   });
 
   it('deberia sacar error cuando se envia null en el guardar mascota', () => {
-    const error = 'error'
+    const error = 'error';
     spyMascotaServiceGuardar.and.returnValue(throwError(error));
 
     mascotaService.guardar(null).subscribe(
-      () => {},
-      (error) => expect(error).toEqual(error)
+      () => { },
+      (err) => expect(error).toEqual(err)
     );
     component.crear();
   });

@@ -13,11 +13,11 @@ describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
   let trmService: TrmService;
-  let trm: Trm = new Trm('1234','COP','2022-05-04T00:00:00-05:00', '2022-05-04T00:00:00-05:00', '4016.34', 'true');
+  const trm: Trm = new Trm('1234', 'COP', '2022-05-04T00:00:00-05:00', '2022-05-04T00:00:00-05:00', '4016.34', 'true');
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeComponent ],
+      declarations: [HomeComponent],
       imports: [
         HttpClientTestingModule,
         RouterTestingModule,
@@ -26,7 +26,7 @@ describe('HomeComponent', () => {
       ],
       providers: [HttpService, TrmService]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

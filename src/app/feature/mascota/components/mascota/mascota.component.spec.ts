@@ -14,7 +14,6 @@ import { of } from 'rxjs';
 import { Mascota } from '@mascota/shared/model/mascota/mascota';
 import { FacturaComponent } from '@factura/components/factura/factura.component';
 import { CrearMascotaComponent } from '../crear-mascota/crear-mascota.component';
-/* import { IdMascotaResponse } from '@mascota/shared/model/mascota/idMascotaResponse'; */
 
 
 
@@ -24,31 +23,26 @@ describe('MascotaComponent', () => {
   let mascotaService: MascotaService;
 
   let dialogSpy: jasmine.Spy;
-  let dialogRefSpyObj = jasmine.createSpyObj({ afterClosed : of({}), close: null });
-  dialogRefSpyObj.componentInstance = { body: '' }; // attach componentInstance to the spy object...
+  const dialogRefSpyObj = jasmine.createSpyObj({ afterClosed: of({}), close: null });
+  dialogRefSpyObj.componentInstance = { body: '' };
 
-  /* let spyMascotaServiceConsultarMascotasDeUsuario: jasmine.Spy; */
+  const mascota = new Mascota();
+  let spyMascotaServiceConsultarMascotasPorId: jasmine.Spy;
+  let spyMascotaServiceEliminarMascotaPorId: jasmine.Spy;
 
-  let mascotas: Mascota[] = [
+  const mascotas: Mascota[] = [
     {
       id: 1,
-      nombre: "Raz",
+      nombre: 'Raz',
       raza: 'Pumeraña',
       peso: '5Kg',
       idUsuario: 1
     }
-  ]
+  ];
 
-  let mascota= new Mascota();
-  /* let idMascotaResponse = new IdMascotaResponse(); */
-
-  let spyMascotaServiceConsultarMascotasPorId: jasmine.Spy;
-  let spyMascotaServiceEliminarMascotaPorId: jasmine.Spy;
-  /* let spyMascotaServiceNotificar: jasmine.Spy; */
-
-  beforeEach(waitForAsync (() => {
-      TestBed.configureTestingModule({
-      declarations: [ MascotaComponent ],
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [MascotaComponent],
       imports: [
         CommonModule,
         HttpClientTestingModule,
@@ -59,7 +53,7 @@ describe('MascotaComponent', () => {
       ],
       providers: [MascotaService, HttpService, RegistroIngresoService, FacturaService]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -69,8 +63,7 @@ describe('MascotaComponent', () => {
     spyOn(mascotaService, 'consultarMascotasPorIdUsuario').and.returnValue(of(mascotas));
     spyMascotaServiceConsultarMascotasPorId = spyOn(mascotaService, 'consultarMascotaPorId').and.returnValue(of(mascota));
     spyMascotaServiceEliminarMascotaPorId = spyOn(mascotaService, 'eliminar');
-    /* spyMascotaServiceNotificar = spyOn(mascotaService, 'notificar'); */
-    dialogSpy = spyOn(TestBed.get(MatDialog), 'open').and.returnValue(dialogRefSpyObj);
+    dialogSpy = spyOn(TestBed.inject(MatDialog), 'open').and.returnValue(dialogRefSpyObj);
     fixture.detectChanges();
   });
 
@@ -81,46 +74,49 @@ describe('MascotaComponent', () => {
   it('open dialog cuando se ejecuta el metodo crear', () => {
     const action = 'crear';
     const idUsuario = 1;
+    const key = 'dialog';
     component.crear(action);
-    component['dialog'].open(CrearMascotaComponent, {
+    component[key].open(CrearMascotaComponent, {
       width: '20%',
       autoFocus: true,
-      data: {id: action, idUsuario: idUsuario}
+      data: { id: action, idUsuario }
     });
     expect(dialogSpy).toHaveBeenCalled();
     expect(dialogSpy).toHaveBeenCalledWith(CrearMascotaComponent, {
       width: '20%',
       autoFocus: true,
-      data: { id: 'crear', idUsuario: 1}
+      data: { id: 'crear', idUsuario: 1 }
     });
   });
 
   it('open dialog cuando se ejecuta el metodo editar', () => {
     const id = 1;
     const idUsuario = 1;
+    const key = 'dialog';
     component.editar(id);
-    component['dialog'].open(CrearMascotaComponent, {
+    component[key].open(CrearMascotaComponent, {
       width: '20%',
       autoFocus: true,
-      data: {id, idUsuario}
+      data: { id, idUsuario }
     });
     expect(dialogSpy).toHaveBeenCalled();
     expect(dialogSpy).toHaveBeenCalledWith(CrearMascotaComponent, {
       width: '20%',
       autoFocus: true,
-      data: { id: 1, idUsuario: 1}
+      data: { id: 1, idUsuario: 1 }
     });
   });
 
-  it('open dialog cuando se ejecuta el metodo factura', ()=>{
+  it('open dialog cuando se ejecuta el metodo factura', () => {
     const idMascota = 1;
+    const key = 'dialog';
     component.factura(idMascota);
-    component['dialog'].open(FacturaComponent, {
+    component[key].open(FacturaComponent, {
       autoFocus: true,
-      data: {idMascota}
+      data: { idMascota }
     });
     expect(dialogSpy).toHaveBeenCalled();
-    
+
   });
 
   it('deberia obtener mascota de usuario y eliminar', () => {
@@ -131,5 +127,5 @@ describe('MascotaComponent', () => {
   });
 
 
-  
+
 });

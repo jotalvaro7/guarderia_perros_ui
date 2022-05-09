@@ -28,9 +28,9 @@ describe('FacturaService', () => {
 
   it('deberia obtener la factura de cobro', () => {
     const dummyFactura = new Factura(
-      'Cristal', 
-      '2022-05-06 09:27:35', 
-      '2022-05-06 18:31:36', 
+      'Cristal',
+      '2022-05-06 09:27:35',
+      '2022-05-06 18:31:36',
       'Su mascota ha estado en nuestra guarderia por: 0 semana(s), 0 dia(s), 9 hora(s), 4 minuto(s)',
       135000
     );

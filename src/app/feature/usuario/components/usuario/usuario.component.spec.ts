@@ -17,27 +17,26 @@ describe('UsuarioComponent', () => {
   let component: UsuarioComponent;
   let fixture: ComponentFixture<UsuarioComponent>;
   let usuarioService: UsuarioService;
-  /* let spyUsuarioServiceNotificar: jasmine.Spy; */
   let spyUsuarioServiceEliminar: jasmine.Spy;
 
   let dialogSpy: jasmine.Spy;
-  let dialogRefSpyObj = jasmine.createSpyObj({ afterClosed : of({}), close: null });
+  const dialogRefSpyObj = jasmine.createSpyObj({ afterClosed: of({}), close: null });
   dialogRefSpyObj.componentInstance = { body: '' };
 
 
-  let usuarios: Usuario[] = [
+  const usuarios: Usuario[] = [
     {
-    id: 1,
-    nombre: 'Julio' , 
-    apellido: 'Osorio', 
-    identificacion: '103694987', 
-    numeroCelular: '34725812'
+      id: 1,
+      nombre: 'Julio',
+      apellido: 'Osorio',
+      identificacion: '103694987',
+      numeroCelular: '34725812'
     }
   ];
 
   const dialogMock = {
     open: () => { }
-   };
+  };
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -54,7 +53,8 @@ describe('UsuarioComponent', () => {
         {
           provide: MatDialog,
           useValue: dialogMock
-        },]
+        },
+      ]
     })
       .compileComponents();
   }));
@@ -64,7 +64,7 @@ describe('UsuarioComponent', () => {
     component = fixture.componentInstance;
     usuarioService = TestBed.inject(UsuarioService);
     spyOn(usuarioService, 'consultar').and.returnValue(of(usuarios));
-    dialogSpy = spyOn(TestBed.get(MatDialog), 'open').and.returnValue(dialogRefSpyObj);
+    dialogSpy = spyOn(TestBed.inject(MatDialog), 'open').and.returnValue(dialogRefSpyObj);
     spyOn(usuarioService, 'notificar');
     spyUsuarioServiceEliminar = spyOn(usuarioService, 'eliminar');
     fixture.detectChanges();
@@ -77,8 +77,9 @@ describe('UsuarioComponent', () => {
 
   it('deberia llamar metodo openDialog para crear', () => {
     const action = 'crear';
+    const key = 'dialog';
     component.crear('crear');
-    component['dialog'].open(CrearUsuarioComponent, {
+    component[key].open(CrearUsuarioComponent, {
       width: '20%',
       autoFocus: true,
       data: { id: action }
@@ -88,11 +89,12 @@ describe('UsuarioComponent', () => {
 
   it('deberia llamar metodo openDialog para editar ', () => {
     const id = 2;
+    const key = 'dialog';
     component.editar(id);
-    component['dialog'].open(CrearUsuarioComponent, {
+    component[key].open(CrearUsuarioComponent, {
       width: '20%',
       autoFocus: true,
-      data: { id: id }
+      data: { id }
     });
     expect(dialogSpy).toHaveBeenCalled();
   });
@@ -104,12 +106,12 @@ describe('UsuarioComponent', () => {
 
   it('deberia sacar error cuando se envia null el id del usuario', () => {
     const usuario = new Usuario('Julio', 'Osorio', '1034', '555');
-    const error = 'error'
+    const error = 'error';
     spyUsuarioServiceEliminar.and.returnValue(throwError(error));
 
     usuarioService.eliminar(null).subscribe(
-      () => {},
-      (error) => expect(error).toEqual(error)
+      () => { },
+      (err) => expect(error).toEqual(err)
     );
     component.delete(usuario);
   });

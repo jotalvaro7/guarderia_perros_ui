@@ -7,7 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from '@core/services/http.service';
 import { MaterialModule } from '@shared/material/material-module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsuarioService } from '@usuario/shared/service/usuario.service';
 import { CrearUsuarioComponent } from './crear-usuario.component';
 import { Usuario } from '@usuario/shared/model/usuario';
@@ -20,27 +20,18 @@ describe('CrearUsuarioComponent', () => {
   let usuarioService: UsuarioService;
   let spyUsuariosServiceGuardar: jasmine.Spy;
   let spyUsuariosServiceEditar: jasmine.Spy;
-  
-  let usuario = new Usuario('Julio' , 'Osorio', '103694987', '34725812');
-  let idUsuario= new IdUsuarioResponse();
+
+  const usuario = new Usuario('Julio', 'Osorio', '103694987', '34725812');
+  const idUsuario = new IdUsuarioResponse();
   idUsuario.valor = 1;
-  /* let usuarios: Usuario[] = [
-    {
-    id: 1,
-    nombre: 'Julio' , 
-    apellido: 'Osorio', 
-    identificacion: '103694987', 
-    numeroCelular: '34725812'
-    }
-  ]; */
 
   const dialogMock = {
     close: () => { }
-   };
+  };
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ CrearUsuarioComponent ],
+      declarations: [CrearUsuarioComponent],
       imports: [
         MatDialogModule,
         HttpClientTestingModule,
@@ -63,7 +54,7 @@ describe('CrearUsuarioComponent', () => {
         HttpService
       ],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -82,29 +73,30 @@ describe('CrearUsuarioComponent', () => {
 
   it('deberia cargar titulo Registrar Usuario', () => {
     component.id = 'crear';
-    component['cargarUsuario']();
+    const key = 'cargarUsuario';
+    component[key]();
     expect('Registrar Usuario').toEqual(component.titulo);
   });
-  
+
 
   it('deberia fabricar usuario', () => {
-
+    const key = 'fabricarUsuario';
     component.usuarioForm.controls.nombre.setValue('Julio');
     component.usuarioForm.controls.apellido.setValue('Osorio');
     component.usuarioForm.controls.identificacion.setValue('103694987');
     component.usuarioForm.controls.numeroCelular.setValue('34725812');
-    component['fabricarUsuario']();
+    component[key]();
 
-    expect(component.usuarioForm.valid).toBeTruthy;
+    expect(component.usuarioForm.valid).toBeTruthy();
 
   });
 
-  it('deberia guardar usuario', async() => {
+  it('deberia guardar usuario', async () => {
     component.crear();
     expect(spyUsuariosServiceGuardar).toHaveBeenCalled();
   });
 
-  it('deberia actualizar usuario', async() => {
+  it('deberia actualizar usuario', async () => {
     component.actualizar();
     expect(spyUsuariosServiceEditar).toHaveBeenCalled();
   });
@@ -131,32 +123,32 @@ describe('CrearUsuarioComponent', () => {
 
   it('deberia setear variable true en el boton crear', () => {
     component.onCrearClick();
-    expect(true).toBe(component.crearClicked)
+    expect(true).toBe(component.crearClicked);
   });
 
   it('deberia setear variable false en el boton editar', () => {
     component.onEditarClick();
-    expect(false).toBe(component.crearClicked)
+    expect(false).toBe(component.crearClicked);
   });
 
   it('deberia sacar error cuando se envia null en el guardar mascota', () => {
-    const error = 'error'
+    const error = 'error';
     spyUsuariosServiceGuardar.and.returnValue(throwError(error));
 
     usuarioService.guardar(null).subscribe(
-      () => {},
-      (error) => expect(error).toEqual(error)
+      () => { },
+      (err) => expect(error).toEqual(err)
     );
     component.crear();
   });
 
   it('deberia sacar error cuando se envia null en el editar mascota', () => {
-    const error = 'error'
+    const error = 'error';
     spyUsuariosServiceEditar.and.returnValue(throwError(error));
 
     usuarioService.editar(null).subscribe(
-      () => {},
-      (error) => expect(error).toEqual(error)
+      () => { },
+      (err) => expect(error).toEqual(err)
     );
     component.actualizar();
   });
