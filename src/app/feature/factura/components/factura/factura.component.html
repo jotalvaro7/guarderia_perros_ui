@@ -7,10 +7,10 @@
         </mat-card-header>
         <mat-card-content>
             <p class="factura__nombre">{{factura.nombreMascota}}</p>
-            <p class="factura__ingreso"> <b>Ingreso:</b> {{factura.fechaIngreso}}</p>
-            <p class="factura__salida"> <b>Salida:</b> {{factura.fechaSalida}}</p>
-            <p class="factura__tiempo"><b>Total Tiempo:</b> {{factura.totalTiempoEnGuarderia}}</p>
-            <p class="factura__pagar"> <b>Total a pagar:</b> ${{factura.precioAPagar}}</p>
+            <p class="factura__ingreso"> <strong>Ingreso:</strong> {{factura.fechaIngreso}}</p>
+            <p class="factura__salida"> <strong>Salida:</strong> {{factura.fechaSalida}}</p>
+            <p class="factura__tiempo"><strong>Total Tiempo:</strong> {{factura.totalTiempoEnGuarderia}}</p>
+            <p class="factura__pagar"> <strong>Total a pagar:</strong> ${{factura.precioAPagar}}</p>
         </mat-card-content>
         <mat-card-actions>
             <button mat-flat-button color="warn" (click)="cancelar()">Cancelar</button>
