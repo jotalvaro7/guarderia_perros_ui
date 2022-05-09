@@ -3,9 +3,7 @@ import { HttpService } from '@core/services/http.service';
 import { environment } from 'src/environments/environment';
 import { Trm } from '../model/trm';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class TrmService {
 
   constructor(protected http: HttpService) { }
