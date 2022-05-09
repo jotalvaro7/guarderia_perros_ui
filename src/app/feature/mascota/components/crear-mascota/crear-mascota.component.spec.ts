@@ -31,6 +31,13 @@ describe('CrearMascotaComponent', () => {
   mascota.peso = "8Kg";
   mascota.idUsuario = 1;
 
+  let mascotaConsulta = new Mascota();
+  mascota.nombre= "Zeus";
+  mascota.raza = "Doberman";
+  mascota.peso = "8Kg";
+  mascota.idUsuario = 1;
+
+
   let mascotaGuardar = new Mascota();
   mascota.nombre= "Zeus";
   mascota.raza = "Doberman";
@@ -78,8 +85,12 @@ describe('CrearMascotaComponent', () => {
     registroIngresoService = TestBed.inject(RegistroIngresoService);
     spyMascotaServiceActualizar = spyOn(mascotaService, 'actualizar').and.returnValue(of(mascota));
     spyMascotaServiceGuardar = spyOn(mascotaService, 'guardar').and.returnValue(of(mascotaGuardar));
+    spyOn(mascotaService, 'consultarMascotaPorId').and.returnValue(of(mascotaConsulta));
     fixture.detectChanges();
   });
+  afterEach(() => {
+    fixture.destroy();
+  })
 
   it('should create', () => {
     expect(component).toBeTruthy();
