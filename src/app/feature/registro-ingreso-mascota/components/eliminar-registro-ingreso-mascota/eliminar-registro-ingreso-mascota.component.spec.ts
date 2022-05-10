@@ -9,6 +9,7 @@ import { EliminarRegistroIngresoMascotaComponent } from './eliminar-registro-ing
 describe('EliminarRegistroIngresoMascotaComponent', () => {
   let component: EliminarRegistroIngresoMascotaComponent;
   let fixture: ComponentFixture<EliminarRegistroIngresoMascotaComponent>;
+  let registroIngresoService: RegistroIngresoService;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -25,6 +26,8 @@ describe('EliminarRegistroIngresoMascotaComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EliminarRegistroIngresoMascotaComponent);
     component = fixture.componentInstance;
+    registroIngresoService = TestBed.inject(RegistroIngresoService);
+    spyOn(registroIngresoService, 'eliminar');
     fixture.detectChanges();
   });
 
