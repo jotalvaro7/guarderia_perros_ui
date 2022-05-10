@@ -1,3 +1,4 @@
+import { of } from 'rxjs';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -7,10 +8,9 @@ import { MaterialModule } from '@shared/material/material-module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
-import { FacturaService } from '@factura/shared/service/factura.service';
-import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso/registro-ingreso.service';
+import { NotificarCobroEmitterService } from '@shared/emitters/notificar-cobro-emitter.service';
+import { NotificarRegistroMascotaEmitterService } from '@shared/emitters/notificar-registro-mascota-emitter.service';
 import { MascotaComponent } from './mascota.component';
-import { of } from 'rxjs';
 import { Mascota } from '@mascota/shared/model/mascota/mascota';
 import { FacturaComponent } from '@factura/components/factura/factura.component';
 import { CrearMascotaComponent } from '../crear-mascota/crear-mascota.component';
@@ -51,7 +51,7 @@ describe('MascotaComponent', () => {
         MaterialModule,
         BrowserAnimationsModule
       ],
-      providers: [MascotaService, HttpService, RegistroIngresoService, FacturaService]
+      providers: [MascotaService, HttpService, NotificarRegistroMascotaEmitterService, NotificarCobroEmitterService]
     })
       .compileComponents();
   }));

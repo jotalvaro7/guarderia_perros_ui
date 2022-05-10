@@ -4,7 +4,7 @@ import { HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { HttpService } from 'src/app/core/services/http.service';
 import { RegistroIngresoService } from './registro-ingreso.service';
-import { RegistroIngreso } from '../../model/registro-ingreso/registro-ingreso';
+import { IdMascota } from '../model/idMascota';
 
 describe('RegistroIngresoService', () => {
   let httpMock: HttpTestingController;
@@ -27,7 +27,7 @@ describe('RegistroIngresoService', () => {
   });
 
   it('deberia crear un registro de ingreso', () => {
-    const dummyRegistroIngreso = new RegistroIngreso();
+    const dummyRegistroIngreso = new IdMascota();
     service.guardar(dummyRegistroIngreso).subscribe(response => {
       expect(response).toEqual(true);
     });
@@ -37,9 +37,9 @@ describe('RegistroIngresoService', () => {
   });
 
   it('deberia eliminar un registro de ingreso', () => {
-    const dummyRegistroIngreso = new RegistroIngreso();
-    dummyRegistroIngreso.idMascota = 1;
-    service.eliminar(dummyRegistroIngreso.idMascota).subscribe(response => {
+    const dummyRegistroIngreso = new IdMascota();
+    dummyRegistroIngreso.valor = 1;
+    service.eliminar(dummyRegistroIngreso.valor).subscribe(response => {
       expect(response).toEqual(true);
     });
     const req = httpMock.expectOne(`${apiEndpointRegistro}/1`);

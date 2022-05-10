@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '@core/services/http.service';
-import { RegistroIngreso } from '@mascota/shared/model/registro-ingreso/registro-ingreso';
+
 import { environment } from 'src/environments/environment';
+import { IdMascota} from '@registro-ingreso-mascota/shared/model/idMascota';
 
 @Injectable()
 export class RegistroIngresoService {
@@ -9,8 +10,8 @@ export class RegistroIngresoService {
   constructor(protected http: HttpService) { }
 
 
-  public guardar(registroIngreso: RegistroIngreso) {
-    return this.http.doPost(`${environment.endpoint}/registro/ingreso`, registroIngreso, this.http.optsName('creando registro de ingreso de mascota'));
+  public guardar(idMascota: IdMascota) {
+    return this.http.doPost(`${environment.endpoint}/registro/ingreso`, idMascota, this.http.optsName('creando registro de ingreso de mascota'));
   }
 
   public eliminar(idMascota: number) {

@@ -7,10 +7,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Mascota } from '@mascota/shared/model/mascota/mascota';
 import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
 import { CrearMascotaComponent } from '../crear-mascota/crear-mascota.component';
-import { IdMascotaResponse } from '@mascota/shared/model/mascota/idMascotaResponse';
-import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso/registro-ingreso.service';
-import { FacturaComponent } from '@factura/components/factura/factura.component';
-import { FacturaService } from '@factura/shared/service/factura.service';
+import { FacturaComponent } from '../../../factura/components/factura/factura.component';
+import { NotificarCobroEmitterService } from '@shared/emitters/notificar-cobro-emitter.service';
+import { NotificarRegistroMascotaEmitterService } from '@shared/emitters/notificar-registro-mascota-emitter.service';
 
 import Swal from 'sweetalert2';
 
@@ -34,8 +33,8 @@ export class MascotaComponent implements OnInit {
 
   constructor(
     private mascotaService: MascotaService,
-    private registroIngresoService: RegistroIngresoService,
-    private facturaService: FacturaService,
+    private notificarCobroEmitterService: NotificarCobroEmitterService,
+    private notificarRegistroMascotaEmitterService: NotificarRegistroMascotaEmitterService,
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
   ) { }
@@ -65,15 +64,15 @@ export class MascotaComponent implements OnInit {
 
   subcripcionMascotaServiceEmitter() {
     this.mascotaService.notificar.subscribe(
-      (response: IdMascotaResponse) => {
+      (response) => {
         console.log(response);
         this.obtenerMascotasUsuario();
       });
   }
 
   subcripcionFacturaServiceEmitter() {
-    this.facturaService.notificar.subscribe(idMascota => {
-      this.registroIngresoService.eliminar(idMascota).subscribe();
+    this.notificarCobroEmitterService.notificar.subscribe(idMascota => {
+      this.notificarRegistroMascotaEmitterService.notificarEliminar.emit(idMascota);
       this.obtenerMascotaDeUsuarioYEliminar(idMascota);
     });
   }

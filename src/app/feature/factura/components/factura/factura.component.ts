@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
+import { NotificarCobroEmitterService } from '@shared/emitters/notificar-cobro-emitter.service';
 import { Factura } from '@factura/shared/model/factura';
 import { FacturaService } from '@factura/shared/service/factura.service';
 
@@ -17,6 +18,7 @@ export class FacturaComponent implements OnInit {
 
   constructor(
     private facturaService: FacturaService,
+    private notificarCobroServiceEmitter: NotificarCobroEmitterService,
     public dialogRef: MatDialogRef<FacturaComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
@@ -35,9 +37,8 @@ export class FacturaComponent implements OnInit {
       icon: 'success',
       title: 'Cobro Realizado',
     });
-    this.facturaService.notificar.emit(this.idMascota);
+    this.notificarCobroServiceEmitter.notificar.emit(this.idMascota);
   }
-
 
 
   cancelar() {

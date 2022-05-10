@@ -36,6 +36,9 @@
       "@mascota/*":[
         "src/app/feature/mascota/*"
       ],
+      "@registro-ingreso-mascota/*":[
+        "src/app/feature/registro-ingreso-mascota/*"
+      ],
       "@factura/*":[
         "src/app/feature/factura/*"
       ],

@@ -8,8 +8,8 @@ import { MaterialModule } from '@shared/material/material-module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
-import { IdMascotaResponse } from '@mascota/shared/model/mascota/idMascotaResponse';
-import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso/registro-ingreso.service';
+/* import { IdMascotaResponse } from 'src/app/feature/registro-ingreso-mascota/shared/model/idMascota'; */
+/* import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso/registro-ingreso.service'; */
 import { CrearMascotaComponent } from './crear-mascota.component';
 import { of, throwError } from 'rxjs';
 
@@ -19,8 +19,8 @@ describe('CrearMascotaComponent', () => {
   let component: CrearMascotaComponent;
   let fixture: ComponentFixture<CrearMascotaComponent>;
   let mascotaService: MascotaService;
-  let registroIngresoService: RegistroIngresoService;
-  const idMascotaResponse = new IdMascotaResponse();
+ /*  let registroIngresoService: RegistroIngresoService;
+  const idMascotaResponse = new IdMascotaResponse(); */
   let spyMascotaServiceActualizar: jasmine.Spy;
   let spyMascotaServiceGuardar: jasmine.Spy;
 
@@ -71,7 +71,7 @@ describe('CrearMascotaComponent', () => {
           useValue: dialogMock
         },
         MascotaService,
-        RegistroIngresoService,
+        /* RegistroIngresoService, */
         HttpService
       ]
     })
@@ -82,7 +82,7 @@ describe('CrearMascotaComponent', () => {
     fixture = TestBed.createComponent(CrearMascotaComponent);
     component = fixture.componentInstance;
     mascotaService = TestBed.inject(MascotaService);
-    registroIngresoService = TestBed.inject(RegistroIngresoService);
+    /* registroIngresoService = TestBed.inject(RegistroIngresoService); */
     spyMascotaServiceActualizar = spyOn(mascotaService, 'actualizar').and.returnValue(of(mascota));
     spyMascotaServiceGuardar = spyOn(mascotaService, 'guardar').and.returnValue(of(mascotaGuardar));
     spyOn(mascotaService, 'consultarMascotaPorId').and.returnValue(of(mascotaConsulta));
@@ -139,12 +139,6 @@ describe('CrearMascotaComponent', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('deberia registar Ingreso de mascota', () => {
-    const spy = spyOn(registroIngresoService, 'guardar').and.callThrough();
-    idMascotaResponse.valor = 1;
-    component.registrarIngresoMascota(idMascotaResponse);
-    expect(spy).toHaveBeenCalled();
-  });
 
   it('deberia limpiar el formulario', () => {
     const spy = spyOn(component.mascotaForm, 'reset');

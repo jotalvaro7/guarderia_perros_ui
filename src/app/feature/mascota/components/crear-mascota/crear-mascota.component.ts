@@ -1,9 +1,7 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { IdMascotaResponse } from '@mascota/shared/model/mascota/idMascotaResponse';
-import { RegistroIngreso } from '@mascota/shared/model/registro-ingreso/registro-ingreso';
-import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso/registro-ingreso.service';
+import { NotificarRegistroMascotaEmitterService } from '@shared/emitters/notificar-registro-mascota-emitter.service';
 import { Mascota } from '@mascota/shared/model/mascota/mascota';
 import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
 import Swal from 'sweetalert2';
@@ -27,7 +25,7 @@ export class CrearMascotaComponent implements OnInit {
     public dialogRef: MatDialogRef<CrearMascotaComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
     private mascotaService: MascotaService,
-    private registroIngresoService: RegistroIngresoService
+    private notificarRegistroMascotaEmitterService: NotificarRegistroMascotaEmitterService
   ) {
     this.id = data.id;
     this.idUsuario = data.idUsuario;
@@ -80,10 +78,10 @@ export class CrearMascotaComponent implements OnInit {
   public crear(): void {
     this.fabricarMascota();
     this.mascotaService.guardar(this.mascota).subscribe(
-      (response: IdMascotaResponse) => {
+      (response) => {
         this.dialogRef.close();
-        this.registrarIngresoMascota(response);
         this.mascotaService.notificar.emit(response);
+        this.notificarRegistroMascotaEmitterService.notificar.emit(response);
         Swal.fire({
           icon: 'success',
           title: 'Nueva Mascota',
@@ -127,12 +125,6 @@ export class CrearMascotaComponent implements OnInit {
     this.mascota.raza = this.mascotaForm.get('raza').value;
     this.mascota.peso = this.mascotaForm.get('peso').value;
     this.mascota.idUsuario = this.idUsuario;
-  }
-
-  registrarIngresoMascota(idResponse: IdMascotaResponse) {
-    const registroIngreso = new RegistroIngreso();
-    registroIngreso.idMascota = idResponse.valor;
-    this.registroIngresoService.guardar(registroIngreso).subscribe();
   }
 
 

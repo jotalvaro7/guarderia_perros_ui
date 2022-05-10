@@ -5,7 +5,6 @@ import { MascotaRoutingModule } from './mascota-routing.module';
 import { CrearMascotaComponent } from './components/crear-mascota/crear-mascota.component';
 import { MascotaComponent } from './components/mascota/mascota.component';
 import { MascotaService } from './shared/service/mascota/mascota.service';
-import { RegistroIngresoService } from './shared/service/registro-ingreso/registro-ingreso.service';
 
 
 @NgModule({
@@ -18,8 +17,7 @@ import { RegistroIngresoService } from './shared/service/registro-ingreso/regist
     SharedModule
   ],
   providers: [
-    MascotaService,
-    RegistroIngresoService
+    MascotaService
   ]
 })
 export class MascotaModule { }
