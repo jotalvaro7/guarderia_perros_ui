@@ -1,4 +1,4 @@
-import { browser } from 'protractor';
+import { browser, by, element } from 'protractor';
 import { AppPage } from '../app.po';
 import { UsuarioPage } from '../page/usuario/usuario.po';
 import { NavbarPage } from '../page/navbar/navbar.po';
@@ -33,6 +33,13 @@ describe('workspace-project Producto', () => {
         page.botonConfirmarGuardar();
         browser.sleep(1000);
         page.botonOkUsuarioAgregado();
+        browser.sleep(1000);
+
+        element.all(by.tagName("body > app-root > app-usuario > mat-card > mat-card-content > table > tbody > tr:nth-child(4) > td:nth-child(5)")).each(function(row){
+          row.getText().then(function(text){
+              expect(text).toContain("83458437");
+          });
+        });
     });
 
     it('deberia editar un usuario', () => {
@@ -41,17 +48,26 @@ describe('workspace-project Producto', () => {
         browser.sleep(1000);
         page.botonActualizar(3);
         browser.sleep(1000);
-        page.nombreUsuarioInput('Julio Cesar');
+        page.nombreUsuarioInput(' Cesar');
         browser.sleep(1000);
-        page.apellidoUsuarioInput('Osorio');
-        browser.sleep(1000);
-        page.identificacionUsuarioInput('439583958304');
-        browser.sleep(1000);
-        page.numeroCelularUsuarioInput('83458437');
+        page.apellidoUsuarioInput(' Otalvaro');
         browser.sleep(1000);
         page.botonConfirmarEditar();
         browser.sleep(1000);
         page.botonOkUsuarioEditado();
+        browser.sleep(1000);
+
+        element.all(by.tagName("body > app-root > app-usuario > mat-card > mat-card-content > table > tbody > tr:nth-child(4) > td:nth-child(2)")).each(function(row){
+            row.getText().then(function(text){
+                expect(text).toContain("Julio Cesar");
+            });
+        });
+
+        element.all(by.tagName("body > app-root > app-usuario > mat-card > mat-card-content > table > tbody > tr:nth-child(4) > td:nth-child(3)")).each(function(row){
+            row.getText().then(function(text){
+                expect(text).toContain("Osorio Otalvaro");
+            });
+        });
     });
 
 
@@ -71,6 +87,13 @@ describe('workspace-project Producto', () => {
         mascotaPage.botonConfirmarGuardar();
         browser.sleep(1000);
         mascotaPage.botonOkMascotaAgregada();
+        browser.sleep(1000);
+
+        element.all(by.tagName("body > app-root > app-mascota > mat-card > mat-card-content > table > tbody > tr:nth-child(1) > td:nth-child(3)")).each(function(row){
+            row.getText().then(function(text){
+                expect(text).toEqual("Doberman");
+            });
+        });
     });
 
     it('deberia navegar a mascotas y editar una mascota', () => {
@@ -80,15 +103,19 @@ describe('workspace-project Producto', () => {
         browser.sleep(2000);
         mascotaPage.botonActualizar(0);
         browser.sleep(1000);
-        mascotaPage.nombremascotaInput('edit');
-        browser.sleep(1000);
-        mascotaPage.razaMascotaInput('edit');
-        browser.sleep(1000);
-        mascotaPage.pesoMascotaInput('10Kg edit');
+        mascotaPage.nombremascotaInput('i');
         browser.sleep(1000);
         mascotaPage.botonConfirmarEditar();
         browser.sleep(1000);
         mascotaPage.botonOkMascotaEditada();
+
+        browser.sleep(1000);
+
+        element.all(by.tagName("body > app-root > app-mascota > mat-card > mat-card-content > table > tbody > tr:nth-child(1) > td:nth-child(2)")).each(function(row){
+            row.getText().then(function(text){
+                expect(text).toEqual("Maxi");
+            });
+        });
     });
 
     it('deberia navegar a mascotas y cobrar factura', () => {
@@ -113,6 +140,12 @@ describe('workspace-project Producto', () => {
         page.botonConfirmarEliminar();
         browser.sleep(1000);
         page.botonConfirmarEliminar();
+
+        element.all(by.tagName("body > app-root > app-usuario > mat-card > mat-card-content > table > tbody > tr:nth-child(4) > td:nth-child(3)")).each(function(row){
+            row.getText().then(function(text){
+                expect(text).toContain('');
+            });
+        });
 
     });
 
