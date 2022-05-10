@@ -158,7 +158,7 @@ describe('CrearMascotaComponent', () => {
     expect(false).toEqual(component[key]);
   });
 
-  it('deberia sacar error cuando se envia null en el actualizar mascota', () => {
+  it('deberia sacar error cuando se envia null en el actualizar mascota', async() => {
     const error = 'error';
     spyMascotaServiceActualizar.and.returnValue(throwError(error));
 
@@ -169,7 +169,7 @@ describe('CrearMascotaComponent', () => {
     component.actualizar();
   });
 
-  it('deberia sacar error cuando se envia null en el guardar mascota', () => {
+  it('deberia sacar error cuando se envia null en el guardar mascota', async() => {
     const error = 'error';
     spyMascotaServiceGuardar.and.returnValue(throwError(error));
 
