@@ -8,8 +8,8 @@ import { Mascota } from '@mascota/shared/model/mascota/mascota';
 import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
 import { CrearMascotaComponent } from '../crear-mascota/crear-mascota.component';
 import { FacturaComponent } from '../../../factura/components/factura/factura.component';
+import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso/registro-ingreso.service'; 
 import { NotificarCobroEmitterService } from '@shared/emitters/notificar-cobro-emitter.service';
-import { NotificarRegistroMascotaEmitterService } from '@shared/emitters/notificar-registro-mascota-emitter.service';
 
 import Swal from 'sweetalert2';
 
@@ -34,7 +34,7 @@ export class MascotaComponent implements OnInit {
   constructor(
     private mascotaService: MascotaService,
     private notificarCobroEmitterService: NotificarCobroEmitterService,
-    private notificarRegistroMascotaEmitterService: NotificarRegistroMascotaEmitterService,
+    private registroIngresoService: RegistroIngresoService,
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
   ) { }
@@ -72,7 +72,7 @@ export class MascotaComponent implements OnInit {
 
   subcripcionFacturaServiceEmitter() {
     this.notificarCobroEmitterService.notificar.subscribe(idMascota => {
-      this.notificarRegistroMascotaEmitterService.notificarEliminar.emit(idMascota);
+      this.registroIngresoService.eliminar(idMascota).subscribe();
       this.obtenerMascotaDeUsuarioYEliminar(idMascota);
     });
   }

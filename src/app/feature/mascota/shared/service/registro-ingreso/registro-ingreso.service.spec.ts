@@ -4,7 +4,8 @@ import { HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { HttpService } from 'src/app/core/services/http.service';
 import { RegistroIngresoService } from './registro-ingreso.service';
-import { IdMascota } from '../model/idMascota';
+import { IdMascota } from '../../model/mascota/idMascota';
+import { RegistroIngresoMascota } from '@mascota/shared/model/mascota/registroIngresoMascota';
 
 describe('RegistroIngresoService', () => {
   let httpMock: HttpTestingController;
@@ -27,7 +28,7 @@ describe('RegistroIngresoService', () => {
   });
 
   it('deberia crear un registro de ingreso', () => {
-    const dummyRegistroIngreso = new IdMascota();
+    const dummyRegistroIngreso = new RegistroIngresoMascota();
     service.guardar(dummyRegistroIngreso).subscribe(response => {
       expect(response).toEqual(true);
     });

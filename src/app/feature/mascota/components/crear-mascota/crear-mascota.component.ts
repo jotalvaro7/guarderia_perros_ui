@@ -1,10 +1,12 @@
 import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { NotificarRegistroMascotaEmitterService } from '@shared/emitters/notificar-registro-mascota-emitter.service';
+import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso/registro-ingreso.service';
 import { Mascota } from '@mascota/shared/model/mascota/mascota';
 import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
 import Swal from 'sweetalert2';
+import { IdMascota } from '@mascota/shared/model/mascota/idMascota';
+import { RegistroIngresoMascota } from '@mascota/shared/model/mascota/registroIngresoMascota';
 
 
 @Component({
@@ -25,7 +27,7 @@ export class CrearMascotaComponent implements OnInit {
     public dialogRef: MatDialogRef<CrearMascotaComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
     private mascotaService: MascotaService,
-    private notificarRegistroMascotaEmitterService: NotificarRegistroMascotaEmitterService
+    private registroIngresoService: RegistroIngresoService
   ) {
     this.id = data.id;
     this.idUsuario = data.idUsuario;
@@ -78,10 +80,10 @@ export class CrearMascotaComponent implements OnInit {
   public crear(): void {
     this.fabricarMascota();
     this.mascotaService.guardar(this.mascota).subscribe(
-      (response) => {
+      (response: IdMascota) => {
         this.dialogRef.close();
         this.mascotaService.notificar.emit(response);
-        this.notificarRegistroMascotaEmitterService.notificar.emit(response);
+        this.crearRegistroIngresoMascota(response);
         Swal.fire({
           icon: 'success',
           title: 'Nueva Mascota',
@@ -127,6 +129,11 @@ export class CrearMascotaComponent implements OnInit {
     this.mascota.idUsuario = this.idUsuario;
   }
 
+  crearRegistroIngresoMascota(idMascota: IdMascota) {
+    const registroIngresoMascota = new RegistroIngresoMascota();
+    registroIngresoMascota.idMascota = idMascota.valor;
+    this.registroIngresoService.guardar(registroIngresoMascota).subscribe();
+  }
 
   limpiarForm() {
     this.mascotaForm.reset();
