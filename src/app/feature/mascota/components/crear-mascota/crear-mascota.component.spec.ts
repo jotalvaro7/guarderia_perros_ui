@@ -11,7 +11,7 @@ import { MascotaService } from '@mascota/shared/service/mascota/mascota.service'
 /* import { IdMascotaResponse } from 'src/app/feature/registro-ingreso-mascota/shared/model/idMascota'; */
 /* import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso/registro-ingreso.service'; */
 import { CrearMascotaComponent } from './crear-mascota.component';
-import { of, throwError } from 'rxjs';
+import { of } from 'rxjs';
 
 import { Mascota } from '@mascota/shared/model/mascota/mascota';
 
@@ -158,7 +158,7 @@ describe('CrearMascotaComponent', () => {
     expect(false).toEqual(component[key]);
   });
 
-  it('deberia sacar error cuando se envia null en el actualizar mascota', async() => {
+  /* it('deberia sacar error cuando se envia null en el actualizar mascota', async() => {
     const error = 'error';
     spyMascotaServiceActualizar.and.returnValue(throwError(error));
 
@@ -167,6 +167,7 @@ describe('CrearMascotaComponent', () => {
       (err) => expect(error).toEqual(err)
     );
     component.actualizar();
+    fixture.destroy();
   });
 
   it('deberia sacar error cuando se envia null en el guardar mascota', async() => {
@@ -178,8 +179,9 @@ describe('CrearMascotaComponent', () => {
       (err) => expect(error).toEqual(err)
     );
     component.crear();
+    fixture.destroy();
   });
-
+ */
 
 
 });
