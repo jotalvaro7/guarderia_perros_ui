@@ -8,8 +8,8 @@ import { MaterialModule } from '@shared/material/material-module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
+import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso/registro-ingreso.service';
 import { NotificarCobroEmitterService } from '@shared/emitters/notificar-cobro-emitter.service';
-import { NotificarRegistroMascotaEmitterService } from '@shared/emitters/notificar-registro-mascota-emitter.service';
 import { MascotaComponent } from './mascota.component';
 import { Mascota } from '@mascota/shared/model/mascota/mascota';
 import { FacturaComponent } from '@factura/components/factura/factura.component';
@@ -51,7 +51,7 @@ describe('MascotaComponent', () => {
         MaterialModule,
         BrowserAnimationsModule
       ],
-      providers: [MascotaService, HttpService, NotificarRegistroMascotaEmitterService, NotificarCobroEmitterService]
+      providers: [MascotaService, HttpService, RegistroIngresoService, NotificarCobroEmitterService]
     })
       .compileComponents();
   }));
