@@ -6,6 +6,7 @@ import { CrearMascotaComponent } from './components/crear-mascota/crear-mascota.
 import { MascotaComponent } from './components/mascota/mascota.component';
 import { MascotaService } from './shared/service/mascota/mascota.service';
 import { RegistroIngresoService } from './shared/service/registro-ingreso/registro-ingreso.service';
+import { FacturaModule } from '@shared/factura.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { RegistroIngresoService } from './shared/service/registro-ingreso/regist
   ],
   imports: [
     MascotaRoutingModule,
-    SharedModule
+    SharedModule,
+    FacturaModule
   ],
   providers: [
     MascotaService,

@@ -130,31 +130,6 @@ describe('CrearUsuarioComponent', () => {
     component.onEditarClick();
     expect(false).toBe(component.crearClicked);
   });
-
-/*    it('deberia sacar error cuando se envia null en el guardar mascota', () => {
-     
-    const error = 'error';
-    spyUsuariosServiceGuardar.and.returnValue(throwError(error));
-
-    usuarioService.guardar(null).subscribe(
-      () => { },
-      (err) => expect(error).toEqual(err)
-    );
-    component.crear();
-  }); */
-
-  /*
-  it('deberia sacar error cuando se envia null en el editar mascota', () => {
-    const error = 'error';
-    spyUsuariosServiceEditar.and.returnValue(throwError(error));
-
-    usuarioService.editar(null).subscribe(
-      () => { },
-      (err) => expect(error).toEqual(err)
-    );
-    component.actualizar();
-  }); */
-
 });
 
 
