@@ -2,14 +2,18 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorHandler, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HTTP_ERRORES_CODIGO } from './http-codigo-error';
+import { SwalAlertTriggerService } from '@core/services/swal-alert-trigger.service';
 
 @Injectable()
 export class ManejadorError implements ErrorHandler {
-  constructor() {}
+  constructor(
+    private swalAlertTriggerService: SwalAlertTriggerService,
+  ) {}
 
   handleError(error: string | Error): void {
     const mensajeError = this.mensajePorDefecto(error);
     this.imprimirErrorConsola(mensajeError);
+    this.mostrarErrorSwalAlert(mensajeError);
   }
 
   private mensajePorDefecto(error) {
@@ -40,5 +44,12 @@ export class ManejadorError implements ErrorHandler {
       return HTTP_ERRORES_CODIGO.PETICION_FALLIDA;
     }
     return HTTP_ERRORES_CODIGO[httpCode];
+  }
+
+  private mostrarErrorSwalAlert(mensaje): void {
+    const icono = 'error';
+    const titulo = mensaje.error.mensaje;
+    const respuesta: string = 'Nombre de la excepcion: ' + mensaje.error.nombreExcepcion;
+    this.swalAlertTriggerService.ejecutarSwalAlert(icono, titulo, respuesta);
   }
 }

@@ -2,8 +2,8 @@ import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from '@usuario/shared/model/usuario';
 import { UsuarioService } from '@usuario/shared/service/usuario.service';
+import { SwalAlertTriggerService } from '@core/services/swal-alert-trigger.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-crear-usuario',
@@ -23,6 +23,7 @@ export class CrearUsuarioComponent implements OnInit {
     public dialogRef: MatDialogRef<CrearUsuarioComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
     private usuarioService: UsuarioService,
+    private swalAlertTriggerService: SwalAlertTriggerService,
 
   ) {
     this.id = data.id;
@@ -79,19 +80,10 @@ export class CrearUsuarioComponent implements OnInit {
       response => {
         this.dialogRef.close();
         this.usuarioService.notificar.emit(response);
-        Swal.fire({
-          icon: 'success',
-          title: 'Nuevo Usuario',
-          text: `Usuario ${this.usuario.nombre} creado con Exito!`
-        });
+        this.swalAlertTriggerService.ejecutarSwalAlert('success',
+          'Nuevo Usuario',
+          `Usuario ${this.usuario.nombre} creado con Exito!`);
       },
-      err => {
-        Swal.fire({
-          icon: 'error',
-          title: err.error.mensaje,
-          text: 'Nombre de la excepcion: ' + err.error.nombreExcepcion
-        });
-      }
     );
   }
 
@@ -101,19 +93,10 @@ export class CrearUsuarioComponent implements OnInit {
       response => {
         this.dialogRef.close();
         this.usuarioService.notificar.emit(response);
-        Swal.fire({
-          icon: 'success',
-          title: 'Se ha actualizado el Usuario',
-          text: `Usuario ${this.usuario.nombre} actualizado con Exito!`
-        });
+        this.swalAlertTriggerService.ejecutarSwalAlert('success',
+        'Se ha actualizado el Usuario',
+        `Usuario ${this.usuario.nombre} actualizado con Exito!`);
       },
-      err => {
-        Swal.fire({
-          icon: 'error',
-          title: err.error.mensaje,
-          text: 'Nombre de la excepcion: ' + err.error.nombreExcepcion
-        });
-      }
     );
   }
 

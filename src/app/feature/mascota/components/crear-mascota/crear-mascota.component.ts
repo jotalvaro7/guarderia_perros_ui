@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso/registro-ingreso.service';
 import { Mascota } from '@mascota/shared/model/mascota/mascota';
 import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
-import Swal from 'sweetalert2';
+import { SwalAlertTriggerService } from '@core/services/swal-alert-trigger.service';
 import { IdMascota } from '@mascota/shared/model/mascota/idMascota';
 import { RegistroIngresoMascota } from '@mascota/shared/model/mascota/registroIngresoMascota';
 
@@ -27,7 +27,8 @@ export class CrearMascotaComponent implements OnInit {
     public dialogRef: MatDialogRef<CrearMascotaComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
     private mascotaService: MascotaService,
-    private registroIngresoService: RegistroIngresoService
+    private registroIngresoService: RegistroIngresoService,
+    private swalAlertTriggerService: SwalAlertTriggerService,
   ) {
     this.id = data.id;
     this.idUsuario = data.idUsuario;
@@ -84,19 +85,10 @@ export class CrearMascotaComponent implements OnInit {
         this.dialogRef.close();
         this.mascotaService.notificar.emit(response);
         this.crearRegistroIngresoMascota(response);
-        Swal.fire({
-          icon: 'success',
-          title: 'Nueva Mascota',
-          text: `Mascota ${this.mascota.nombre} registrada con Exito!`
-        });
+        this.swalAlertTriggerService.ejecutarSwalAlert('success',
+          'Nueva Mascota',
+          `Mascota ${this.mascota.nombre} registrada con Exito!`);
       },
-      err => {
-        Swal.fire({
-          icon: 'error',
-          title: err.error.mensaje,
-          text: 'Nombre de la excepcion: ' + err.error.nombreExcepcion
-        });
-      }
     );
   }
 
@@ -106,19 +98,10 @@ export class CrearMascotaComponent implements OnInit {
       response => {
         this.dialogRef.close();
         this.mascotaService.notificar.emit(response);
-        Swal.fire({
-          icon: 'success',
-          title: 'Se ha actualizado la Mascota',
-          text: `Mascota ${this.mascota.nombre} actualizada con Exito!`
-        });
+        this.swalAlertTriggerService.ejecutarSwalAlert('success',
+          'Se ha actualizado la Mascota',
+          `Mascota ${this.mascota.nombre} actualizada con Exito!`);
       },
-      err => {
-        Swal.fire({
-          icon: 'error',
-          title: err.error.mensaje,
-          text: 'Nombre de la excepcion: ' + err.error.nombreExcepcion
-        });
-      }
     );
   }
 

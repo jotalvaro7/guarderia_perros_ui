@@ -93,14 +93,8 @@ export class UsuarioComponent implements OnInit {
                 text: `El Usuario se ha eliminado con éxito de la base de datos`,
               });
             }
-          },
-          err => {
-            Swal.fire({
-              icon: 'error',
-              title: err.error.mensaje,
-              text: 'Nombre de la excepcion: ' + err.error.nombreExcepcion
-            });
-          });
+          }
+        );
       }
     });
   }

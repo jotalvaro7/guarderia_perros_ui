@@ -11,7 +11,6 @@ import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso
 import { NotificarCobroEmitterService } from '@shared/emitters/notificar-cobro-emitter.service';
 import { FacturaComponent } from '@shared/factura/components/factura/factura.component';
 
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-mascota',
@@ -103,13 +102,7 @@ export class MascotaComponent implements OnInit {
             this.mascotaService.notificar.emit();
           }
         },
-        err => {
-          Swal.fire({
-            icon: 'error',
-            title: err.error.mensaje,
-            text: 'Nombre de la excepcion: ' + err.error.nombreExcepcion
-          });
-        });
+      );
     });
   }
 
