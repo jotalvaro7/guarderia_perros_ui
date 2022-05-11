@@ -12,7 +12,7 @@ import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso
 import { NotificarCobroEmitterService } from '@shared/emitters/notificar-cobro-emitter.service';
 import { MascotaComponent } from './mascota.component';
 import { Mascota } from '@mascota/shared/model/mascota/mascota';
-import { FacturaComponent } from '../../../factura/components/factura/factura.component';
+import { FacturaComponent } from '@shared/factura/components/factura/factura.component';
 import { CrearMascotaComponent } from '../crear-mascota/crear-mascota.component';
 
 
