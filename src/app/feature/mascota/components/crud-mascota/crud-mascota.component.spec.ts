@@ -9,15 +9,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
 import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso/registro-ingreso.service';
-import { CrearMascotaComponent } from './crear-mascota.component';
+import { CrudMascotaComponent } from './crud-mascota.component';
 import { of } from 'rxjs';
 
 import { Mascota } from '@mascota/shared/model/mascota/mascota';
 import { IdMascota } from '@mascota/shared/model/mascota/idMascota';
 
 describe('CrearMascotaComponent', () => {
-  let component: CrearMascotaComponent;
-  let fixture: ComponentFixture<CrearMascotaComponent>;
+  let component: CrudMascotaComponent;
+  let fixture: ComponentFixture<CrudMascotaComponent>;
   let mascotaService: MascotaService;
   let spyMascotaServiceActualizar: jasmine.Spy;
   let spyMascotaServiceGuardar: jasmine.Spy;
@@ -50,7 +50,7 @@ describe('CrearMascotaComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [CrearMascotaComponent],
+      declarations: [CrudMascotaComponent],
       imports: [
         MatDialogModule,
         HttpClientTestingModule,
@@ -79,7 +79,7 @@ describe('CrearMascotaComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CrearMascotaComponent);
+    fixture = TestBed.createComponent(CrudMascotaComponent);
     component = fixture.componentInstance;
     mascotaService = TestBed.inject(MascotaService);
     registroIngresoService = TestBed.inject(RegistroIngresoService);

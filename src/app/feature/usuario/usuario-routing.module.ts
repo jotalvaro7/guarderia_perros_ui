@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CrearUsuarioComponent } from './components/crear-usuario/crear-usuario.component';
+import { CrudUsuarioComponent } from './components/crud-usuario/crud-usuario.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 
 const routes: Routes = [
@@ -10,7 +10,7 @@ const routes: Routes = [
     children: [
       {
         path: 'crear',
-        component: CrearUsuarioComponent
+        component: CrudUsuarioComponent
       }
     ]
   }

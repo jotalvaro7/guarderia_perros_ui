@@ -11,10 +11,10 @@ import { RegistroIngresoMascota } from '@mascota/shared/model/mascota/registroIn
 
 @Component({
   selector: 'app-crear-mascota',
-  templateUrl: './crear-mascota.component.html',
-  styleUrls: ['./crear-mascota.component.scss']
+  templateUrl: './crud-mascota.component.html',
+  styleUrls: ['./crud-mascota.component.scss']
 })
-export class CrearMascotaComponent implements OnInit {
+export class CrudMascotaComponent implements OnInit {
 
   public mascotaForm: FormGroup;
   public mascota: Mascota;
@@ -24,7 +24,7 @@ export class CrearMascotaComponent implements OnInit {
   private crearClicked: boolean;
 
   constructor(
-    public dialogRef: MatDialogRef<CrearMascotaComponent>,
+    public dialogRef: MatDialogRef<CrudMascotaComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
     private mascotaService: MascotaService,
     private registroIngresoService: RegistroIngresoService,

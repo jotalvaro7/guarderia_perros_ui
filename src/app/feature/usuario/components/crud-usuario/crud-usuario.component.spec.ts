@@ -9,14 +9,14 @@ import { MaterialModule } from '@shared/material/material-module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsuarioService } from '@usuario/shared/service/usuario.service';
-import { CrearUsuarioComponent } from './crear-usuario.component';
+import { CrudUsuarioComponent } from './crud-usuario.component';
 import { Usuario } from '@usuario/shared/model/usuario';
 import { IdUsuarioResponse } from '@usuario/shared/model/idResponseUsuario';
 
 
-describe('CrearUsuarioComponent', () => {
-  let component: CrearUsuarioComponent;
-  let fixture: ComponentFixture<CrearUsuarioComponent>;
+describe('CrudUsuarioComponent', () => {
+  let component: CrudUsuarioComponent;
+  let fixture: ComponentFixture<CrudUsuarioComponent>;
   let usuarioService: UsuarioService;
   let spyUsuariosServiceGuardar: jasmine.Spy;
   let spyUsuariosServiceEditar: jasmine.Spy;
@@ -31,7 +31,7 @@ describe('CrearUsuarioComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [CrearUsuarioComponent],
+      declarations: [CrudUsuarioComponent],
       imports: [
         MatDialogModule,
         HttpClientTestingModule,
@@ -58,7 +58,7 @@ describe('CrearUsuarioComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CrearUsuarioComponent);
+    fixture = TestBed.createComponent(CrudUsuarioComponent);
     component = fixture.componentInstance;
     usuarioService = TestBed.inject(UsuarioService);
     spyOn(usuarioService, 'consultarPorId').and.returnValue(of(usuario));

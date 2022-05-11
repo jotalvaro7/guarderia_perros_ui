@@ -13,7 +13,7 @@ import { NotificarCobroEmitterService } from '@shared/emitters/notificar-cobro-e
 import { MascotaComponent } from './mascota.component';
 import { Mascota } from '@mascota/shared/model/mascota/mascota';
 import { FacturaComponent } from '@shared/factura/components/factura/factura.component';
-import { CrearMascotaComponent } from '../crear-mascota/crear-mascota.component';
+import { CrudMascotaComponent } from '../crud-mascota/crud-mascota.component';
 
 
 
@@ -76,13 +76,13 @@ describe('MascotaComponent', () => {
     const idUsuario = 1;
     const key = 'dialog';
     component.crear(action);
-    component[key].open(CrearMascotaComponent, {
+    component[key].open(CrudMascotaComponent, {
       width: '20%',
       autoFocus: true,
       data: { id: action, idUsuario }
     });
     expect(dialogSpy).toHaveBeenCalled();
-    expect(dialogSpy).toHaveBeenCalledWith(CrearMascotaComponent, {
+    expect(dialogSpy).toHaveBeenCalledWith(CrudMascotaComponent, {
       width: '20%',
       autoFocus: true,
       data: { id: 'crear', idUsuario: 1 }
@@ -94,13 +94,13 @@ describe('MascotaComponent', () => {
     const idUsuario = 1;
     const key = 'dialog';
     component.editar(id);
-    component[key].open(CrearMascotaComponent, {
+    component[key].open(CrudMascotaComponent, {
       width: '20%',
       autoFocus: true,
       data: { id, idUsuario }
     });
     expect(dialogSpy).toHaveBeenCalled();
-    expect(dialogSpy).toHaveBeenCalledWith(CrearMascotaComponent, {
+    expect(dialogSpy).toHaveBeenCalledWith(CrudMascotaComponent, {
       width: '20%',
       autoFocus: true,
       data: { id: 1, idUsuario: 1 }

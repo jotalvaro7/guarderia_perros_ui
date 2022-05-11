@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Usuario } from '@usuario/shared/model/usuario';
 import { UsuarioService } from '@usuario/shared/service/usuario.service';
 import { MatDialog } from '@angular/material/dialog';
-import { CrearUsuarioComponent } from '../crear-usuario/crear-usuario.component';
+import { CrudUsuarioComponent } from '../crud-usuario/crud-usuario.component';
 
 import Swal from 'sweetalert2';
 
@@ -48,7 +48,7 @@ export class UsuarioComponent implements OnInit {
   }
 
   public crear(action: string) {
-    this.dialog.open(CrearUsuarioComponent, {
+    this.dialog.open(CrudUsuarioComponent, {
       width: '20%',
       autoFocus: true,
       data: { id: action }
@@ -56,7 +56,7 @@ export class UsuarioComponent implements OnInit {
   }
 
   public editar(id: number): void {
-    this.dialog.open(CrearUsuarioComponent, {
+    this.dialog.open(CrudUsuarioComponent, {
       width: '20%',
       autoFocus: true,
       data: { id }

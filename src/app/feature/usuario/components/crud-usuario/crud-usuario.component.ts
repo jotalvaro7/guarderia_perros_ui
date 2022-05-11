@@ -7,10 +7,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-crear-usuario',
-  templateUrl: './crear-usuario.component.html',
-  styleUrls: ['./crear-usuario.component.scss']
+  templateUrl: './crud-usuario.component.html',
+  styleUrls: ['./crud-usuario.component.scss']
 })
-export class CrearUsuarioComponent implements OnInit {
+export class CrudUsuarioComponent implements OnInit {
 
 
   public usuarioForm: FormGroup;
@@ -20,7 +20,7 @@ export class CrearUsuarioComponent implements OnInit {
   public crearClicked: boolean;
 
   constructor(
-    public dialogRef: MatDialogRef<CrearUsuarioComponent>,
+    public dialogRef: MatDialogRef<CrudUsuarioComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
     private usuarioService: UsuarioService,
     private swalAlertTriggerService: SwalAlertTriggerService,

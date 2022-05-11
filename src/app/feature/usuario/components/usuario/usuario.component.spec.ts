@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UsuarioService } from '@usuario/shared/service/usuario.service';
 import { UsuarioComponent } from './usuario.component';
 import { Usuario } from '@usuario/shared/model/usuario';
-import { CrearUsuarioComponent } from '../crear-usuario/crear-usuario.component';
+import { CrudUsuarioComponent } from '../crud-usuario/crud-usuario.component';
 
 
 describe('UsuarioComponent', () => {
@@ -79,7 +79,7 @@ describe('UsuarioComponent', () => {
     const action = 'crear';
     const key = 'dialog';
     component.crear('crear');
-    component[key].open(CrearUsuarioComponent, {
+    component[key].open(CrudUsuarioComponent, {
       width: '20%',
       autoFocus: true,
       data: { id: action }
@@ -91,7 +91,7 @@ describe('UsuarioComponent', () => {
     const id = 2;
     const key = 'dialog';
     component.editar(id);
-    component[key].open(CrearUsuarioComponent, {
+    component[key].open(CrudUsuarioComponent, {
       width: '20%',
       autoFocus: true,
       data: { id }

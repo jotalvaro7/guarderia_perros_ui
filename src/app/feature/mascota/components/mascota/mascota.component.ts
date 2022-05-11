@@ -6,7 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 
 import { Mascota } from '@mascota/shared/model/mascota/mascota';
 import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
-import { CrearMascotaComponent } from '../crear-mascota/crear-mascota.component';
+import { CrudMascotaComponent } from '../crud-mascota/crud-mascota.component';
 import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso/registro-ingreso.service';
 import { NotificarCobroEmitterService } from '@shared/emitters/notificar-cobro-emitter.service';
 import { FacturaComponent } from '@shared/factura/components/factura/factura.component';
@@ -77,7 +77,7 @@ export class MascotaComponent implements OnInit {
   }
 
   public crear(action: string) {
-    this.dialog.open(CrearMascotaComponent, {
+    this.dialog.open(CrudMascotaComponent, {
       width: '20%',
       autoFocus: true,
       data: { id: action, idUsuario: this.idUsuario }
@@ -85,7 +85,7 @@ export class MascotaComponent implements OnInit {
   }
 
   public editar(id: number) {
-    this.dialog.open(CrearMascotaComponent, {
+    this.dialog.open(CrudMascotaComponent, {
       width: '20%',
       autoFocus: true,
       data: { id, idUsuario: this.idUsuario }

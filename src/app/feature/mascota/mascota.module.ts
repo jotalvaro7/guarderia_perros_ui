@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared/shared.module';
 
 import { MascotaRoutingModule } from './mascota-routing.module';
-import { CrearMascotaComponent } from './components/crear-mascota/crear-mascota.component';
+import { CrudMascotaComponent } from './components/crud-mascota/crud-mascota.component';
 import { MascotaComponent } from './components/mascota/mascota.component';
 import { MascotaService } from './shared/service/mascota/mascota.service';
 import { RegistroIngresoService } from './shared/service/registro-ingreso/registro-ingreso.service';
@@ -10,7 +10,7 @@ import { RegistroIngresoService } from './shared/service/registro-ingreso/regist
 
 @NgModule({
   declarations: [
-    CrearMascotaComponent,
+    CrudMascotaComponent,
     MascotaComponent,
   ],
   imports: [

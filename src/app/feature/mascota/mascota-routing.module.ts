@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CrearMascotaComponent } from './components/crear-mascota/crear-mascota.component';
+import { CrudMascotaComponent } from './components/crud-mascota/crud-mascota.component';
 import { MascotaComponent } from './components/mascota/mascota.component';
 
 const routes: Routes = [
@@ -10,7 +10,7 @@ const routes: Routes = [
     children: [
       {
         path: 'crear',
-        component: CrearMascotaComponent
+        component: CrudMascotaComponent
       }
     ]
   }
