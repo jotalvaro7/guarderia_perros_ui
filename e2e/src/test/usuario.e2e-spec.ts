@@ -35,9 +35,9 @@ describe('workspace-project Producto', () => {
         page.botonOkUsuarioAgregado();
         browser.sleep(1000);
 
-        element.all(by.tagName("body > app-root > app-usuario > mat-card > mat-card-content > table > tbody > tr:nth-child(4) > td:nth-child(5)")).each(function(row){
-          row.getText().then(function(text){
-              expect(text).toContain("83458437");
+        element.all(by.tagName('body > app-root > app-usuario > mat-card > mat-card-content > table > tbody > tr:nth-child(4) > td:nth-child(5)')).each((row) => {
+          row.getText().then((text) => {
+              expect(text).toContain('83458437');
           });
         });
     });
@@ -57,15 +57,15 @@ describe('workspace-project Producto', () => {
         page.botonOkUsuarioEditado();
         browser.sleep(1000);
 
-        element.all(by.tagName("body > app-root > app-usuario > mat-card > mat-card-content > table > tbody > tr:nth-child(4) > td:nth-child(2)")).each(function(row){
-            row.getText().then(function(text){
-                expect(text).toContain("Julio Cesar");
+        element.all(by.tagName('body > app-root > app-usuario > mat-card > mat-card-content > table > tbody > tr:nth-child(4) > td:nth-child(2)')).each((row) => {
+            row.getText().then((text) => {
+                expect(text).toContain('Julio Cesar');
             });
         });
 
-        element.all(by.tagName("body > app-root > app-usuario > mat-card > mat-card-content > table > tbody > tr:nth-child(4) > td:nth-child(3)")).each(function(row){
-            row.getText().then(function(text){
-                expect(text).toContain("Osorio Otalvaro");
+        element.all(by.tagName('body > app-root > app-usuario > mat-card > mat-card-content > table > tbody > tr:nth-child(4) > td:nth-child(3)')).each((row) => {
+            row.getText().then((text) => {
+                expect(text).toContain('Osorio Otalvaro');
             });
         });
     });
@@ -89,9 +89,9 @@ describe('workspace-project Producto', () => {
         mascotaPage.botonOkMascotaAgregada();
         browser.sleep(1000);
 
-        element.all(by.tagName("body > app-root > app-mascota > mat-card > mat-card-content > table > tbody > tr:nth-child(1) > td:nth-child(3)")).each(function(row){
-            row.getText().then(function(text){
-                expect(text).toEqual("Doberman");
+        element.all(by.tagName('body > app-root > app-mascota > mat-card > mat-card-content > table > tbody > tr:nth-child(1) > td:nth-child(3)')).each((row) => {
+            row.getText().then((text) => {
+                expect(text).toEqual('Doberman');
             });
         });
     });
@@ -111,9 +111,9 @@ describe('workspace-project Producto', () => {
 
         browser.sleep(1000);
 
-        element.all(by.tagName("body > app-root > app-mascota > mat-card > mat-card-content > table > tbody > tr:nth-child(1) > td:nth-child(2)")).each(function(row){
-            row.getText().then(function(text){
-                expect(text).toEqual("Maxi");
+        element.all(by.tagName('body > app-root > app-mascota > mat-card > mat-card-content > table > tbody > tr:nth-child(1) > td:nth-child(2)')).each((row) => {
+            row.getText().then((text) => {
+                expect(text).toEqual('Maxi');
             });
         });
     });
@@ -141,8 +141,8 @@ describe('workspace-project Producto', () => {
         browser.sleep(1000);
         page.botonConfirmarEliminar();
 
-        element.all(by.tagName("body > app-root > app-usuario > mat-card > mat-card-content > table > tbody > tr:nth-child(4) > td:nth-child(3)")).each(function(row){
-            row.getText().then(function(text){
+        element.all(by.tagName('body > app-root > app-usuario > mat-card > mat-card-content > table > tbody > tr:nth-child(4) > td:nth-child(3)')).each((row) => {
+            row.getText().then((text) => {
                 expect(text).toContain('');
             });
         });
