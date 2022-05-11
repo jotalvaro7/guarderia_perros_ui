@@ -66,7 +66,7 @@ describe('UsuarioComponent', () => {
     spyOn(usuarioService, 'consultar').and.returnValue(of(usuarios));
     dialogSpy = spyOn(TestBed.inject(MatDialog), 'open').and.returnValue(dialogRefSpyObj);
     spyOn(usuarioService, 'notificar');
-    spyUsuarioServiceEliminar = spyOn(usuarioService, 'eliminar');
+    spyUsuarioServiceEliminar = spyOn(usuarioService, 'eliminar').and.callThrough();
     fixture.detectChanges();
   });
 
@@ -99,10 +99,6 @@ describe('UsuarioComponent', () => {
     expect(dialogSpy).toHaveBeenCalled();
   });
 
-  it('deberia eliminar un usuario', () => {
-    const usuario = new Usuario('Julio', 'Osorio', '1034', '555');
-    component.delete(usuario);
-  });
 
   it('deberia sacar error cuando se envia null el id del usuario', () => {
     const usuario = new Usuario('Julio', 'Osorio', '1034', '555');
