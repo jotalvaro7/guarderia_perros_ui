@@ -8,15 +8,18 @@ import { ErrorCamposPlantillaComponent } from './directivas/error-campos/compone
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TrackByPipe } from './pipe/track-by.pipe';
 import { MaterialModule } from './material/material-module';
+import { FacturaComponent } from './factura/components/factura/factura.component';
+import { FacturaService } from './factura/shared/service/factura.service';
 @NgModule({
   declarations: [
     ErrorCamposPlantillaComponent,
     MensajeErrorCamposDirective,
     MensajeErrorCamposContenedorDirective,
     MensajeErrorCamposSubmitDirective,
-    TrackByPipe
+    TrackByPipe,
+    FacturaComponent
   ],
-  imports: [ReactiveFormsModule, FormsModule],
+  imports: [ReactiveFormsModule, FormsModule, MaterialModule, CommonModule],
   exports: [
     CommonModule,
     HttpClientModule,
@@ -26,7 +29,9 @@ import { MaterialModule } from './material/material-module';
     ReactiveFormsModule,
     FormsModule,
     TrackByPipe,
-    MaterialModule
-  ]
+    MaterialModule,
+    FacturaComponent
+  ],
+  providers: [FacturaService]
 })
 export class SharedModule { }

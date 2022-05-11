@@ -7,9 +7,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Mascota } from '@mascota/shared/model/mascota/mascota';
 import { MascotaService } from '@mascota/shared/service/mascota/mascota.service';
 import { CrearMascotaComponent } from '../crear-mascota/crear-mascota.component';
-import { FacturaComponent } from '../../../../shared/factura/components/factura/factura.component';
 import { RegistroIngresoService } from '@mascota/shared/service/registro-ingreso/registro-ingreso.service';
 import { NotificarCobroEmitterService } from '@shared/emitters/notificar-cobro-emitter.service';
+import { FacturaComponent } from '@shared/factura/components/factura/factura.component';
 
 import Swal from 'sweetalert2';
 
