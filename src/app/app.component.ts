@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { MenuItem } from '@core/modelo/menu-item';
-
 
 @Component({
   selector: 'app-root',
@@ -8,9 +6,10 @@ import { MenuItem } from '@core/modelo/menu-item';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Guarderia Mascotas';
-  public menuNavigation: MenuItem[] = [
-    { url: '/home', nombre: 'Home' },
-    { url: '/usuario', nombre: 'Usuarios' }
-  ];
+
+  constructor(
+  ){
+    
+  }
+
 }

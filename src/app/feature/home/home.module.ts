@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared/shared.module';
-import { HomeComponent } from './home.component';
-import { TrmService } from './shared/service/trm.service';
+import { HomeComponent } from './components/home.component';
+import { HomeRoutingModule } from './home-routing.module';
 
 
 @NgModule({
@@ -9,10 +9,10 @@ import { TrmService } from './shared/service/trm.service';
     HomeComponent
   ],
   imports: [
+    HomeRoutingModule,
     SharedModule
   ],
   providers: [
-    TrmService
   ]
 })
 export class HomeModule { }

@@ -27,6 +27,9 @@
       "@core-service/*": [
         "src/app/core/services/*"
       ],
+      "@login/*": [
+        "src/app/feature/login/*"
+      ],
       "@home/*": [
         "src/app/feature/home/*"
       ],

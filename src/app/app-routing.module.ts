@@ -1,17 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SecurityGuard } from '@core/guard/security.guard';
-import { HomeComponent } from '@home/home.component';
-
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent, canActivate: [SecurityGuard] },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', loadChildren: () => import('@login/login.module').then(mod => mod.LoginModule)},
+  { path: 'home', loadChildren: () => import('@home/home.module').then(mod => mod.HomeModule), canActivate:[SecurityGuard]},
   { path: 'usuario', loadChildren: () => import('@usuario/usuario.module').then(mod => mod.UsuarioModule) },
   {
-    path: 'mascota/:nombreUsuario/:apellidoUsuario/:idUsuario',
-    loadChildren: () => import('@mascota/mascota.module').then(mod => mod.MascotaModule)
-  }
+    path: 'mascota/:nombreUsuario/:apellidoUsuario/:idUsuario', loadChildren: () => 
+                                        import('@mascota/mascota.module').then(mod => mod.MascotaModule)},
 ];
 
 @NgModule({

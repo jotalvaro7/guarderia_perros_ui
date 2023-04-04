@@ -6,9 +6,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from '@core/core.module';
 import { CookieService } from 'ngx-cookie-service';
-import { HomeModule } from '@home/home.module';
-
-
 
 
 @NgModule({
@@ -19,7 +16,6 @@ import { HomeModule } from '@home/home.module';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    HomeModule,
     CoreModule,
   ],
   providers: [CookieService],
