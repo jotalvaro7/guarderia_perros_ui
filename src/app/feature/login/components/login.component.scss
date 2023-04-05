@@ -1,49 +1,66 @@
-body {
-    font-family: Arial, sans-serif;
+.login {
+  display: grid;
+  grid-template-columns: repeat(15, 1fr);
+  grid-template-rows: repeat(15, 1fr);
+  height: 100vh;
+  width: 100vw;
+  grid-template-areas:
+    ". . . . . . . . . . . . . . ."
+    ". . . . . . . . . . . . . . ."
+    ". . . . . . . . . . . . . . ."
+    ". . . . . . . . . . . . . . ."
+    ". . . . . . . . . . . . . . ."
+    ". . . . . login_title login_title login_title . . . . . . ."
+    ". . . . . login_form login_form login_form . . . . . . ."
+    ". . . . . . . . . . . . . . ."
+    ". . . . . . . . . . . . . . ."
+    ". . . . . . . . . . . . . . ."
+    ". . . . . . . . . . . . . . ."
+    ". . . . . . . . . . . . . . ."
+    ". . . . . . . . . . . . . . ."
+    ". . . . . . . . . . . . . . ."
+    ". . . . . . . . . . . . . . .";
+  justify-items: stretch;
+
+  .login__title {
+    grid-area: login_title;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
   }
-  
-  .login-container {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 5px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .form-grid {
+
+  .login__form {
+    grid-area: login_form;
     display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 0.5rem;
-    align-items: center;
-  }
-  
-  label {
-    font-weight: bold;
-  }
-  
-  button {
-    background-color: #4caf50;
-    color: white;
-    font-weight: bold;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-areas:
+      "login__input--username"
+      "."
+      "login__input--password"
+      "."
+      "login__button";
+    justify-items: stretch;
     
-    &:hover {
-      background-color: #45a049;
+
+    .login__input--username {
+      grid-area: login__input--username;
+      text-align: center;
+    }
+
+    .login__input--password {
+      grid-area: login__input--password;
+      text-align: center;
+    }
+
+    .login__button {
+      grid-area: login__button;
+    }
+
+    .login__button:disabled {
+      background-color: #ccc;
+      color: #666;
+      cursor: not-allowed;
     }
   }
+}
