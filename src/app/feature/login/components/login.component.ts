@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
       (response: Token) => {
         console.log("Token: ", response)
         sessionStorage.setItem('access_token', response.token);
-        this.route.navigate(['/home']);
+        this.route.navigate(['/producto']);
       }
     )
 

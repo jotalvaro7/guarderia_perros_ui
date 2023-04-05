@@ -14,10 +14,8 @@ export class SecurityGuard implements CanActivate {
     const token = sessionStorage.getItem('access_token') || localStorage.getItem('access_token');
     
     if (token) {
-      // Si el token existe, permite el acceso a la ruta.
       return true;
     } else {
-      // Si el token no existe, redirige al usuario a la página de inicio de sesión.
       return this.router.navigate(['/login']);
     }
   }
