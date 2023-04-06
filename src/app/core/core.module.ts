@@ -17,7 +17,7 @@ import { MainLayoutComponent } from './main-layout/main-layout.component';
     CommonModule,
     RouterModule
   ],
-  exports: [ToolbarComponent, NavbarComponent, HttpClientModule],
+  exports: [ToolbarComponent, NavbarComponent, MainLayoutComponent, HttpClientModule],
   providers: [
     HttpService,
     SecurityGuard,

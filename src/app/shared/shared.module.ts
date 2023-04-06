@@ -10,6 +10,7 @@ import { TrackByPipe } from './pipe/track-by.pipe';
 import { MaterialModule } from './material/material-module';
 import { FacturaComponent } from './factura/components/factura/factura.component';
 import { FacturaService } from './factura/shared/service/factura.service';
+import { CoreModule } from '@core/core.module';
 @NgModule({
   declarations: [
     ErrorCamposPlantillaComponent,
@@ -19,9 +20,10 @@ import { FacturaService } from './factura/shared/service/factura.service';
     TrackByPipe,
     FacturaComponent
   ],
-  imports: [ReactiveFormsModule, FormsModule, MaterialModule, CommonModule],
+  imports: [ReactiveFormsModule, FormsModule, MaterialModule, CommonModule, CoreModule],
   exports: [
     CommonModule,
+    CoreModule,
     HttpClientModule,
     MensajeErrorCamposDirective,
     MensajeErrorCamposContenedorDirective,
