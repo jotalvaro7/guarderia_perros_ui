@@ -1,0 +1,33 @@
+$font-titulo-header: serif;
+
+.card {
+    width: 80%;
+    margin: 0px auto;
+    margin-top: 20px;
+
+    &__header {
+        width: 100%;
+        display: grid;
+        grid-template-rows: repeat(2, 1fr);
+    }
+
+    &__titulo {
+        font-family: $font-titulo-header;
+        margin-left: 5px;
+        font-size: 30px;
+    }
+
+    table {
+        width: 100%;
+    }
+}
+
+
+.mat-row .mat-cell {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+}
+
+.mat-row:hover .mat-cell {
+    border-color: currentColor;
+}
