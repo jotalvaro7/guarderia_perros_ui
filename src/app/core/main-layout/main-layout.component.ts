@@ -16,8 +16,7 @@ export class MainLayoutComponent implements OnInit {
   
   title = 'Guarderia Mascotas';
   public menuNavigation: MenuItem[] = [
-    { url: '/home', nombre: 'Home' },
-    { url: '/usuario', nombre: 'Usuarios' }
+    { url: '/producto', nombre: 'Home' },
   ];
 
 }
