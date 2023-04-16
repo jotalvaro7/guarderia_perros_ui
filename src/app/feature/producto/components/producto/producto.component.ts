@@ -41,13 +41,15 @@ export class ProductoComponent implements OnInit {
   obtenerProductos() {
     this.productoService.obtenerProductos().subscribe((response) => {
       this.productos = response;
-      console.log(this.productos);
+      this.productos.forEach(producto => {
+        producto.selectedNumber = 1;
+      });
       this.dataSource = new MatTableDataSource(this.productos);
       this.dataSource.paginator = this.paginator;
     });
   }
 
-  onCompraButtonClick(idProducto: string, cantidad: string) {
+  botonResumenCompra(idProducto: string, cantidad: string) {
     this.router.navigate([`comprar/${idProducto}/cantidad/${cantidad}`], {
       relativeTo: this.route,
     });
