@@ -9,7 +9,8 @@ import { Producto } from "@producto/shared/model/producto/producto";
   styleUrls: ["./compra-producto.component.scss"],
 })
 export class CompraProductoComponent implements OnInit {
-  producto: Producto;
+  public producto: Producto;
+  public isFavorite: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -19,7 +20,6 @@ export class CompraProductoComponent implements OnInit {
   ngOnInit(): void {
     const productoId = this.route.snapshot.paramMap.get("idProducto");
     const cantidad = this.route.snapshot.paramMap.get("cantidad");
-    console.log(productoId, cantidad);
     this.obtenerPrecio(productoId, cantidad);
   }
 
@@ -28,5 +28,9 @@ export class CompraProductoComponent implements OnInit {
         this.producto = response;
         console.log(this.producto);
       });
+  }
+
+  toggleFavorite(): void {
+    this.isFavorite = !this.isFavorite;
   }
 }

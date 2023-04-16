@@ -1,2 +1,27 @@
 <app-main-layout></app-main-layout>
-<p>compra-producto works!</p>
+<div class="card-container">
+  <mat-card class="card-compra" *ngIf="producto">
+    <mat-card-header>
+      <mat-card-title class="card-title">
+        {{ producto?.bookDto?.title }}
+      </mat-card-title>
+      <button mat-icon-button (click)="toggleFavorite()">
+        <mat-icon [ngClass]="{'favorite-marked': isFavorite}">favorite</mat-icon>
+      </button>
+      <mat-card-subtitle class="card-author"
+        > Autor: {{ producto?.bookDto?.author }}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p class="precio">Precio unidad: {{ producto?.bookDto?.price | currency }}</p>
+      <p class="rating">Calificación: {{ producto?.ratingDto?.starts }} / 5</p>
+      <p class="cantidad">Cantidad a comprar: {{ producto?.cantidad }}</p>
+      <p class="precio-total">
+        Precio total: {{ producto?.totalPrice | currency }}
+      </p>
+    </mat-card-content>
+    <mat-card-actions class="card-actions">
+      <button class="button-comprar">Comprar</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
