@@ -8,13 +8,12 @@
       <button mat-icon-button (click)="toggleFavorite()">
         <mat-icon [ngClass]="{'favorite-marked': isFavorite}">favorite</mat-icon>
       </button>
-      <mat-card-subtitle class="card-author"
-        > Autor: {{ producto?.bookDto?.author }}
+      <mat-card-subtitle class="card-author"> Autor: {{ producto?.bookDto?.author }}
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <p class="precio">Precio unidad: {{ producto?.bookDto?.price | currency }}</p>
-      <p class="rating">Calificación: {{ producto?.ratingDto?.starts }} / 5</p>
+      <p class="rating">Calificación: {{ getStars(producto?.ratingDto?.starts) }}</p>
       <p class="cantidad">Cantidad a comprar: {{ producto?.cantidad }}</p>
       <p class="precio-total">
         Precio total: {{ producto?.totalPrice | currency }}

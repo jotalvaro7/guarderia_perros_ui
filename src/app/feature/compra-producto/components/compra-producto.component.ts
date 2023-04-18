@@ -15,7 +15,7 @@ export class CompraProductoComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private compraProductoService: CompraProductoService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const productoId = this.route.snapshot.paramMap.get("idProducto");
@@ -25,12 +25,24 @@ export class CompraProductoComponent implements OnInit {
 
   private obtenerPrecio(productoId: string, cantidad: string) {
     this.compraProductoService.calcularPrecio(productoId, cantidad).subscribe((response) => {
-        this.producto = response;
-        console.log(this.producto);
-      });
+      this.producto = response;
+      console.log(this.producto);
+    });
   }
 
   toggleFavorite(): void {
     this.isFavorite = !this.isFavorite;
+  }
+
+  getStars(calificacion: number): string {
+    let stars = "";
+    for (let i = 1; i <= 5; i++) {
+      if (i <= calificacion) {
+        stars += "★";
+      } else {
+        stars += "☆";
+      }
+    }
+    return stars;
   }
 }

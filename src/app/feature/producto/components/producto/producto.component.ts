@@ -41,7 +41,7 @@ export class ProductoComponent implements OnInit {
   obtenerProductos() {
     this.productoService.obtenerProductos().subscribe((response) => {
       this.productos = response;
-      this.productos.forEach(producto => {
+      this.productos.forEach((producto) => {
         producto.selectedNumber = 1;
       });
       this.dataSource = new MatTableDataSource(this.productos);
@@ -53,5 +53,17 @@ export class ProductoComponent implements OnInit {
     this.router.navigate([`comprar/${idProducto}/cantidad/${cantidad}`], {
       relativeTo: this.route,
     });
+  }
+
+  getStars(calificacion: number): string {
+    let stars = "";
+    for (let i = 1; i <= 5; i++) {
+      if (i <= calificacion) {
+        stars += "★";
+      } else {
+        stars += "☆";
+      }
+    }
+    return stars;
   }
 }
