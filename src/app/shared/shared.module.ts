@@ -1,16 +1,19 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
-import { MensajeErrorCamposDirective } from './directivas/error-campos/directiva/mensaje-error-campos.directive';
-import { MensajeErrorCamposSubmitDirective } from './directivas/error-campos/directiva/mensaje-error-campos-submit.directive';
-import { MensajeErrorCamposContenedorDirective } from './directivas/error-campos/directiva/mensaje-error-campos-contenedor.directive';
-import { ErrorCamposPlantillaComponent } from './directivas/error-campos/componente/error-campos-plantilla.component';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { TrackByPipe } from './pipe/track-by.pipe';
-import { MaterialModule } from './material/material-module';
-import { FacturaComponent } from './factura/components/factura/factura.component';
-import { FacturaService } from './factura/shared/service/factura.service';
-import { CoreModule } from '@core/core.module';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { HttpClientModule } from "@angular/common/http";
+import { MensajeErrorCamposDirective } from "./directivas/error-campos/directiva/mensaje-error-campos.directive";
+import { MensajeErrorCamposSubmitDirective } from "./directivas/error-campos/directiva/mensaje-error-campos-submit.directive";
+import { MensajeErrorCamposContenedorDirective } from "./directivas/error-campos/directiva/mensaje-error-campos-contenedor.directive";
+import { ErrorCamposPlantillaComponent } from "./directivas/error-campos/componente/error-campos-plantilla.component";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { TrackByPipe } from "./pipe/track-by.pipe";
+import { MaterialModule } from "./material/material-module";
+import { FacturaComponent } from "./factura/components/factura/factura.component";
+import { FacturaService } from "./factura/shared/service/factura.service";
+import { NavbarComponent } from "./components/navbar/navbar.component";
+import { ToolbarComponent } from "./components/toolbar/toolbar.component";
+import { MainLayoutComponent } from "./components/main-layout/main-layout.component";
+import { RouterModule } from "@angular/router";
 @NgModule({
   declarations: [
     ErrorCamposPlantillaComponent,
@@ -18,12 +21,20 @@ import { CoreModule } from '@core/core.module';
     MensajeErrorCamposContenedorDirective,
     MensajeErrorCamposSubmitDirective,
     TrackByPipe,
-    FacturaComponent
+    FacturaComponent,
+    NavbarComponent,
+    ToolbarComponent,
+    MainLayoutComponent,
   ],
-  imports: [ReactiveFormsModule, FormsModule, MaterialModule, CommonModule, CoreModule],
+  imports: [
+    ReactiveFormsModule,
+    FormsModule,
+    MaterialModule,
+    CommonModule,
+    RouterModule,
+  ],
   exports: [
     CommonModule,
-    CoreModule,
     HttpClientModule,
     MensajeErrorCamposDirective,
     MensajeErrorCamposContenedorDirective,
@@ -32,8 +43,11 @@ import { CoreModule } from '@core/core.module';
     FormsModule,
     TrackByPipe,
     MaterialModule,
-    FacturaComponent
+    FacturaComponent,
+    NavbarComponent,
+    ToolbarComponent,
+    MainLayoutComponent,
   ],
-  providers: [FacturaService]
+  providers: [FacturaService],
 })
-export class SharedModule { }
+export class SharedModule {}
