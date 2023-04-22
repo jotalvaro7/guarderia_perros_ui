@@ -7,4 +7,5 @@ export class Producto {
     cantidad: number;
     totalPrice: number;
     selectedNumber?: number;
+    image: string
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpService } from '@core/services/http.service';
+import { HttpService} from '@core/services/http.service';
 import { Producto } from '../model/producto/producto';
 import { Observable } from 'rxjs';
 
@@ -13,5 +13,9 @@ export class ProductoService {
 
   public obtenerProductos(): Observable<Producto[]>{
     return this.http.doGet<Producto[]>("/products/api/v1/listar", this.http.optsName('obtener productos'));
+  }
+
+  public obtenerImagenPorId(productoId: number): Observable<String> {
+    return this.http.doGetImage(`/products/api/v1/image/${productoId}`);
   }
 }

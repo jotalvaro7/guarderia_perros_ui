@@ -13,6 +13,7 @@ import { ProductoService } from "@producto/shared/service/producto.service";
 export class ProductoComponent implements OnInit {
   columnas: string[] = [
     "#",
+    'Portada',
     "Titulo",
     "Autor",
     "Calificación",
@@ -20,9 +21,10 @@ export class ProductoComponent implements OnInit {
     "Precio",
     "Comprar",
   ];
-  numbers: number[] = [1, 2, 3, 4, 5];
-  selectedNumber: number;
 
+  public numbers: number[] = [1, 2, 3, 4, 5];
+  public selectedNumber: number;
+  public imageUrl: string;
   public productos: Producto[];
   public dataSource: any;
 
@@ -30,7 +32,7 @@ export class ProductoComponent implements OnInit {
     private productoService: ProductoService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -38,7 +40,7 @@ export class ProductoComponent implements OnInit {
     this.obtenerProductos();
   }
 
-  obtenerProductos() {
+  private obtenerProductos() {
     this.productoService.obtenerProductos().subscribe((response) => {
       this.productos = response;
       this.productos.forEach((producto) => {
@@ -46,7 +48,20 @@ export class ProductoComponent implements OnInit {
       });
       this.dataSource = new MatTableDataSource(this.productos);
       this.dataSource.paginator = this.paginator;
+      this.obtenerImagen();
     });
+  }
+
+  private obtenerImagen() {
+    this.productos.forEach((producto) => {
+      this.productoService
+        .obtenerImagenPorId(producto.bookDto.id)
+        .subscribe((base64Image: string) => {
+          this.imageUrl = "data:image/jpeg;base64," + base64Image;
+          producto.image = this.imageUrl;
+        });
+    });
+    
   }
 
   botonResumenCompra(idProducto: string, cantidad: string) {

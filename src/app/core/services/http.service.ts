@@ -50,6 +50,11 @@ export class HttpService {
     return this.http.get<T>(serviceUrl, ropts);
   }
 
+  public doGetImage(serviceUrl: string, opts?:Options): Observable<String> {
+    const ropts = this.createOptions(opts);
+    return this.http.get(serviceUrl, {...ropts, responseType: 'text'})
+  }
+
   public doPost<T, R>(serviceUrl: string, body: T, opts?: Options): Observable<R> {
     const ropts = this.createOptions(opts);
 
