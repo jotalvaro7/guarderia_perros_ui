@@ -1,49 +1,24 @@
 <app-main-layout></app-main-layout>
-<head>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-  />
-</head>
-<mat-card class="card">
-  <mat-card-header class="card__header">
-    <mat-card-title class="card__titulo animate__animated animate__fadeInLeft">Libros</mat-card-title>
-  </mat-card-header>
-  <mat-card-content *ngIf="productos">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" aria-describedby="tabla de productos">
-      <ng-container matColumnDef="#">
-        <th mat-header-cell class="center" *matHeaderCellDef>#</th>
-        <td mat-cell class="center" *matCellDef="let i = index">{{ i + 1 }}</td>
-      </ng-container>
+<h1 class="titulo animate__animated animate__fadeInLeft">Qué libro deseas comprar?</h1>
+<div class="container animate__animated animate__backInRight">
+  <div class="cards-container">
+    <ng-container *ngFor="let producto of productos; index as i">
+      <div class="card-wrapper">
+        <div class="card">
+          <img [src]="producto.image" class="card-img-top card-img" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{producto.bookDto.title}}</h5>
+            <p class="card-author">{{producto.bookDto.author}}</p>
+            <p class="card-price">{{producto.bookDto.price | currency}}</p>
+            <p class="card-starts">Calificación: {{getStars(producto.ratingDto.starts) }}</p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
 
-      <ng-container matColumnDef="Portada">
-        <th mat-header-cell class="center" *matHeaderCellDef>Portada</th>
-        <td mat-cell class="center" *matCellDef="let producto">
-          <img [src]="producto.image" alt="" class="product-image">
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="Titulo">
-        <th mat-header-cell class="center" *matHeaderCellDef>Titulo</th>
-        <td mat-cell class="center" *matCellDef="let producto">
-          {{ producto.bookDto.title }}
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="Autor">
-        <th mat-header-cell class="center" *matHeaderCellDef>Autor</th>
-        <td mat-cell class="center" *matCellDef="let producto">
-          {{ producto.bookDto.author }}
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="Calificación">
-        <th mat-header-cell class="center" *matHeaderCellDef>Calificación</th>
-        <td class="center" mat-cell *matCellDef="let producto">
-          {{ getStars(producto.ratingDto.starts) }}
-        </td>
-      </ng-container>
-
+<!-- <head>
       <ng-container matColumnDef="Cantidad">
         <th mat-header-cell class="center" *matHeaderCellDef>Cantidad</th>
         <td mat-cell class="center" *matCellDef="let producto">
@@ -52,13 +27,6 @@
               {{ number }}
             </mat-option>
           </mat-select>
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="Precio">
-        <th mat-header-cell class="center" *matHeaderCellDef>Precio por unidad</th>
-        <td mat-cell class="center" *matCellDef="let producto">
-          {{ producto.bookDto.price | currency }}
         </td>
       </ng-container>
 
@@ -71,11 +39,4 @@
           </button>
         </td>
       </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="columnas"></tr>
-      <tr mat-row *matRowDef="let row; columns: columnas"></tr>
-    </table>
-
-    <mat-paginator class="mat-elevation-z8" [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
-  </mat-card-content>
-</mat-card>
+</mat-card> -->
