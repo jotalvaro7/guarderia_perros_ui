@@ -1,42 +1,37 @@
 <app-main-layout></app-main-layout>
-<h1 class="titulo animate__animated animate__fadeInLeft">Qué libro deseas comprar?</h1>
+<h1 class="titulo animate__animated animate__fadeInLeft">
+  Qué libro deseas comprar?
+</h1>
 <div class="container animate__animated animate__backInRight">
   <div class="cards-container">
     <ng-container *ngFor="let producto of productos; index as i">
       <div class="card-wrapper">
         <div class="card">
-          <img [src]="producto.image" class="card-img-top card-img" alt="...">
+          <img [src]="producto.image" class="card-img-top card-img" alt="..." />
           <div class="card-body">
-            <h5 class="card-title">{{producto.bookDto.title}}</h5>
-            <p class="card-author">{{producto.bookDto.author}}</p>
-            <p class="card-price">{{producto.bookDto.price | currency}}</p>
-            <p class="card-starts">Calificación: {{getStars(producto.ratingDto.starts) }}</p>
+            <h5 class="card-title">{{ producto.bookDto.title }}</h5>
+            <p class="card-author">{{ producto.bookDto.author }}</p>
+            <p class="card-starts">
+              {{ getStars(producto.ratingDto.starts) }}
+            </p>
+          </div>
+          <div class="card-extra-info">
+            <p class="card-price">
+              {{
+                producto.bookDto.price | currency : "COP " : "symbol" : "1.0-0"
+              }}
+            </p>
+            <div class="amount-container">
+              <label for="amount-text" class="amount-text">Cantidad:</label>
+              <input type="text" class="form-control selected-amount" [value]="producto.selectedNumber" (input)="actualizarSeleccion($event.target.value, producto)">
+
+            </div>
+            <div class="container-button">
+              <button class="button-buy" (click)="botonResumenCompra(producto.bookDto.id, producto.selectedNumber)">Comprar</button>
+            </div>
           </div>
         </div>
       </div>
     </ng-container>
   </div>
 </div>
-
-<!-- <head>
-      <ng-container matColumnDef="Cantidad">
-        <th mat-header-cell class="center" *matHeaderCellDef>Cantidad</th>
-        <td mat-cell class="center" *matCellDef="let producto">
-          <mat-select class="select-cantidad" [(value)]="producto.selectedNumber">
-            <mat-option *ngFor="let number of numbers" [value]="number">
-              {{ number }}
-            </mat-option>
-          </mat-select>
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="Comprar">
-        <th mat-header-cell class="center" *matHeaderCellDef>Comprar</th>
-        <td mat-cell class="center" *matCellDef="let producto; let i = index">
-          <button [id]="'eliminarButton-' + i" mat-icon-button color="primary"
-            (click)="botonResumenCompra(producto.bookDto.id, producto.selectedNumber)">
-            <mat-icon>shopping_cart</mat-icon>
-          </button>
-        </td>
-      </ng-container>
-</mat-card> -->

@@ -61,10 +61,14 @@ export class ProductoComponent implements OnInit {
           producto.image = this.imageUrl;
         });
     });
-    
   }
 
-  botonResumenCompra(idProducto: string, cantidad: string) {
+  actualizarSeleccion(nuevoValor: number, producto: Producto){
+    producto.selectedNumber = nuevoValor;
+  }
+
+
+  botonResumenCompra(idProducto: string, cantidad: number) {
     this.router.navigate([`comprar/${idProducto}/cantidad/${cantidad}`], {
       relativeTo: this.route,
     });
