@@ -14,6 +14,7 @@ import { NavbarComponent } from "./components/navbar/navbar.component";
 import { ToolbarComponent } from "./components/toolbar/toolbar.component";
 import { MainLayoutComponent } from "./components/main-layout/main-layout.component";
 import { RouterModule } from "@angular/router";
+import { ObtenerImagenService } from "./services/obtener-imagen/obtener-imagen.service";
 @NgModule({
   declarations: [
     ErrorCamposPlantillaComponent,
@@ -48,6 +49,6 @@ import { RouterModule } from "@angular/router";
     ToolbarComponent,
     MainLayoutComponent,
   ],
-  providers: [FacturaService],
+  providers: [FacturaService, ObtenerImagenService],
 })
 export class SharedModule {}

@@ -1,26 +1,48 @@
 <app-main-layout></app-main-layout>
-<div class="card-container">
-  <mat-card class="card-compra" *ngIf="producto">
-    <mat-card-header>
-      <mat-card-title class="card-title">
-        {{ producto?.bookDto?.title }}
-      </mat-card-title>
-      <button mat-icon-button (click)="toggleFavorite()">
-        <mat-icon [ngClass]="{'favorite-marked': isFavorite}">favorite</mat-icon>
-      </button>
-      <mat-card-subtitle class="card-author"> Autor: {{ producto?.bookDto?.author }}
-      </mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <p class="precio">Precio unidad: {{ producto?.bookDto?.price | currency }}</p>
-      <p class="rating">Calificación: {{ getStars(producto?.ratingDto?.starts) }}</p>
-      <p class="cantidad">Cantidad a comprar: {{ producto?.cantidad }}</p>
-      <p class="precio-total">
-        Precio total: {{ producto?.totalPrice | currency }}
+<div *ngIf="producto" class="product-container">
+  <div class="product-container__book-info">
+    <div>
+      <img class="book-info__cover" src="{{ this.image }}" alt="portada del libro" />
+    </div>
+    <div class="book-info__data">
+      <p class="book-data__title">{{ producto.bookDto.title }}</p>
+      <p class="book-data__author">{{ producto.bookDto.author }}</p>
+      <p class="book-data__starts">{{ getStars(producto.ratingDto.starts) }}</p>
+      <p class="book-data__summary-title">
+        Resumen de {{ producto.bookDto.title }}
       </p>
-    </mat-card-content>
-    <mat-card-actions class="card-actions">
-      <button class="button-comprar">Comprar</button>
-    </mat-card-actions>
-  </mat-card>
+      <div class="book-data__summary">
+        <span class="summary__visible--text" id="visibleText">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui animi placeat, commodi
+          alias, recusandae tempora labore perferendis enim sint quam eius.
+          Aliquam quas earum laudantium ratione eveniet itaque non distinctio? Magni quaerat recusandae ut porro
+          aspernatur sunt obcaecati accusamus pariatur nihil, dolores nam cupiditate fuga non, error omnis officiis.
+          Aliquam rerum eius aperiam voluptatem, delectus ea nesciunt odio eaque ducimus? Necessitatibus neque doloribus
+          vero corporis nihil! Quod doloremque quam inventore.
+        </span>
+        <div class="summary__hidden--text" [@expandCollapse]="hiddenTextVisible ? 'expanded' : 'collapsed'" id="hiddenText">
+          facilis sapiente ad quia eligendi laborum obcaecati sunt repellendus, blanditiis molestiae ullam at? Ipsam
+          iure esse officia, enim autem blanditiis. Saepe fugit nihil dolorem possimus repellat beatae voluptatibus
+          doloremque soluta. Blanditiis a necessitatibus quas neque deserunt, quo corrupti debitis eveniet fugiat
+          cupiditate, nobis dolores atque numquam corporis. Distinctio, temporibus delectus. Expedita autem eveniet, sit
+          sint necessitatibus nesciunt recusandae fugiat quod, dolorem porro, fuga temporibus facere odio deleniti
+          consequuntur tempore. Repellat itaque qui nemo recusandae nihil incidunt voluptas vitae veritatis modi.
+        </div>
+        <a href="#" class="summary__toggle-text" (click)="toggleHiddenText($event)">{{ hiddenTextVisible ? 'Ver menos' : 'Ver más' }}</a>
+      </div>
+    </div>
+    <div class="product-container__buy-section">
+      <p class="buy-section__seller">
+        Vendido por
+        <span class="seller__name">Litografia Libros y Letras</span>
+      </p>
+      <p class="buy-section__total-price">
+        {{ producto.totalPrice | currency : "$ " : "symbol" : "1.0-0" }}
+      </p>
+      <p class="buy-section__shipping-cost">
+        Gastos de envío:
+        <span class="shipping-cost__value">$ 12.000</span>
+      </p>
+      <button type="button" class="buy-section__btn btn btn-info">Pagar</button>
+    </div>
+  </div>
 </div>

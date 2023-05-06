@@ -4,6 +4,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Producto } from "@producto/shared/model/producto/producto";
 import { ProductoService } from "@producto/shared/service/producto.service";
+import { ObtenerImagenService } from "@shared/services/obtener-imagen/obtener-imagen.service";
 
 @Component({
   selector: "app-producto",
@@ -13,7 +14,7 @@ import { ProductoService } from "@producto/shared/service/producto.service";
 export class ProductoComponent implements OnInit {
   columnas: string[] = [
     "#",
-    'Portada',
+    "Portada",
     "Titulo",
     "Autor",
     "Calificación",
@@ -30,9 +31,10 @@ export class ProductoComponent implements OnInit {
 
   constructor(
     private productoService: ProductoService,
+    private obtenerImageService: ObtenerImagenService,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -54,7 +56,7 @@ export class ProductoComponent implements OnInit {
 
   private obtenerImagen() {
     this.productos.forEach((producto) => {
-      this.productoService
+      this.obtenerImageService
         .obtenerImagenPorId(producto.bookDto.id)
         .subscribe((base64Image: string) => {
           this.imageUrl = "data:image/jpeg;base64," + base64Image;
@@ -63,7 +65,7 @@ export class ProductoComponent implements OnInit {
     });
   }
 
-  actualizarSeleccion(nuevoValor: number, producto: Producto){
+  actualizarSeleccion(nuevoValor: number, producto: Producto) {
     producto.selectedNumber = nuevoValor;
   }
 

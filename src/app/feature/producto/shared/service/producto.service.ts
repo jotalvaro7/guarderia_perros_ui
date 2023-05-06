@@ -15,7 +15,5 @@ export class ProductoService {
     return this.http.doGet<Producto[]>("/products/api/v1/listar", this.http.optsName('obtener productos'));
   }
 
-  public obtenerImagenPorId(productoId: number): Observable<String> {
-    return this.http.doGetImage(`/products/api/v1/image/${productoId}`);
-  }
+
 }

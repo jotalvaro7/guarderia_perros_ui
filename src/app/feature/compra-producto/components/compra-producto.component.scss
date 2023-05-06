@@ -1,86 +1,108 @@
-.card-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.product-container {
+  width: 70%;
   height: 100%;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-}
+  margin: 0 auto;
+  margin-top: 30px;
 
-.card-compra {
-  max-width: 600px;
-  z-index: 2;
-
-  .card-title {
-    font-size: 30px;
-    text-align: center;
-    font-family: cursive;
-    text-decoration: none;
-  }
-
-  .favorite-marked {
-    color: #f44336;
-  }
-
-  .card-author {
-    font-size: 18px;
-    font-family: cursive;
+  .product-container__book-info {
+    width: 98%;
+    margin: 0 auto;
     display: flex;
-    justify-content: flex-end;
-  }
+    column-gap: 20px;
 
-  .precio {
-    font-size: 18px;
-    font-family: cursive;
-  }
-
-  .rating {
-    font-size: 18px;
-    font-family: cursive;
-  }
-
-  .cantidad {
-    font-size: 18px;
-    font-family: cursive;
-  }
-
-  .precio-total {
-    font-size: 22px;
-    font-family: cursive;
-  }
-
-  .card-actions {
-    display: flex;
-    justify-content: center;
-
-    .button-comprar {
-      display: block;
-      font-size: 20px;
-      font-family: cursive;
-      font-weight: lighter;
-      text-align: center;
-      text-decoration: none;
-      background: #f3deba;
-      width: 150px;
-      border: 2px solid;
-      transition: all 0.5s;
-      -webkit-transition: all 0.5s;
-      -moz-transition: all 0.5s;
-      -ms-transition: all 0.5s;
-      -o-transition: all 0.5s;
+    .book-info__cover {
+      width: 100%;
+      box-shadow: 0px 1px 10px black;
     }
 
-    .button-comprar:hover {
-      border-radius: 10px;
-      -webkit-border-radius: 10px;
-      -moz-border-radius: 10px;
-      -ms-border-radius: 10px;
-      -o-border-radius: 10px;
-      background-color: #bbd6b8;
-      box-shadow: 2px 2px 1px;
+    .book-info__data {
+      width: 40%;
+
+      .book-data__title {
+        font-size: 28px;
+        font-family: "Montserrat", sans-serif;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      .book-data__author {
+        font-size: 40px;
+        font-family: "Courier New", Courier, monospace;
+        opacity: 50%;
+      }
+
+      .book-data__starts{
+        font-size: 35px;
+        color: goldenrod;
+      }
+
+      .book-data__summary-title {
+        font-size: 20px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+      }
+
+      .book-data__summary {
+        text-transform: initial;
+
+        .summary__visible--text {
+          font-family: 'Work Sans', sans-serif;
+          font-weight: bold;
+          color: rgb(98, 97, 97);
+          line-height: 1.5;
+
+        }
+
+        .summary__hidden--text {
+          max-height: 100%;
+          font-family: 'Work Sans', sans-serif;
+          font-weight: bold;
+          color: rgb(98, 97, 97);
+          line-height: 1.5;
+        }
+
+        .summary__toggle-text {
+          color: deeppink;
+        }
+      }
+    }
+
+    .product-container__buy-section {
+      display: block;
+      margin-top: 30px;
+
+      .buy-section__seller {
+        font-size: 20px;
+
+        .seller__name {
+          font-size: 20px;
+          font-weight: bold;
+          text-transform: uppercase;
+        }
+      }
+
+      .buy-section__total-price {
+        font-size: 35px;
+        font-weight: bold;
+        margin-left: 20px;
+      }
+
+      .buy-section__shipping-cost {
+        font-size: 20px;
+        margin-left: 20px;
+
+        .shipping-cost__value {
+          font-weight: bold;
+        }
+      }
+
+      .buy-section__btn {
+        font-size: 20px;
+        width: 50%;
+        background-color: deeppink;
+        border: none;
+        margin-left: 20px;
+      }
     }
   }
 }
