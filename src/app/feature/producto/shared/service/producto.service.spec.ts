@@ -47,6 +47,8 @@ describe('ProductoService', () => {
         },
         cantidad: 1,
         totalPrice: 50000.0,
+        selectedNumber: 1,
+        image: ""
       },
       {
         bookDto: {
@@ -64,6 +66,8 @@ describe('ProductoService', () => {
         },
         cantidad: 1,
         totalPrice: 50000.0,
+        selectedNumber: 1,
+        image: ""
       },
     ];
 
@@ -74,8 +78,7 @@ describe('ProductoService', () => {
       expect(response).toEqual(productosMock);
     });
 
-    expect(httpService.doGet).toHaveBeenCalledWith(
-      '/products/api/v1/listar',
+    expect(httpService.doGet).toHaveBeenCalledWith('/products/api/v1/listar',
       jasmine.objectContaining({
         headers: jasmine.any(Object),
       })

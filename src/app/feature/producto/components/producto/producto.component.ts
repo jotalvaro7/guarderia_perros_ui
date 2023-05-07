@@ -1,6 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { MatPaginator } from "@angular/material/paginator";
-import { MatTableDataSource } from "@angular/material/table";
+import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Producto } from "@producto/shared/model/producto/producto";
 import { ProductoService } from "@producto/shared/service/producto.service";
@@ -12,31 +10,17 @@ import { ObtenerImagenService } from "@shared/services/obtener-imagen/obtener-im
   styleUrls: ["./producto.component.scss"],
 })
 export class ProductoComponent implements OnInit {
-  columnas: string[] = [
-    "#",
-    "Portada",
-    "Titulo",
-    "Autor",
-    "Calificación",
-    "Cantidad",
-    "Precio",
-    "Comprar",
-  ];
 
-  public numbers: number[] = [1, 2, 3, 4, 5];
   public selectedNumber: number;
   public imageUrl: string;
   public productos: Producto[];
-  public dataSource: any;
 
   constructor(
     private productoService: ProductoService,
     private obtenerImageService: ObtenerImagenService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  ) { }
 
   ngOnInit(): void {
     this.obtenerProductos();
@@ -48,20 +32,16 @@ export class ProductoComponent implements OnInit {
       this.productos.forEach((producto) => {
         producto.selectedNumber = 1;
       });
-      this.dataSource = new MatTableDataSource(this.productos);
-      this.dataSource.paginator = this.paginator;
       this.obtenerImagen();
     });
   }
 
   private obtenerImagen() {
     this.productos.forEach((producto) => {
-      this.obtenerImageService
-        .obtenerImagenPorId(producto.bookDto.id)
-        .subscribe((base64Image: string) => {
-          this.imageUrl = "data:image/jpeg;base64," + base64Image;
-          producto.image = this.imageUrl;
-        });
+      this.obtenerImageService.obtenerImagenPorId(producto.bookDto.id).subscribe((base64Image: string) => {
+        this.imageUrl = "data:image/jpeg;base64," + base64Image;
+        producto.image = this.imageUrl;
+      });
     });
   }
 

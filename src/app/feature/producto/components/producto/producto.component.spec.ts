@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 import { ProductoComponent } from "./producto.component";
 import { ProductoService } from "@producto/shared/service/producto.service";
+import { ObtenerImagenService } from "@shared/services/obtener-imagen/obtener-imagen.service";
 import { RouterTestingModule } from "@angular/router/testing";
-import { MaterialModule } from "@shared/material/material-module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { Producto } from "@producto/shared/model/producto/producto";
 import { of } from "rxjs";
@@ -14,7 +14,7 @@ describe("ProductoComponent", () => {
   let component: ProductoComponent;
   let fixture: ComponentFixture<ProductoComponent>;
   let productoService: ProductoService;
-  let spyProductoServiceObtenerProductos: jasmine.Spy;
+  let obtenerImagenService: ObtenerImagenService;
   let router: Router;
   let route: ActivatedRoute;
 
@@ -35,6 +35,8 @@ describe("ProductoComponent", () => {
       },
       cantidad: 1,
       totalPrice: 50000.0,
+      selectedNumber: 1,
+      image: ""
     },
     {
       bookDto: {
@@ -52,6 +54,8 @@ describe("ProductoComponent", () => {
       },
       cantidad: 1,
       totalPrice: 50000.0,
+      selectedNumber: 1,
+      image: ""
     },
   ];
 
@@ -61,11 +65,9 @@ describe("ProductoComponent", () => {
       imports: [
         RouterTestingModule,
         HttpClientTestingModule,
-        RouterTestingModule,
-        MaterialModule,
         BrowserAnimationsModule,
       ],
-      providers: [ProductoService, HttpService],
+      providers: [ProductoService, HttpService, ObtenerImagenService],
     }).compileComponents();
   }));
 
@@ -73,12 +75,12 @@ describe("ProductoComponent", () => {
     fixture = TestBed.createComponent(ProductoComponent);
     component = fixture.componentInstance;
     productoService = TestBed.inject(ProductoService);
-    spyProductoServiceObtenerProductos = spyOn(
-      productoService,
-      "obtenerProductos"
-    ).and.returnValue(of(productosMock));
+    obtenerImagenService = TestBed.inject(ObtenerImagenService);
     router = TestBed.inject(Router);
     route = TestBed.inject(ActivatedRoute);
+    spyOn(productoService, "obtenerProductos").and.returnValue(of(productosMock));
+    spyOn(obtenerImagenService, "obtenerImagenPorId").and.returnValue(of("base64Image"));
+
     fixture.detectChanges();
   });
 
@@ -86,29 +88,37 @@ describe("ProductoComponent", () => {
     expect(component).toBeTruthy();
   });
 
-  it("deberia obtener los productos", () => {
-    component.obtenerProductos();
-    expect(spyProductoServiceObtenerProductos).toHaveBeenCalled();
+  it("should initialize with a list of products", () => {
+    expect(component.productos.length).toBe(2);
   });
 
-  it("deberia retornar el monto correcto de estrellas", () => {
-    expect(component.getStars(1)).toBe("★☆☆☆☆");
-    expect(component.getStars(2)).toBe("★★☆☆☆");
-    expect(component.getStars(3)).toBe("★★★☆☆");
-    expect(component.getStars(4)).toBe("★★★★☆");
-    expect(component.getStars(5)).toBe("★★★★★");
+  it("should update selectedNumber of a product", () => {
+    const newSelectedNumber = 5;
+    const productToUpdate = component.productos[0];
+
+    component.actualizarSeleccion(newSelectedNumber, productToUpdate);
+
+    expect(productToUpdate.selectedNumber).toBe(newSelectedNumber);
   });
 
-  it('deberia navegar a la ruta correcta cuando botonResumenCompra es llamado', () => {
-    const routerSpy = spyOn(router, 'navigate');
-    const idProducto = '1';
-    const cantidad = '5';
+  it("should return a string with starts base on rating", () => {
+    const rating = 3;
+    const expectedStarts = "★★★☆☆";
 
-    component.botonResumenCompra(idProducto, cantidad);
+    const starts = component.getStars(rating);
 
-    expect(routerSpy).toHaveBeenCalledWith(
-      [`comprar/${idProducto}/cantidad/${cantidad}`],
-      { relativeTo: route }
-    );
+    expect(starts).toBe(expectedStarts);
   });
+
+  it('should navigate to be correct URL when botonResumenCompra is called', () => {
+    const navigateSpy = spyOn(router, 'navigate');
+
+    component.botonResumenCompra('1', 2);
+
+    expect(navigateSpy).toHaveBeenCalledWith(['comprar/1/cantidad/2'], {
+      relativeTo: route,
+    })
+
+  })
+
 });
