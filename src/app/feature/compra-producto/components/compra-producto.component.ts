@@ -51,10 +51,6 @@ export class CompraProductoComponent implements OnInit {
       });
   }
 
-  toggleFavorite(): void {
-    this.isFavorite = !this.isFavorite;
-  }
-
   getStars(calificacion: number): string {
     let stars = "";
     for (let i = 1; i <= 5; i++) {
