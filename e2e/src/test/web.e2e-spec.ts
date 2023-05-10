@@ -1,168 +1,68 @@
-import { browser, by, element } from 'protractor';
-import { AppPage } from '../app.po';
-import { UsuarioPage } from '../page/usuario/usuario.po';
-import { NavbarPage } from '../page/navbar/navbar.po';
-import { MascotaPage } from '../page/mascota/mascota.po';
+import { browser, by, element, protractor } from 'protractor';
+import { ProductoPage } from '../page/producto/producto.po';
+import { LoginPage } from '../page/login/login.po';
 
 describe('workspace-project Producto', () => {
-    let page: UsuarioPage;
-    let mascotaPage: MascotaPage;
-    let appPage: AppPage;
-    let navbar: NavbarPage;
-
-    beforeEach(() => {
-        appPage = new AppPage();
-        page = new UsuarioPage();
-        mascotaPage = new MascotaPage();
-        navbar = new NavbarPage();
-        navbar.clickBotonUsuario();
-    });
-
-    it('deberia crear un nuevo usuario', () => {
-        browser.sleep(1000);
-        page.botonAgregar();
-        browser.sleep(1000);
-        page.nombreUsuarioInput('Julio');
-        browser.sleep(1000);
-        page.apellidoUsuarioInput('Osorio');
-        browser.sleep(1000);
-        page.identificacionUsuarioInput('439583958304');
-        browser.sleep(1000);
-        page.numeroCelularUsuarioInput('83458437');
-        browser.sleep(1000);
-        page.botonConfirmarGuardar();
-        browser.sleep(1000);
-        page.botonOkUsuarioAgregado();
-        browser.sleep(1000);
-
-        element.all(by.tagName('body > app-root > app-usuario > mat-card > mat-card-content > table > tbody > tr:nth-child(4) > td:nth-child(5)')).each((row) => {
-          row.getText().then((text) => {
-              expect(text).toContain('83458437');
-          });
-        });
-    });
-
-    it('deberia editar un usuario', () => {
-        appPage.navigateTo();
-        navbar.clickBotonUsuario();
-        browser.sleep(1000);
-        page.botonActualizar(3);
-        browser.sleep(1000);
-        page.nombreUsuarioInput(' Cesar');
-        browser.sleep(1000);
-        page.apellidoUsuarioInput(' Otalvaro');
-        browser.sleep(1000);
-        page.botonConfirmarEditar();
-        browser.sleep(1000);
-        page.botonOkUsuarioEditado();
-        browser.sleep(1000);
-
-        element.all(by.tagName('body > app-root > app-usuario > mat-card > mat-card-content > table > tbody > tr:nth-child(4) > td:nth-child(2)')).each((row) => {
-            row.getText().then((text) => {
-                expect(text).toContain('Julio Cesar');
-            });
-        });
-
-        element.all(by.tagName('body > app-root > app-usuario > mat-card > mat-card-content > table > tbody > tr:nth-child(4) > td:nth-child(3)')).each((row) => {
-            row.getText().then((text) => {
-                expect(text).toContain('Osorio Otalvaro');
-            });
-        });
-    });
+  let loginPage: LoginPage;
+  let productoPage: ProductoPage;
 
 
-    it('deberia navegar a mascotas y crear una nueva mascota', () => {
-        appPage.navigateTo();
-        navbar.clickBotonUsuario();
-        page.botonMascota(3);
-        browser.sleep(2000);
-        mascotaPage.botonAgregar();
-        browser.sleep(1000);
-        mascotaPage.nombremascotaInput('Max');
-        browser.sleep(1000);
-        mascotaPage.razaMascotaInput('Doberman');
-        browser.sleep(1000);
-        mascotaPage.pesoMascotaInput('10Kg');
-        browser.sleep(1000);
-        mascotaPage.botonConfirmarGuardar();
-        browser.sleep(1000);
-        mascotaPage.botonOkMascotaAgregada();
-        browser.sleep(1000);
+  beforeEach(() => {
+    loginPage = new LoginPage();
+    productoPage = new ProductoPage();
 
-        element.all(by.tagName('body > app-root > app-mascota > mat-card > mat-card-content > table > tbody > tr:nth-child(1) > td:nth-child(3)')).each((row) => {
-            row.getText().then((text) => {
-                expect(text).toEqual('Doberman');
-            });
-        });
-    });
+  });
 
-    it('deberia navegar a mascotas y editar una mascota', () => {
-        appPage.navigateTo();
-        navbar.clickBotonUsuario();
-        page.botonMascota(3);
-        browser.sleep(2000);
-        mascotaPage.botonActualizar(0);
-        browser.sleep(1000);
-        mascotaPage.nombremascotaInput('i');
-        browser.sleep(1000);
-        mascotaPage.botonConfirmarEditar();
-        browser.sleep(1000);
-        mascotaPage.botonOkMascotaEditada();
-
-        browser.sleep(1000);
-
-        element.all(by.tagName('body > app-root > app-mascota > mat-card > mat-card-content > table > tbody > tr:nth-child(1) > td:nth-child(2)')).each((row) => {
-            row.getText().then((text) => {
-                expect(text).toEqual('Maxi');
-            });
-        });
-    });
-
-    it('deberia navegar a mascotas y cobrar factura', () => {
-        appPage.navigateTo();
-        navbar.clickBotonUsuario();
-        page.botonMascota(3);
-        browser.sleep(5000);
-        mascotaPage.botonFactura(0);
-        browser.sleep(1000);
-        mascotaPage.botonConfirmarFactura();
-        browser.sleep(1000);
-        mascotaPage.botonOkFacturaCobrada();
-    });
+  it('deberia abrir en la pagina de login y loguearse', () => {
+    var EC = protractor.ExpectedConditions;
+    var userNameInput = element(by.id('username'));
+    browser.wait(EC.presenceOf(userNameInput), 5000);
+    loginPage.userNameInput('julio_osorio');
+    browser.sleep(1000);
+    var passwordInput = element(by.id('password'));
+    browser.wait(EC.presenceOf(passwordInput), 5000);
+    loginPage.passwordInput('12345');
+    browser.sleep(1000);
+    var loginButton = element(by.id('buttonLogin'));
+    browser.wait(EC.elementToBeClickable(loginButton), 5000);
+    loginPage.buttonLogin();
+    browser.sleep(1000);
+  });
 
 
-    it('deberia eliminar un usuario', () => {
-        appPage.navigateTo();
-        navbar.clickBotonUsuario();
-        browser.sleep(1000);
-        page.botonEliminar(3);
-        browser.sleep(1000);
-        page.botonConfirmarEliminar();
-        browser.sleep(1000);
-        page.botonConfirmarEliminar();
+  it('comparar el titulo de la pagina productos', () => {
+    var EC = protractor.ExpectedConditions;
+    var titulo = element(by.id('title'));
+    browser.wait(EC.visibilityOf(titulo), 5000);
+    expect(titulo.getText()).toEqual('Qué libro deseas comprar?');
+    browser.sleep(1000);
+  });
 
-        element.all(by.tagName('body > app-root > app-usuario > mat-card > mat-card-content > table > tbody > tr:nth-child(4) > td:nth-child(3)')).each((row) => {
-            row.getText().then((text) => {
-                expect(text).toContain('');
-            });
-        });
+  it('deberia seleccionar el primer libro, mostrar los detalles, agregar 2 de cantidad y darle al boton comprar', () => {
 
-    });
+    var EC = protractor.ExpectedConditions;
 
-    it('deberia llenar el formulario y limpiarlo', () => {
-        appPage.navigateTo();
-        navbar.clickBotonUsuario();
-        browser.sleep(1000);
-        page.botonAgregar();
-        browser.sleep(1000);
-        page.nombreUsuarioInput('Julio');
-        browser.sleep(1000);
-        page.apellidoUsuarioInput('Osorio');
-        browser.sleep(1000);
-        page.identificacionUsuarioInput('439583958304');
-        browser.sleep(1000);
-        page.numeroCelularUsuarioInput('83458437');
-        browser.sleep(1000);
-        page.botonLimpiarFormulario();
-    });
+    //selecciona el primer libro y muestra los detalles
+    var primerLibro = element(by.css('.card-wrapper:first-child .card'));
+    browser.actions().mouseMove(primerLibro).perform();
+    var detalleLibro = primerLibro.element(by.css('.card-extra-info'));
+    browser.wait(EC.visibilityOf(detalleLibro), 5000);
+    browser.sleep(1500);
+
+    // Cambia la cantidad de libros a comprar
+    var inputCantidad = detalleLibro.element(by.css('.selected-amount'));
+    browser.wait(EC.visibilityOf(inputCantidad), 5000);
+    inputCantidad.clear();
+    inputCantidad.sendKeys('2');
+    browser.sleep(1500);
+
+    // Haz clic en el botón de comprar
+    var botonComprar = detalleLibro.element(by.css('.button-buy'));
+    browser.wait(EC.visibilityOf(botonComprar), 5000);
+    productoPage.botonComprarLibro();
+    browser.sleep(2000);
+
+  });
+
+
 });

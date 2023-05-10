@@ -4,6 +4,6 @@
     <form class="login__form" [formGroup]="loginForm" (submit)="onSubmit()">
         <input class="login__input login__input--username" type="text" id="username" formControlName="username" placeholder="Username" required>
         <input class="login__input login__input--password" type="password" id="password" formControlName="password" placeholder="Password" required>
-      <button class="login__button" type="submit" [disabled]="loginForm.invalid">Ingresar</button>
+      <button id="buttonLogin" class="login__button" type="submit" [disabled]="loginForm.invalid">Ingresar</button>
     </form>
   </div>
