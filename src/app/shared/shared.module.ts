@@ -8,8 +8,6 @@ import { ErrorCamposPlantillaComponent } from "./directivas/error-campos/compone
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { TrackByPipe } from "./pipe/track-by.pipe";
 import { MaterialModule } from "./material/material-module";
-import { FacturaComponent } from "./factura/components/factura/factura.component";
-import { FacturaService } from "./factura/shared/service/factura.service";
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { ToolbarComponent } from "./components/toolbar/toolbar.component";
 import { MainLayoutComponent } from "./components/main-layout/main-layout.component";
@@ -22,7 +20,6 @@ import { ObtenerImagenService } from "./services/obtener-imagen/obtener-imagen.s
     MensajeErrorCamposContenedorDirective,
     MensajeErrorCamposSubmitDirective,
     TrackByPipe,
-    FacturaComponent,
     NavbarComponent,
     ToolbarComponent,
     MainLayoutComponent,
@@ -44,11 +41,10 @@ import { ObtenerImagenService } from "./services/obtener-imagen/obtener-imagen.s
     FormsModule,
     TrackByPipe,
     MaterialModule,
-    FacturaComponent,
     NavbarComponent,
     ToolbarComponent,
     MainLayoutComponent,
   ],
-  providers: [FacturaService, ObtenerImagenService],
+  providers: [ObtenerImagenService],
 })
 export class SharedModule {}

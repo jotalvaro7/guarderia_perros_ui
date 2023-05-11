@@ -15,15 +15,7 @@ const routes: Routes = [
   {
     path: 'producto/comprar/:idProducto/cantidad/:cantidad', loadChildren: () =>
       import('@compra-producto/compra-producto.module').then(mod => mod.CompraProductoModule), canActivate: [SecurityGuard]
-  },
-  {
-    path: 'usuario', loadChildren: () => import('@usuario/usuario.module')
-      .then(mod => mod.UsuarioModule)
-  },
-  {
-    path: 'mascota/:nombreUsuario/:apellidoUsuario/:idUsuario', loadChildren: () =>
-      import('@mascota/mascota.module').then(mod => mod.MascotaModule)
-  },
+  }
 ];
 
 @NgModule({
