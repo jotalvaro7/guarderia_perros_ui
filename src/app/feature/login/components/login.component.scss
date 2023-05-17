@@ -1,66 +1,79 @@
-.login {
-  display: grid;
-  grid-template-columns: repeat(15, 1fr);
-  grid-template-rows: repeat(15, 1fr);
-  height: 100vh;
-  width: 100vw;
-  grid-template-areas:
-    ". . . . . . . . . . . . . . ."
-    ". . . . . . . . . . . . . . ."
-    ". . . . . . . . . . . . . . ."
-    ". . . . . . . . . . . . . . ."
-    ". . . . . . . . . . . . . . ."
-    ". . . . . login_title login_title login_title . . . . . . ."
-    ". . . . . login_form login_form login_form . . . . . . ."
-    ". . . . . . . . . . . . . . ."
-    ". . . . . . . . . . . . . . ."
-    ". . . . . . . . . . . . . . ."
-    ". . . . . . . . . . . . . . ."
-    ". . . . . . . . . . . . . . ."
-    ". . . . . . . . . . . . . . ."
-    ". . . . . . . . . . . . . . ."
-    ". . . . . . . . . . . . . . .";
-  justify-items: stretch;
-
-  .login__title {
-    grid-area: login_title;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .login__form {
-    grid-area: login_form;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(5, 1fr);
-    grid-template-areas:
-      "login__input--username"
-      "."
-      "login__input--password"
-      "."
-      "login__button";
-    justify-items: stretch;
-    
-
-    .login__input--username {
-      grid-area: login__input--username;
-      text-align: center;
-    }
-
-    .login__input--password {
-      grid-area: login__input--password;
-      text-align: center;
-    }
-
-    .login__button {
-      grid-area: login__button;
-    }
-
-    .login__button:disabled {
-      background-color: #ccc;
-      color: #666;
-      cursor: not-allowed;
-    }
-  }
+@font-face {
+  font-family: "dacingScript";
+  src: url("../../../shared/fonts/DancingScript-VariableFont_wght.ttf");
 }
+
+.login-container{
+  background-image: url('../../../../assets/img/login/books.jpg');
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+mat-card{
+  height: 400px;
+  width: 400px;
+  background-color: rgba(0,0,0,0.5);
+  border: 1px solid #000;
+}
+
+.login__title{
+  color: white;
+  font-size: 40px;
+  font-family: 'dacingScript';
+  display: flex;
+  justify-content: center;
+}
+
+form {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+input{
+  font-size: 20px;
+}
+
+button{
+  font-size: 20px;
+  width: 50%;
+  align-self: center;
+  transition: all 0.8s;
+  -webkit-transition: all 0.8s;
+  -moz-transition: all 0.8s;
+  -ms-transition: all 0.8s;
+  -o-transition: all 0.8s;
+}
+
+button:hover{
+  background-color: rgb(230, 159, 35);
+}
+
+
+::ng-deep .mat-form-field-label,
+::ng-deep .mat-form-field-underline,
+::ng-deep .mat-form-field-ripple,
+::ng-deep .mat-input-element,
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: white !important;
+  border-color: white !important;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  color: white !important;
+  border-color: white !important;
+}
+
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: white !important;
+  border-color: white !important;
+}
+
+::ng-deep .mat-icon {
+  color: white !important;
+}
+

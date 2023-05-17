@@ -12,7 +12,7 @@ import { LoginService } from "@login/shared/service/login.service";
   styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
-
+  public hide = true;
   public loginForm: FormGroup
   public credencialesDeUsuario: CredencialesDeUsuario;
 
